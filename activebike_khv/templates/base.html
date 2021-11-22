@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="../../static/libs/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../../static/libs/bootstrap-grid.min.css" />
+    <link rel="stylesheet" href="../../static/libs/reset.css" />
+    <link
+      rel="stylesheet"
+      href="../../static/libs/font-awesome/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="../../static/css/style.css" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-G9961718N0"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-G9961718N0");
+    </script>
+
+    <script>
+      $(document).ready(function () {
+        // $('.activity-descr').slideUp();
+        // $('.activity__show-descr').on('click', function() {;
+        // 	$('.activity__show-descr').not($(this)).removeClass('active');
+        // 	$('.activity__show-descr').not($(this)).siblings('.activity-descr').slideUp();
+
+        // 	$(this).toggleClass('active');
+        // 	$(this).siblings('.activity-descr').slideToggle();
+        // });
+
+        $(".header-gallery").owlCarousel({
+          // nav: true,
+          dots: false,
+          loop: false,
+          mouseDrag: true,
+          touchDrag: true,
+          responsiveClass: true,
+          responsive: {
+            0: {
+              items: 2,
+            },
+            400: {
+              items: 2,
+            },
+            500: {
+              items: 3,
+            },
+            600: {
+              items: 4,
+            },
+            1000: {
+              items: 7,
+            },
+          },
+        });
+
+        $(".li-gallery").owlCarousel({
+          nav: true,
+          dots: false,
+          loop: true,
+          mouseDrag: true,
+          touchDrag: true,
+          items: 1,
+          responsiveClass: true,
+          responsive: {
+            0: {
+              nav: false,
+              dots: true,
+            },
+            576: {
+              nav: true,
+              dots: false,
+            },
+          },
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    {% include 'includes/header.html' %}
+
+    <main id="primary" class="main site-main">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-md-4">
+            <aside class="links-block m-5">
+              <h2 class="links-block__caption links-caption">
+                Ближайшее мероприятие
+              </h2>
+              <ul class="links-block__list">
+                <script
+                  async
+                  src="https://telegram.org/js/telegram-widget.js?15"
+                  data-telegram-post="activebike/9"
+                  data-width="100%"
+                ></script>
+                <!-- <li class="links-block__li tal">
+                      <img src="<?php echo get_template_directory_uri() ?>/assets/img/rides_gallery/smid_200621_anons.jpg" alt="Наши заезды" class="li-gallery__img">
+                      <a href="https://www.dvride.ru/forum/viewtopic.php?pid=401002#p401002" class="links-block__link links-block__link_anons">До Смидовича<br> (20.06.2021 6-00 перед мостом)</a>
+                  </li>
+                  <li class="links-block__li tal">
+                      <img src="<?php echo get_template_directory_uri() ?>/assets/img/rides_gallery/Vol200621_anons.jpg" alt="Наши заезды" class="li-gallery__img">
+                      <a href="https://www.dvride.ru/forum/viewtopic.php?id=20609" class="links-block__link links-block__link_anons">Волочаевская сопка<br> (20.06.2021 8-30 Платинум Арена)</a>
+                  </li> -->
+              </ul>
+            </aside>
+            <aside class="links-block">
+              <h2 class="links-block__caption links-caption">
+                Полезные ссылки
+              </h2>
+              <ul class="links-block__list">
+                <li class="links-block__li">
+                  <span class="links-block__text">Сообщество ACTIVE BIKE:</span>
+                  <span class="social-links">
+                    <a
+                      href="https://vk.com/bikekhv"
+                      class="social-link social-link_vk"
+                      title="Вконтакте"
+                      ><i class="fa fa-vk fa-lg"></i
+                    ></a>
+                    <a
+                      href="https://www.instagram.com/activebike_khv"
+                      class="social-link social-link_instagram"
+                      title="Instagram"
+                      ><i class="fa fa-instagram fa-lg"></i
+                    ></a>
+                  </span>
+                </li>
+                <li class="links-block__li">
+                  <span class="links-block__text">Dvride.Ru (наш форум):</span>
+                  <span class="social-links">
+                    <a
+                      href="https://www.dvride.ru"
+                      class="social-link social-link_dvride"
+                      title="Форум Dvride.Ru"
+                      ><i class="fa fa-bicycle fa-lg"></i
+                    ></a>
+                    <a
+                      href="https://t.me/dvride"
+                      class="social-link social-link_telegram"
+                      title="чат ВелоХа в Telegram"
+                      ><i class="fa fa-telegram fa-lg"></i
+                    ></a>
+                    <a
+                      href="https://www.strava.com/clubs/dvride"
+                      class="social-link social-link_strava"
+                      title="Клуб Dvride в Strava"
+                      ><i class="icon-strava"></i
+                    ></a>
+                  </span>
+                </li>
+                <li class="links-block__li">
+                  <span class="links-block__text">Чат "Куда поехать":</span>
+                  <span class="social-links">
+                    <a
+                      href="https://chat.whatsapp.com/Evl24E6CGerETihtyJQtDE"
+                      class="social-link social-link_whatsapp"
+                      title="WhatsApp"
+                      ><i class="fa fa-whatsapp fa-lg"></i
+                    ></a>
+                  </span>
+                </li>
+                <li class="links-block__li">
+                  <span class="links-block__text"
+                    >Туристический клуб "Горизонт":</span
+                  >
+                  <span class="social-links">
+                    <a
+                      href="https://vk.com/togu_gorizont"
+                      class="social-link social-link_vk"
+                      title="Вконтакте"
+                      ><i class="fa fa-vk fa-lg"></i
+                    ></a>
+                    <a
+                      href="https://instagram.com/tc_gorizont_khv"
+                      class="social-link social-link_instagram"
+                      title="Instagram"
+                      ><i class="fa fa-instagram fa-lg"></i
+                    ></a>
+                  </span>
+                </li>
+                <li class="links-block__li">
+                  <span class="links-block__text"
+                    >Веломастерская "Вел.Ком" @nefelim1988:</span
+                  >
+                  <span class="social-links">
+                    <a
+                      href="https://www.instagram.com/velcomebike"
+                      class="social-link social-link_instagram"
+                      title="Instagram"
+                      ><i class="fa fa-instagram fa-lg"></i
+                    ></a>
+                    <a
+                      href="https://www.strava.com/clubs/velcombike"
+                      class="social-link social-link_strava"
+                      title="Strava"
+                      ><i class="icon-strava"></i
+                    ></a>
+                  </span>
+                </li>
+                <li class="links-block__li">
+                  <span class="links-block__text"
+                    >Веломастерская @velomaster27 (Nick_NeoCOM):</span
+                  >
+                  <span class="social-links">
+                    <a
+                      href="https://www.instagram.com/velomaster27/"
+                      class="social-link social-link_instagram"
+                      title="Instagram"
+                      ><i class="fa fa-instagram fa-lg"></i
+                    ></a>
+                  </span>
+                </li>
+                <li class="links-block__li">
+                  <a
+                    href="https://rudolf-khb.livejournal.com/124304.html"
+                    class="link"
+                    >Веломаршруты по окрестностям Хабаровска (Rudolf)</a
+                  >
+                </li>
+              </ul>
+            </aside>
+          </div>
+
+          <div class="col-12 col-md-8">
+            {% block content %} Нет мероприятий. {% endblock %}
+          </div>
+        </div>
+      </div>
+    </main>
+
+    {% include 'includes/footer.html' %}
+  </body>
+</html>
