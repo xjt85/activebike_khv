@@ -1,5 +1,5 @@
 body {
-    background-color: #f2f2f2;
+    background-color: #C9E5FF;
     /* color: #515f7a; */
     color: rgb(61, 62, 64);
     font-family: Roboto, Arial, Helvetica, sans-serif;
@@ -20,7 +20,7 @@ h2 {
 
 .header {
     margin-bottom: 20px;
-    background-color: #40314B;
+    background-color: #034769;
     position: fixed;
     z-index: 99;
     width: 100%;
@@ -541,7 +541,7 @@ h2 {
 
 .footer {
     padding: 30px 15px;
-    background-color: #40314B;
+    background-color: #034769;
     color: #fff;
 }
 
