@@ -1,5 +1,5 @@
 body {
-    background-color: #C9E5FF;
+    background-color: #E6F3FF;
     /* color: #515f7a; */
     color: rgb(61, 62, 64);
     font-family: Roboto, Arial, Helvetica, sans-serif;
@@ -20,7 +20,8 @@ h2 {
 
 .header {
     margin-bottom: 20px;
-    background-color: #034769;
+    background-color: #3483AA;
+    color: #fff;
     position: fixed;
     z-index: 99;
     width: 100%;
@@ -29,18 +30,7 @@ h2 {
 
 .header-topline {
     position: relative;
-    padding: 10px 0 3px;
-}
-
-.header-topline::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 20px;
-    height: 100%;
-    background-color: #B2D5EB;
-    transform: skewX(-30deg);
+    padding: 10px 0;
 }
 
 .header-text {
@@ -52,15 +42,15 @@ h2 {
 .header-text__title {
     position: relative;
     display: inline-block;
-    font-size: 30px;
+    font-size: 24px;
     text-align: center;
-    margin-right: 50px;
+    margin-bottom: 10px;
     color: #fff;
 }
 
 .header-text__subtitle {
     display: inline-block;
-    font-size: 18px;
+    font-size: 16px;
     text-align: center;
     color: #fff;
 }
@@ -109,6 +99,25 @@ h2 {
     color: rgb(233, 233, 233);
 }
 
+.header-menu {
+    background-color: #0B5B84;
+}
+.header-menu__list-item {
+    display: inline-block;
+}
+
+.header-menu__link {
+    display: inline-block;
+    padding: 6px 30px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s;
+}
+
+.header-menu__link:hover {
+    background-color: rgb(7, 78, 109)
+}
+
 .site-logo-wrapper {
     text-align: center;
 }
@@ -119,14 +128,14 @@ h2 {
 
 .site-logo {
     display: inline-block;
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     background: url(../img/site_logo+.svg) 0px 0px/cover no-repeat;
 }
 
 .main {
     position: relative;
-    padding-top: 125px;
+    padding-top: 180px;
     margin-bottom: 20px;
 }
 
@@ -166,11 +175,6 @@ h2 {
 .tal {
     text-align: left;
 }
-
-
-/* .links-block__li:hover {
-    box-shadow: 0px 0px 30px rgba(27, 66, 100, 50%);
-} */
 
 .li-gallery {
     width: 100%;
@@ -541,7 +545,7 @@ h2 {
 
 .footer {
     padding: 30px 15px;
-    background-color: #034769;
+    background-color: #3483AA;
     color: #fff;
 }
 
@@ -556,7 +560,6 @@ h2 {
 
 .footer__text {
     width: 100%;
-    color: #dfe8ee;
 }
 
 .footer__link {

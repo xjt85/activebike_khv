@@ -91,7 +91,16 @@
     <main id="primary" class="main site-main">
       <div class="container">
         <div class="row">
-          <div class="col-12 col-md-4">
+          
+          <div class="col-8">
+            <div class="content">
+              <div class="activities">
+                {% block content %}Нет мероприятий.{% endblock %}
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-4">
             <aside class="links-block m-5">
               <h2 class="links-block__caption links-caption">
                 Ближайшее мероприятие
@@ -100,7 +109,7 @@
                 <script
                   async
                   src="https://telegram.org/js/telegram-widget.js?15"
-                  data-telegram-post="activebike/9"
+                  data-telegram-post="activebike/23"
                   data-width="100%"
                 ></script>
                 <!-- <li class="links-block__li tal">
@@ -230,10 +239,7 @@
               </ul>
             </aside>
           </div>
-
-          <div class="col-12 col-md-8">
-            {% block content %} Нет мероприятий. {% endblock %}
-          </div>
+        
         </div>
       </div>
     </main>
