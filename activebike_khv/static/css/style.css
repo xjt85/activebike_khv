@@ -33,10 +33,17 @@ h2 {
     padding: 10px 0;
 }
 
+.topline-text-left {
+    padding: 0 20px;
+}
+
 .header-text {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    font-size: 21px;
+}
+
+.header-text__t1,
+.header-text__t2 {
+    display: block;
 }
 
 .header-text__title {
@@ -135,8 +142,8 @@ h2 {
 
 .main {
     position: relative;
-    padding-top: 180px;
-    margin-bottom: 20px;
+    padding-top: 160px;
+    margin-bottom: 30px;
 }
 
 .links-block {
