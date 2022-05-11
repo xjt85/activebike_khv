@@ -1,6 +1,7 @@
 asgiref==3.4.1
 atomicwrites==1.4.0
 attrs==21.2.0
+autopep8==1.6.0
 colorama==0.4.4
 Django==3.2.9
 flake8==4.0.1
@@ -15,6 +16,7 @@ mccabe==0.6.1
 mysqlclient==2.1.0
 packaging==21.3
 pep8-naming==0.12.1
+Pillow==9.1.0
 pluggy==1.0.0
 py==1.11.0
 pycodestyle==2.8.0
