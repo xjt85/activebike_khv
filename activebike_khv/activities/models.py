@@ -45,6 +45,6 @@ class Activity(models.Model):
         return self.text[:15]
 
     class Meta:
-        ordering = ['-pub_date']
+        ordering = ['-date_edit']
         verbose_name = 'Мероприятие'
         verbose_name_plural = 'Мероприятия'
