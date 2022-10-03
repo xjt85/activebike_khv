@@ -1,6 +1,6 @@
 body {
     /* color: #515f7a; */
-    background-color: #eff7ff;
+    background-color: #E6F3FF;
     color: rgb(61, 62, 64);
     font-family: Roboto, Arial, Helvetica, sans-serif;
     font-size: 16px;
@@ -32,6 +32,8 @@ h2 {
 .header-topline {
     position: relative;
     padding: 10px 0;
+    background-color: #3483AA;
+    color: #fff;
 }
 
 .topline-text-left {
@@ -108,7 +110,7 @@ h2 {
 }
 
 .header-menu {
-    background-color: #3f9ac8;
+    background-color: #0B5B84;
     color: #fff;
 }
 .header-menu__list-item {
@@ -555,8 +557,8 @@ h2 {
 .footer {
     padding: 30px 15px;
     /* background-color: #3483AA; */
-    background-color: #c5e2fd;
-    /* color: #fff; */
+    background-color: #3483AA;
+    color: #fff;
 }
 
 .footer__text-wrapper {
@@ -573,7 +575,7 @@ h2 {
 }
 
 .footer__link {
-    color: #757575;
+    color: #e2e2e2;
     text-decoration: none;
 }
 
