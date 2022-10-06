@@ -416,26 +416,26 @@ h2 {
     border: 1px solid #dfe8ee;
 }
 
-.activities {
+.events {
     padding: 0;
 }
 
-.activities__content {
+.events__content {
     margin-bottom: 2px;
 }
 
-.activities__h2 {
+.events__h2 {
     font-size: 28px;
     margin-bottom: 30px;
 }
 
-.activity {
+.event {
     padding: 10px;
     border-bottom: 1px solid #B2D5EB;
     text-align: center;
 }
 
-.activity__caption {
+.event__caption {
     font-size: 18px;
     font-weight: 500;
     text-align: center;
@@ -443,7 +443,7 @@ h2 {
     margin-bottom: 10px;
 }
 
-.activity__icons {
+.event__icons {
     text-align: center;
     display: flex;
     justify-content: center;
@@ -480,64 +480,64 @@ h2 {
     margin-left: 10px;
 }
 
-.activity__date {
+.event__date {
     margin-bottom: 10px;
 }
 
-.activity__links {
+.event__links {
     margin-bottom: 10px;
 }
 
-.activities__link-link {
+.events__link-link {
     display: block;
     width: 100%;
     color: #0b6fc0;
 }
 
-.activities__link-link:hover {
+.events__link-link:hover {
     text-decoration: none;
 }
 
-.activity__show-descr {
+.event__show-descr {
     margin-bottom: 20px;
     cursor: pointer;
 }
 
-.activity__show-descr i {
+.event__show-descr i {
     position: relative;
     transition: all 0.2s;
 }
 
-.activity__show-descr.active i {
+.event__show-descr.active i {
     top: 3px;
     left: 0px;
     transform: rotate(180deg);
 }
 
-.activity__show-descr:hover {
+.event__show-descr:hover {
     text-decoration: underline;
 }
 
-.activity__show-descr-text {
+.event__show-descr-text {
     display: inline-block;
     min-width: 136px;
     margin-right: 10px;
 }
 
-.activity__show-descr-text_2 {
+.event__show-descr-text_2 {
     display: none;
     margin-right: 10px;
 }
 
-.activity__show-descr.active .activity__show-descr-text_1 {
+.event__show-descr.active .event__show-descr-text_1 {
     display: none;
 }
 
-.activity__show-descr.active .activity__show-descr-text_2 {
+.event__show-descr.active .event__show-descr-text_2 {
     display: inline-block;
 }
 
-.activity-descr {
+.event-descr {
     text-align: left;
     font-weight: 400;
 }
@@ -612,7 +612,7 @@ h2 {
     .header-text__subtitle {
         width: 100%;
     }
-    .activities {
+    .events {
         font-size: 14px;
     }
     .li-gallery__item {
@@ -626,10 +626,10 @@ h2 {
         width: 90%;
         transform: translateX(-50%) skewX(-50deg);
     }
-    .activity__date {
+    .event__date {
         text-align: center;
     }
-    .activity__links {
+    .event__links {
         text-align: center;
     }
     .li-gallery__item {
@@ -690,51 +690,51 @@ h2 {
         padding: 20px 5px;
         padding-bottom: 10px;
     }
-    .activities {
+    .events {
         margin-bottom: 20px;
     }
-    .activities__h2_1,
-    activities__h2_2 {
+    .events__h2_1,
+    events__h2_2 {
         display: block;
     }
-    .activities__row {
+    .events__row {
         flex-wrap: wrap;
         padding: 14px 5px;
     }
-    .activities__row_head {
+    .events__row_head {
         display: none;
     }
-    .activities__col {
+    .events__col {
         padding: 5px;
         border: none;
         text-align: center;
         width: 50%;
         margin: 0;
     }
-    .activities__col:last-child {
+    .events__col:last-child {
         border-right: 1px solid #B2D5EB;
     }
-    .activities__col_logo {
+    .events__col_logo {
         order: 1;
         border-left: 1px solid #B2D5EB;
     }
-    .activities__col_logo.add-icon-completed::after {
+    .events__col_logo.add-icon-completed::after {
         margin-left: 6px;
         margin-top: 0;
         font-size: 14px;
     }
-    .activities__col_logo.add-icon-fire::after {
+    .events__col_logo.add-icon-fire::after {
         margin-left: 6px;
         margin-top: 0;
     }
-    .activities__col_date {
+    .events__col_date {
         order: 2;
     }
-    .activities__col_name {
+    .events__col_name {
         order: 3;
         border-left: 1px solid #B2D5EB;
     }
-    .activities__col_link {
+    .events__col_link {
         order: 4;
     }
     .item-descr {

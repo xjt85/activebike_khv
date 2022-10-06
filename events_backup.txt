@@ -1,0 +1,261 @@
+<div class="event">
+    <h3 class="event__caption">Весенний бревет 200 км</h3>
+    <div class="event__icons">
+      <span class="icon-bike"></span>
+    </div>
+    <div class="event__date">апрель 2022</div>
+    <div class="event__links">
+      <!-- <a href="https://www.dvride.ru/forum/viewtopic.php?id=20505" class="events__link-link">Обсуждение</a> -->
+    </div>
+    <div class="event-descr">
+      <p class="event-descr__text">
+        Традиция весенних бреветов вокруг Хабаровска положена
+        <a href="//rudolf-khb.livejournal.com/2095.html" class="link"
+          >в 2011 году Павлом Бакановым</a
+        >. Бревет - организованный зачётный (с лимитом времени) велозаезд н_
+        длинную дистанцию. Стандартными дистанциями являются 200, 300, 400, 600,
+        1000 и 1200 км. Рандоннёр — велосипедист, принимающий участие в
+        специальных заездах, известных как бреветы.
+      </p>
+    </div>
+  </div>
+
+  <div class="event">
+    <h3 class="event__caption">Предоткрытие велосезона</h3>
+    <div class="event__icons">
+      <span class="icon-bike"></span>
+    </div>
+    <div class="event__date">апрель 2022</div>
+    <div class="event__links">
+      <!-- <a href="https://www.dvride.ru/forum/viewtopic.php?id=20542" class="events__link-link">Обсуждение</a> -->
+    </div>
+    <div class="event-descr">
+      <p class="event-descr__text">
+        Предоткрытие сезона - традиционная массовая покатушка на Пемзенскую
+        протоку, около поселка Владимировка, где в середине апреля можно
+        наблюдать ледоход на Амуре. Расстояние небольшое - около 60 км от центра
+        города.
+      </p>
+    </div>
+  </div>
+
+  <div class="event">
+    <h3 class="event__caption">Открытие велосезона</h3>
+    <div class="event__icons">
+      <span class="icon-bike"></span>
+    </div>
+    <div class="event__date">апрель 2022</div>
+    <div class="event__links">
+      <!-- <a href="https://www.dvride.ru/forum/viewtopic.php?id=20526" class="events__link-link">Отчет</a> -->
+    </div>
+    <div class="event-descr">
+      <p class="event-descr__text">
+        Традиционное открытие летнего велосезона. Мероприятие проводится с целью
+        приобщения людей к велоспорту и активному образу жизни в целом.
+        Примерная дистанция (в одну сторону): до "Ерофей Арены" - 10 км, до
+        Сопки Двух Братьев - 26 км. Движение по дорогам - согласно ПДД, группами
+        не более 20 человек, наличие включенных передних и задних фонарей при
+        этом - обязательно. Наличие шлема и защитной экипировки приветствуется.
+      </p>
+    </div>
+  </div>
+
+  <div class="event">
+    <h3 class="event__caption">Весенняя новичковая 120-ка</h3>
+    <div class="event__icons">
+      <span class="icon-bike"></span>
+    </div>
+    <div class="event__date">май 2022</div>
+    <div class="event__links">
+      <!-- <a href="https://www.dvride.ru/forum/viewtopic.php?id=20557" class="events__link-link">Обсуждение: Dvride.Ru</a>
+                                        <a href="https://orgeo.ru/event/16845" class="events__link-link">Регистрация: Orgeo.ru</a> -->
+      <a
+        href="https://rudolf-khb.livejournal.com/126432.html"
+        class="events__link-link"
+        >Отчет в ЖЖ</a
+      >
+    </div>
+    <div class="event-descr">
+      <p class="event-descr__text">
+        Цель мероприятия - привлечение новых участников к заездам на длинные
+        дистанции. Дистанция 120 км заезда составляет 120 км, и должна быть
+        преодолена за 8 часов, что соответствует формату бреветов (из расчета 15
+        км в час). В первую очередь приглашаются те, для кого преодоление
+        расстояния выше 100 км будет вызовом самому себе. На старте будут выданы
+        подробные карты и номерки. Это не соревнование и не гонка, призов за
+        первые места не будет, но ради интереса время прохождения дистанции
+        будет фиксироваться. На маршруте будут действовать контрольные пункты,
+        где нужно будет получить отметку, а также можно пополнить запасы воды и
+        бананов. Всем, кто уложится в норматив 8 часов - будут вручены памятные
+        медали.
+      </p>
+    </div>
+  </div>
+
+  <div class="event">
+    <h3 class="event__caption">ГранФондо Июнь</h3>
+    <div class="event__icons">
+      <span class="icon-bike"></span>
+    </div>
+    <div class="event__date">июнь 2022</div>
+    <div class="event__links">
+      <!-- <a href="https://www.dvride.ru/forum/viewtopic.php?id=20589" class="events__link-link">Обсуждение: Dvride.Ru</a>    
+                                    <a href="https://orgeo.ru/event/17274" class="events__link-link">Регистрация: Orgeo.ru</a> -->
+      <a
+        href="https://rudolf-khb.livejournal.com/126661.html"
+        class="events__link-link"
+        >Отчет в ЖЖ</a
+      >
+    </div>
+    <div class="event-descr">
+      <p class="event-descr__text">
+        Массовое мероприятие в формате преодоления стокилометровой дистанции,
+        половина которой проходит по грунтовым дорогам. Основная цель - поиск
+        новых оригинальных маршрутов, тренировка новичков, развитие навыков
+        ориентирования.
+      </p>
+    </div>
+  </div>
+
+  <div class="event">
+    <h3 class="event__caption">ГранФондо Июль</h3>
+    <div class="event__icons">
+      <span class="icon-bike"></span>
+    </div>
+    <div class="event__date">июль 2022</div>
+    <div class="event__links">
+      <!-- <a href="" class="events__link-link">
+                                        <a href="https://orgeo.ru/event/17636" class="events__link-link">Регистрация: Orgeo.ru</a>     -->
+    </div>
+    <div class="event-descr">
+      <p class="event-descr__text">
+        Массовое мероприятие в формате преодоления стокилометровой дистанции,
+        половина которой проходит по грунтовым дорогам. Основная цель - поиск
+        новых оригинальных маршрутов, тренировка новичков, развитие навыков
+        ориентирования.
+      </p>
+    </div>
+  </div>
+
+  <div class="event">
+    <h3 class="event__caption">Поездка на "озеро Лотосов"</h3>
+    <div class="event__icons">
+      <span class="icon-bike"></span>
+    </div>
+    <div class="event__date">июль 2022</div>
+    <div class="event__links">
+      <!-- <a href="" class="events__link-link"></a> -->
+    </div>
+    <div class="event-descr">
+      <p class="event-descr__text">
+        Неспешная покатушка, рассчитанная на новичков. Проходит во время
+        цветения лотосов на озере около поселка Галкино.
+      </p>
+    </div>
+  </div>
+
+  <div class="event">
+    <h3 class="event__caption">Гонка "Парк северный"</h3>
+    <div class="event__icons">
+      <span class="icon-bike"></span>
+    </div>
+    <div class="event__date">август 2022</div>
+    <div class="event__links">
+      <!-- <a href="" class="events__link-link"></a> -->
+    </div>
+    <div class="event-descr">
+      <p class="event-descr__text">
+        Любительская велогонка в Северном парке. К гонке допускаются участники
+        от 18 лет при обязательном наличии шлема и исправного велосипеда. Гонка
+        проходит в формате "1 час" - старт будет открыт в течение 1 часа. В
+        течение этого времени, участники, по завершении очередного круга, могут
+        ехать на следующий круг. Побеждает проехавший большее количество кругов
+        (при равенстве кругов, выше в рейтинге проехавший быстрее).
+
+        <a
+          href="https://www.dvride.ru/forum/viewtopic.php?id=19616"
+          class="link"
+          >Обсуждение и результаты гонки 2019 года</a
+        >
+      </p>
+    </div>
+  </div>
+
+  <div class="event">
+    <h3 class="event__caption">ГранФондо Август</h3>
+    <div class="event__icons">
+      <span class="icon-bike"></span>
+    </div>
+    <div class="event__date">август 2022</div>
+    <div class="event__links">
+      <!-- <a href="" class="events__link-link"></a> -->
+    </div>
+    <div class="event-descr">
+      <p class="event-descr__text">
+        Массовое мероприятие в формате преодоления стокилометровой дистанции,
+        половина которой проходит по грунтовым дорогам. Основная цель - поиск
+        новых оригинальных маршрутов, тренировка новичков, развитие навыков
+        ориентирования.
+      </p>
+    </div>
+  </div>
+
+  <div class="event">
+    <h3 class="event__caption">Велоквест "Факториал"</h3>
+    <div class="event__icons">
+      <span class="icon-bike"></span>
+    </div>
+    <div class="event__date">август 2022</div>
+    <div class="event__links">
+      <!-- <a href="" class="events__link-link"></a> -->
+    </div>
+    <div class="event-descr">
+      <p class="event-descr__text">
+        Спортивно-интеллектуальная гонка, которой участвуют команды, в составе
+        которых от 1 до 2 человек. Участники могут передвигаться только на
+        велосипеде. Задача команды - набрать максимальное число баллов за
+        минимальное время. Баллы даются за посещение контрольных пунктов (КП) и
+        за решение задач в контрольных пунктах. Обсуждение прошлогоднего
+        события:
+        <a
+          href="https://www.dvride.ru/forum/viewtopic.php?id=20360"
+          class="link"
+          >Велоквест Факториал 2020</a
+        >
+      </p>
+    </div>
+  </div>
+
+  <div class="event">
+    <h3 class="event__caption">Гонка ХСО</h3>
+    <div class="event__icons">
+      <span class="icon-bike"></span>
+    </div>
+    <div class="event__date">сентябрь 2022</div>
+    <div class="event__links">
+      <!-- <a href="" class="events__link-link"></a> -->
+    </div>
+    <div class="event-descr">
+      <p class="event-descr__text">
+        "Кросс-кантри" - гонка по короткому треку с техничными участками.
+        Проводится недалеко от Ильинки, около базы подготовки лыжников.
+      </p>
+    </div>
+  </div>
+
+  <div class="event">
+    <h3 class="event__caption">Закрытие велосезона</h3>
+    <div class="event__icons">
+      <span class="icon-bike"></span>
+    </div>
+    <div class="event__date">октябрь 2022</div>
+    <div class="event__links">
+      <!-- <a href="" class="events__link-link"></a> -->
+    </div>
+    <div class="event-descr">
+      <p class="event-descr__text">
+        Традиционная массовая покатушка на Воронежские сопки. Посиделки у костра
+        в осеннем лесу.
+      </p>
+    </div>
+  </div>

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}События{% endblock %}
+{% block content %}
+
+<h2 class="events__h2">
+  <span class="events__h2_1">События</span>
+  {% comment %} <span class="events__h2_2">на 2022 год</span> {% endcomment %}
+</h2>
+
+<div class="events__content">
+  
+  <div class="event">
+    <h3 class="event__caption">Весенний бревет 200 км</h3>
+    <div class="event__icons">
+      <span class="icon-bike"></span>
+    </div>
+    <div class="event__date">апрель 2022</div>
+    <div class="event__links">
+      <!-- <a href="https://www.dvride.ru/forum/viewtopic.php?id=20505" class="events__link-link">Обсуждение</a> -->
+    </div>
+    <div class="event-descr">
+      <p class="event-descr__text">
+        Традиция весенних бреветов вокруг Хабаровска положена
+        <a href="//rudolf-khb.livejournal.com/2095.html" class="link"
+          >в 2011 году Павлом Бакановым</a
+        >. Бревет - организованный зачётный (с лимитом времени) велозаезд н_
+        длинную дистанцию. Стандартными дистанциями являются 200, 300, 400, 600,
+        1000 и 1200 км. Рандоннёр — велосипедист, принимающий участие в
+        специальных заездах, известных как бреветы.
+      </p>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
