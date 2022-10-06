@@ -15,7 +15,9 @@
           </div>
         </div>
         <div class="col-7">
-          <div class="header-text">Сообщество любителей активного отдыха города Хабаровска</div>
+          <div class="header-text">
+            Сообщество любителей активного отдыха города Хабаровска
+          </div>
         </div>
       </div>
     </div>
@@ -34,6 +36,16 @@
     <div class="container">
       <div class="row justify-content-center align-items-center">
         <div class="col-12">
+          <ul class="header-menu__list">
+            {% load menubuilder %}
+            {% menu main_menu %}
+            {% for item in menuitems %}
+              <li class="header-menu__list-item">
+                <a href="{{ item.url }}" title="{{ item.title|escape }}"  class="header-menu__link {% if item.current %} current {% endif %}">{{ item.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+          {% comment %}
           <ul class="header-menu__list">
             <li class="header-menu__list-item">
               <a href="" class="header-menu__link">Мероприятия</a>
@@ -54,6 +66,7 @@
               <a href="" class="header-menu__link">О нас</a>
             </li>
           </ul>
+          {% endcomment %}
         </div>
       </div>
     </div>
