@@ -7,6 +7,17 @@
         </div>
       </div>
       <div class="col-8 col-md-10">
+        <div class="footer-menu-wrapper">
+          <ul class="footer-menu">
+            {% load menubuilder %}
+            {% menu main_menu %}
+            {% for item in menuitems %}
+              <li class="header-menu__list-item">
+                <a href="{{ item.url }}" title="{{ item.title|escape }}"  class="header-menu__link {% if item.current %} current {% endif %}">{{ item.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
         <div class="footer__text-wrapper">
           <p class="footer__text">&copy; "ACTIVE BIKE", 2021.</p>
           <p class="footer__text footer__text_2">

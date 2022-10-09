@@ -37,6 +37,7 @@ class Event(models.Model):
         null=True,
         related_name='activities'
     )
+    date_pub = models.DateTimeField(auto_now_add=True)
     date_planned = models.DateTimeField(auto_now_add=True)
     date_edited = models.DateTimeField(auto_now_add=True)
 
