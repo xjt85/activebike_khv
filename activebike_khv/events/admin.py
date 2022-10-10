@@ -14,5 +14,5 @@ class EventAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
 
 
-admin.site.register(EventType)
+admin.site.register(EventType, EventTypeAdmin)
 admin.site.register(Event, EventAdmin)
