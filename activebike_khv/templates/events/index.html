@@ -12,16 +12,16 @@
 <div class="events__content">
   {% for event in events %}
     <article class="event">
+      <h3 class="event__caption">{{ event.caption }}</h3>
       <div class="event__main">
         <div class="event__left">
           <div class="event__image">
             {% thumbnail event.image "300x300" crop="center" upscale=True as im %}
-              <img src="{{ im.url }}" alt="{{ event.caption }}" class="event__image-img">
+              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ event.caption }}" class="event__image-img">
             {% endthumbnail %}
           </div>
         </div>
         <div class="event__right">
-          <h3 class="event__caption">{{ event.caption }}</h3>
           <div class="event-descr">
             <p class="event-descr__text">{{ event.description|truncatechars:200 }}</p>
           </div>
