@@ -1,69 +1,68 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}События{% endblock %} {% block content %}
+{% load cache %}
+{% load thumbnail %}
+{% block title %}События{% endblock %}
 
+{% block content %}
 <h2 class="events__h2">
   <span class="events__h2_1">События</span>
 </h2>
 
 <div class="events__content">
-  <div class="event">
-    <div class="event__main">
-      <div class="event__left">
-        <div class="event__image">
-          <img src="{% static 'img/rides_gallery/Vol290521-3.jpg' %}" alt="Фото" class="event__image-img">
+  {% for event in events %}
+    <article class="event">
+      <div class="event__main">
+        <div class="event__left">
+          <div class="event__image">
+            {% thumbnail event.image "300x300" crop="center" upscale=True as im %}
+              <img src="{{ im.url }}" alt="{{ event.caption }}" class="event__image-img">
+            {% endthumbnail %}
+          </div>
+        </div>
+        <div class="event__right">
+          <h3 class="event__caption">{{ event.caption }}</h3>
+          <div class="event-descr">
+            <p class="event-descr__text">{{ event.description|truncatechars:200 }}</p>
+          </div>
         </div>
       </div>
-      <div class="event__right">
-        <h3 class="event__caption">Весенний бревет 200 км</h3>
-        <div class="event-descr">
-          <p class="event-descr__text">
-            Традиция весенних бреветов вокруг Хабаровска положена
-            <a href="//rudolf-khb.livejournal.com/2095.html" class="link"
-              >в 2011 году Павлом Бакановым</a
-            >. Бревет - организованный зачётный (с лимитом времени) велозаезд н_
-            длинную дистанцию. Стандартными дистанциями являются 200, 300, 400,
-            600, 1000 и 1200 км. Рандоннёр — велосипедист, принимающий участие в
-            специальных заездах, известных как бреветы.
-          </p>
+      <div class="event__info">
+        <div class="event__info-col-1">
+          <div class="event__icons">
+            <span class="icon-bike"></span>
+          </div>
+        </div>
+        <div class="event__info-col-2">
+          <div class="event-author">
+            Автор:
+            <span class="event-author__value">{{ event.author }}</span>
+          </div>
+          <div class="event-date-edited">
+            Изменено:
+            <span class="event-date-edited__value">{{ event.date_edited|date:"d.m.Y" }}</span>
+          </div>
+        </div>
+        <div class="event__info-col-3">
+          <div class="event__views">
+            Просмотров:
+            <span class="event__views-value">20</span>
+          </div>
+          <div class="event__comments">
+            Комментарии (<span class="event__views-value">10</span>)
+          </div>
+        </div>
+        <div class="event__info-col-4">
+          <div class="event__date">
+            Дата события:
+            <span class="event__date-value">{{ event.date_planned|date:"d.m.Y" }}</span>
+          </div>
+          <div class="event__share">
+            <a class="event__date-value" href="">Поделиться</a>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="event__info">
-      <div class="event__info-col-1">
-        <div class="event__icons">
-          <span class="icon-bike"></span>
-        </div>
-      </div>
-      <div class="event__info-col-2">
-        <div class="event__author">
-          Автор:
-          <span class="event__author-value">Rudolf</span>
-        </div>
-        <div class="event__author">
-          Изменено:
-          <span class="event__date_edited">21.03.2022</span>
-        </div>
-      </div>
-      <div class="event__info-col-3">
-        <div class="event__views">
-          Просмотров:
-          <span class="event__views-value">20</span>
-        </div>
-        <div class="event__comments">
-          Комментарии (<span class="event__views-value">10</span>)
-        </div>
-      </div>
-      <div class="event__info-col-4">
-        <div class="event__date">
-          Дата события:
-          <span class="event__date-value">01.04.2022</span>
-        </div>
-        <div class="event__share">
-          <a class="event__date-value" href="">Поделиться</a>
-        </div>
-      </div>
-    </div>
-  </div>
+    </article>
+  {% endfor %}
 </div>
 {% endblock %}

@@ -3,17 +3,20 @@
   <div class="header-topline">
     <div class="container">
       <div class="row justify-content-center align-items-center">
-        <div class="col-3">
-          <div class="topline-text-left">
-            <h1 class="header-text__title">ACTIVE BIKE KHV</h1>
-            <span class="header-text__subtitle">больше, чем покатушки</span>
-          </div>
-        </div>
+        
         <div class="col-2">
           <div class="site-logo-wrapper">
             <span class="site-logo"></span>
           </div>
         </div>
+        
+        <div class="col-3">
+          <h1 class="header-text__title">ACTIVE BIKE KHV</h1>
+          {% comment %} <div class="topline-text-left">
+            <span class="header-text__subtitle">больше, чем покатушки</span>
+          </div> {% endcomment %}
+        </div>
+        
         <div class="col-7">
           <div class="header-text">
             Сообщество любителей активного отдыха города Хабаровска
@@ -28,7 +31,7 @@
         <div class="col-12">
           <ul class="header-menu__list">
             {% load menubuilder %}
-            {% menu main_menu %}
+            {% menu menu %}
             {% for item in menuitems %}
               <li class="header-menu__list-item">
                 <a href="{{ item.url }}" title="{{ item.title|escape }}"  class="header-menu__link {% if item.current %} current {% endif %}">{{ item.title }}</a>

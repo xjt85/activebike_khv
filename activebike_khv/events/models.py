@@ -38,7 +38,7 @@ class Event(models.Model):
         related_name='activities'
     )
     date_pub = models.DateTimeField(auto_now_add=True)
-    date_planned = models.DateTimeField(auto_now_add=True)
+    date_planned = models.DateTimeField()
     date_edited = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
