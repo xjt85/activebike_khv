@@ -431,7 +431,7 @@ h2, h3 {
 
 .events__h2 {
   font-size: 28px;
-  margin-bottom: 30px;
+  margin-bottom: 0px;
 }
 
 .event {
@@ -439,10 +439,10 @@ h2, h3 {
   box-sizing: border-box;
   border-bottom: 1px solid #b2d5eb;
   text-align: center;
+  /* margin-bottom: 20px; */
   /* display: flex;
   flex-wrap: wrap; */
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-  margin-bottom: 20px;
+  /* box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2); */
 }
 
 .event__main {
