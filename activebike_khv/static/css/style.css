@@ -437,6 +437,7 @@ h2, h3 {
 .event {
   padding: 20px;
   box-sizing: border-box;
+  /* border-top: 1px solid #b2d5eb; */
   border-bottom: 1px solid #b2d5eb;
   text-align: center;
   /* margin-bottom: 20px; */
