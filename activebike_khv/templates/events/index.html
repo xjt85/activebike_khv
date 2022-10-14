@@ -2,7 +2,7 @@
 {% load static %}
 {% load cache %}
 {% load thumbnail %}
-{% block title %}События{% endblock %}
+{% block title %}События - {% endblock %}
 
 {% block content %}
 <h2 class="events__h2">
@@ -12,7 +12,7 @@
 <div class="events__content">
   {% for event in events %}
     <article class="event">
-      <h3 class="event__caption"><a href="{% url 'events:event_detail' event.id %}">{{ event.date_planned|date:"d.m.Y" }} - {{ event.caption }}</a></h3>
+      <h3 class="event__caption"><a href="{% url 'events:event_detail' event.id %}" class="event__caption-link">{{ event.date_planned|date:"d.m.Y" }} - {{ event.caption }}</a></h3>
       <div class="event__main">
         <div class="event__left">
           <div class="event__image">
@@ -24,13 +24,14 @@
         <div class="event__right">
           <div class="event-descr">
             <p class="event-descr__text">{{ event.description|truncatechars:300 }}</p>
+            <a href="{% url 'events:event_detail' event.id %}" class="event-descr__more">Читать далее</a>
           </div>
         </div>
       </div>
       <div class="event__info">
         <div class="event__info-col-1">
           <div class="event__icons">
-            <span class="icon-bike"></span>
+            <i class="fa fa-bicycle fa-lg"></i>
           </div>
         </div>
         <div class="event__info-col-2">

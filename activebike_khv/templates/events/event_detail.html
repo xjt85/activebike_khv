@@ -2,7 +2,7 @@
 {% load static %}
 {% load cache %}
 {% load thumbnail %}
-{% block title %}Страница события{% endblock %}
+{% block title %}{{ event.date_planned|date:"d.m.Y" }} - {{ event.caption }} - {% endblock %}
 
 {% block content %}
 <article class="event-page">
