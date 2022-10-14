@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cache %}
+{% load thumbnail %}
+{% block title %}Страница события{% endblock %}
+
+{% block content %}
+<article class="event-page">
+  <h3 class="event-page__caption">{{ event.date_planned|date:"d.m.Y" }} - {{ event.caption }}</h3>
+  <div class="event-page__main">
+    <div class="event-page__image">
+      {% thumbnail event.image "500x300" crop="center" upscale=True as im %}
+        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ event.caption }}" class="event-page__image-img">
+      {% endthumbnail %}
+    </div>
+    <div class="event-page-descr">
+      <p class="event-page-descr__text">{{ event.description }}</p>
+    </div>
+  </div>
+  <div class="event-page__info">
+    <div class="event-page__info-col-1">
+      <div class="event-page__icons">
+        <span class="icon-bike"></span>
+      </div>
+    </div>
+    <div class="event-page__info-col-2">
+      <div class="event-page-author">
+        Автор:
+        <span class="event-page-author__value">{{ event.author }}</span>
+      </div>
+      <div class="event-page-date-edited">
+        Изменено:
+        <span class="event-page-date-edited__value">{{ event.date_edited|date:"d.m.Y" }}</span>
+      </div>
+    </div>
+    <div class="event-page__info-col-3">
+      <div class="event-page__views">
+        Просмотров:
+        <span class="event-page__views-value">20</span>
+      </div>
+      <div class="event-page__comments">
+        Комментарии (<span class="event-page__views-value">10</span>)
+      </div>
+    </div>
+    <div class="event-page__info-col-4">
+      <div class="event-page__date">
+        Дата события:
+        <span class="event-page__date-value">{{ event.date_planned|date:"d.m.Y" }}</span>
+      </div>
+      <div class="event-page__share">
+        <a class="event-page__date-value" href="">Поделиться</a>
+      </div>
+    </div>
+  </div>
+</article>
+{% endblock %}

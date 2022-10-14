@@ -20,19 +20,15 @@ def events_index(request):
     }
     return render(request, template, context)
 
-def event_detail(request, post_id):
-    post = get_object_or_404(Post, pk=post_id)
-    comments = Comment.objects.filter(post=post)
-    author = post.author
-    author_posts_count = Post.objects.filter(author=post.author).count()
-    form = CommentForm(request.POST or None)
+def event_detail(request, event_id):
+    event = get_object_or_404(Event, pk=event_id)
+    # comments = Comment.objects.filter(event=event)
+    # author = event.author
+    author_events_count = Event.objects.filter(author=event.author).count()
+    # form = CommentForm(request.POST or None)
 
     context = {
-        'post': post,
-        'author': author,
-        'author_posts_count': author_posts_count,
-        'form': form,
-        'comments': comments
+        'event': event,
     }
 
-    return render(request, 'posts/post_detail.html', context)
+    return render(request, 'events/event_detail.html', context)
