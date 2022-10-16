@@ -1,0 +1,25 @@
+<nav class="header-menu">
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-12">
+        <ul class="header-menu__list">
+        {% load menubuilder %}
+        {% menu menu %}
+          {% for m_item in menu_items %}
+            <li class="header-menu__list-item"><a href="{{ m_item.url }}">{{ m_item.name }}</a></li>
+          {% endfor %}
+        {% for item in menuitems %}
+          <li>
+            <a
+              href="{{ item.url }}"
+              title="{{ item.title|escape }}"
+              class="header-menu__link {% if item.current %} current {% endif %}"
+              >{{ item.title }}</a
+            >
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

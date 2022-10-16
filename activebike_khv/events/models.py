@@ -5,6 +5,7 @@ from django.db.models.deletion import SET_NULL
 
 User = get_user_model()
 
+
 class EventType(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=50, unique=True)
@@ -16,6 +17,7 @@ class EventType(models.Model):
     class Meta:
         verbose_name = 'Тип события'
         verbose_name_plural = 'Типы событий'
+
 
 class Event(models.Model):
     caption = models.CharField(max_length=200)
@@ -45,6 +47,6 @@ class Event(models.Model):
         return self.caption[:15]
 
     class Meta:
-        ordering = ['-date_edited']
+        ordering = ['-date_planned']
         verbose_name = 'Событие'
         verbose_name_plural = 'События'
