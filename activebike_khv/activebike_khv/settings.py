@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'events.apps.EventsConfig',
+    'core.apps.CoreConfig',
     'sorl.thumbnail',
     'debug_toolbar',
     'menu',

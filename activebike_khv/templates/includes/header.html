@@ -1,4 +1,5 @@
 {% load static %}
+{% load common_tags %}
 <header class="header">
   <div class="header-topline">
     <div class="container">
@@ -6,7 +7,7 @@
         
         <div class="col-2">
           <div class="site-logo-wrapper">
-            <span class="site-logo"></span>
+            <a href="/" class="site-logo"></a>
           </div>
         </div>
         
@@ -25,21 +26,24 @@
       </div>
     </div>
   </div>
-  <menu class="header-menu">
-    <div class="container">
-      <div class="row justify-content-center align-items-center">
-        <div class="col-12">
-          <ul class="header-menu__list">
-            {% load menubuilder %}
-            {% menu menu %}
-            {% for item in menuitems %}
-              <li class="header-menu__list-item">
-                <a href="{{ item.url }}" title="{{ item.title|escape }}"  class="header-menu__link {% if item.current %} current {% endif %}">{{ item.title }}</a>
-              </li>
-            {% endfor %}
-          </ul>
-        </div>
+{% comment %} 
+  {% show_top_menu %} {% endcomment %}
+<nav class="header-menu">
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-12">
+        <ul class="header-menu__list">
+          {% load menubuilder %}
+          {% menu menu %}
+          {% for item in menuitems %}
+            <li class="header-menu__list-item">
+              <a href="{{ item.url }}" title="{{ item.title|escape }}"  class="header-menu__link {% if item.current %} current {% endif %}">{{ item.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
       </div>
     </div>
-  </menu>
+  </div>
+</nav>
+
 </header>
