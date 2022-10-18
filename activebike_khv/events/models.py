@@ -21,6 +21,21 @@ class Tag(models.Model):
         return self.name
 
 
+class SurfaceType(models.Model):
+    name = models.CharField(max_length=200, unique=True,
+                            verbose_name='Название дорожного покрытия')
+    slug = models.SlugField(max_length=200, unique=True,
+                            verbose_name='Уникальный слаг')
+
+    class Meta:
+        ordering = ['-id']
+        verbose_name = 'Тип дорожного покрытия'
+        verbose_name_plural = 'Типы дорожных покрытий'
+
+    def __str__(self):
+        return self.name
+
+
 class EventType(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=50, unique=True)
@@ -35,7 +50,7 @@ class EventType(models.Model):
 
 
 class Event(models.Model):
-    caption = models.CharField(max_length=200)
+    title = models.CharField(max_length=200)
     description = models.TextField()
     image = models.ImageField(
         'Картинка',
@@ -64,7 +79,7 @@ class Event(models.Model):
     date_edited = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.caption[:15]
+        return self.title[:15]
 
     class Meta:
         ordering = ['-date_planned']
@@ -73,7 +88,7 @@ class Event(models.Model):
 
 
 class Article(models.Model):
-    caption = models.CharField(max_length=200)
+    title = models.CharField(max_length=200)
     description = models.TextField()
     image = models.ImageField(
         'Картинка',
@@ -101,7 +116,7 @@ class Article(models.Model):
     date_edit = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.caption[:15]
+        return self.title[:15]
 
     class Meta:
         ordering = ['-date_pub']
@@ -110,16 +125,55 @@ class Article(models.Model):
 
 
 class Link(models.Model):
-    caption = models.CharField(max_length=200)
+    title = models.CharField(max_length=200)
     url = models.CharField(max_length=200)
     description = models.TextField()
+    
+    def __str__(self):
+        return self.title[:15]
+
+    class Meta:
+        ordering = ['title']
+        verbose_name = 'Ссылка'
+        verbose_name_plural = 'Ссылки'
 
 
 class Media(models.Model):
-    caption = models.CharField(max_length=200)
+    title = models.CharField(max_length=200)
     url = models.CharField(max_length=200)
     description = models.TextField()
 
+    def __str__(self):
+        return self.title[:15]
+
+    class Meta:
+        ordering = ['title']
+        verbose_name = 'Медиа'
+        verbose_name_plural = 'Медиа'
+
 
 class Route(models.Model):
-    caption = models.CharField(max_length=200)
+    title = models.CharField(max_length=200)
+    length = models.IntegerField(null=True)
+    height_gain = models.IntegerField(null=True)
+    surface_type = models.ForeignKey(
+        EventType,
+        on_delete=SET_NULL,
+        blank=True,
+        null=True,
+        related_name='routes'
+    )
+    tags = models.ManyToManyField(
+        Tag,
+        related_name='routes',
+        verbose_name='Теги',
+    )
+    url = models.CharField(max_length=200, null=True)
+
+    def __str__(self):
+        return self.title[:15]
+
+    class Meta:
+        ordering = ['title']
+        verbose_name = 'Маршрут'
+        verbose_name_plural = 'Маршруты'
