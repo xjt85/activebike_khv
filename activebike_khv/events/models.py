@@ -6,6 +6,21 @@ from django.db.models.deletion import SET_NULL
 User = get_user_model()
 
 
+class Tag(models.Model):
+    name = models.CharField(max_length=200, unique=True,
+                            verbose_name='Название тега')
+    slug = models.SlugField(max_length=200, unique=True,
+                            verbose_name='Уникальный слаг')
+
+    class Meta:
+        ordering = ['-id']
+        verbose_name = 'Тег'
+        verbose_name_plural = 'Теги'
+
+    def __str__(self):
+        return self.name
+
+
 class EventType(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=50, unique=True)
@@ -39,6 +54,11 @@ class Event(models.Model):
         null=True,
         related_name='events'
     )
+    tags = models.ManyToManyField(
+        Tag,
+        related_name='events',
+        verbose_name='Теги',
+    )
     date_pub = models.DateTimeField(auto_now_add=True)
     date_planned = models.DateTimeField()
     date_edited = models.DateTimeField(auto_now_add=True)
@@ -50,6 +70,7 @@ class Event(models.Model):
         ordering = ['-date_planned']
         verbose_name = 'Событие'
         verbose_name_plural = 'События'
+
 
 class Article(models.Model):
     caption = models.CharField(max_length=200)
@@ -71,8 +92,13 @@ class Article(models.Model):
         null=True,
         related_name='articles'
     )
+    tags = models.ManyToManyField(
+        Tag,
+        related_name='articles',
+        verbose_name='Теги',
+    )
     date_pub = models.DateTimeField(auto_now_add=True)
-    date_edited = models.DateTimeField(auto_now_add=True)
+    date_edit = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.caption[:15]
@@ -82,27 +108,18 @@ class Article(models.Model):
         verbose_name = 'Статья'
         verbose_name_plural = 'Статьи'
 
+
 class Link(models.Model):
     caption = models.CharField(max_length=200)
     url = models.CharField(max_length=200)
     description = models.TextField()
 
 
-# class Photo(models.Model):
-#     caption = models.CharField(max_length=200)
-#     url = models.CharField(max_length=200)
-#     description = models.TextField()
+class Media(models.Model):
+    caption = models.CharField(max_length=200)
+    url = models.CharField(max_length=200)
+    description = models.TextField()
 
 
-# class Video(models.Model):
-#     caption = models.CharField(max_length=200)
-#     url = models.CharField(max_length=200)
-#     description = models.TextField()
-
-
-# class Route(models.Model):
-#     caption = models.CharField(max_length=200)
-
-
-# class Tag(models.Model):
-#     caption = models.CharField(max_length=200)
+class Route(models.Model):
+    caption = models.CharField(max_length=200)
