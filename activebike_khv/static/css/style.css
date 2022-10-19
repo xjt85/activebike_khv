@@ -401,7 +401,7 @@ h3 {
 }
 
 .content {
-  padding: 15px;
+  padding: 20px;
   background-color: #fff;
   border: 1px solid #dfe8ee;
 }
@@ -422,9 +422,9 @@ h3 {
 /*------------------- Event ----------------------*/
 
 .event {
-  padding: 20px;
   box-sizing: border-box;
   text-align: center;
+  padding: 20px 0;
 }
 
 .event__caption {
@@ -498,47 +498,57 @@ h3 {
 }
 
 .event__info {
-  padding: 20px 0;
   display: flex;
   justify-content: space-between;
   width: 100%;
   text-align: left;
   font-size: 14px;
   display: flex;
+  border-top: 1px solid #b2d5eb;
   border-bottom: 1px solid #b2d5eb;
+  padding: 10px 0;
 }
 
-.event__info-col-1 {
+.event__info-col {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.event__info-col_1 {
   width: 15%;
 }
 
-.event__info-col-2 {
+.event__info-col_2 {
   width: 30%;
 }
 
-.event__info-col-3 {
+.event__info-col_3 {
   width: 30%;
 }
 
-.event__info-col-4 {
+.event__info-col_4 {
   width: 25%;
 }
 
 .event__icons {
-  text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
-  font-size: 30px;
+  height: 100%;
+  width: 100%;
 }
 
+.event__icons i {
+  font-size: 30px;
+}
+/* 
 .icon-bike {
   display: inline-block;
   width: 42px;
   height: 25px;
   background: url(../img/bike_icon.svg) 0px 0px / cover no-repeat;
-}
+} */
 
 .icon-completed {
   display: inline-block;
@@ -622,17 +632,17 @@ h3 {
   text-align: center;
 }
 
-.event-page__main {
-  width: 100%;
-  margin-bottom: 30px;
-}
-
 .event-page__caption {
   display: block;
   font-size: 20px;
   font-weight: 500;
   text-align: center;
   margin-bottom: 20px;
+}
+
+.event-page__main {
+  width: 100%;
+  /* margin-bottom: 30px; */
 }
 
 .event-page__image {
@@ -668,22 +678,41 @@ h3 {
   font-size: 14px;
   display: flex;
   border-bottom: 1px solid #b2d5eb;
+  padding: 10px 0;
 }
 
-.event-page__info-col-1 {
+.event-page__info-col {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.event-page__info-col_1 {
   width: 15%;
 }
 
-.event-page__info-col-2 {
+.event-page__info-col_2 {
   width: 30%;
 }
 
-.event-page__info-col-3 {
+.event-page__info-col_3 {
   width: 30%;
 }
 
-.event-page__info-col-4 {
+.event-page__info-col_4 {
   width: 25%;
+}
+
+.event-page__icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.event-page__icons i {
+  font-size: 30px;
 }
 /*------------------------------------------*/
 

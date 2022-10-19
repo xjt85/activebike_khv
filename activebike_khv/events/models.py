@@ -9,8 +9,6 @@ User = get_user_model()
 class Tag(models.Model):
     name = models.CharField(max_length=200, unique=True,
                             verbose_name='Название тега')
-    slug = models.SlugField(max_length=200, unique=True,
-                            verbose_name='Уникальный слаг')
 
     class Meta:
         ordering = ['-id']
@@ -23,9 +21,7 @@ class Tag(models.Model):
 
 class SurfaceType(models.Model):
     name = models.CharField(max_length=200, unique=True,
-                            verbose_name='Название дорожного покрытия')
-    slug = models.SlugField(max_length=200, unique=True,
-                            verbose_name='Уникальный слаг')
+                            verbose_name='Тип покрытия')
 
     class Meta:
         ordering = ['-id']
@@ -52,7 +48,7 @@ class RouteType(models.Model):
 class EventType(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=50, unique=True)
-    description = models.TextField()
+    description = models.TextField(blank=True)
 
     def __str__(self):
         return self.title
@@ -89,11 +85,11 @@ class Event(models.Model):
         blank=True,
     )
     date_pub = models.DateTimeField(auto_now_add=True)
+    date_edit = models.DateTimeField(auto_now=True)
     date_planned = models.DateTimeField()
-    date_edited = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.title[:15]
+        return self.title[:30]
 
     class Meta:
         ordering = ['-date_planned']
@@ -103,12 +99,12 @@ class Event(models.Model):
 
 class Article(models.Model):
     title = models.CharField(max_length=200)
-    description = models.TextField()
     image = models.ImageField(
         'Картинка',
         upload_to='articles/',
         blank=True
     )
+    description = models.TextField()
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -128,10 +124,10 @@ class Article(models.Model):
         blank=True,
     )
     date_pub = models.DateTimeField(auto_now_add=True)
-    date_edit = models.DateTimeField(auto_now_add=True)
+    date_edit = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.title[:15]
+        return self.title[:30]
 
     class Meta:
         ordering = ['-date_pub']
@@ -140,42 +136,51 @@ class Article(models.Model):
 
 
 class Link(models.Model):
-    title = models.CharField(max_length=200)
+    text = models.CharField(max_length=200)
     url = models.CharField(max_length=200)
-    description = models.TextField()
+    description = models.TextField(blank=True)
+    date_pub = models.DateTimeField(auto_now_add=True)
+    date_edit = models.DateTimeField(auto_now=True)
     
     def __str__(self):
-        return self.title[:15]
+        return self.text[:30]
 
     class Meta:
-        ordering = ['title']
+        ordering = ['text']
         verbose_name = 'Ссылка'
         verbose_name_plural = 'Ссылки'
 
 
 class Media(models.Model):
-    title = models.CharField(max_length=200)
+    text = models.CharField(max_length=200)
     url = models.CharField(max_length=200)
-    description = models.TextField()
+    description = models.TextField(blank=True)
+    date_pub = models.DateTimeField(auto_now_add=True)
+    date_edit = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.title[:15]
+        return self.text[:30]
 
     class Meta:
-        ordering = ['title']
+        ordering = ['text']
         verbose_name = 'Медиа'
         verbose_name_plural = 'Медиа'
 
 
 class Route(models.Model):
     title = models.CharField(max_length=200)
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='routes'
+    )
     type = models.ForeignKey(
         RouteType,
         on_delete=SET_NULL,
         blank=True,
         null=True,
         related_name='routes'
-    ) 
+    )
     length = models.IntegerField(null=True)
     height_gain = models.IntegerField(null=True)
     surface_type = models.ForeignKey(
@@ -188,13 +193,14 @@ class Route(models.Model):
     tags = models.ManyToManyField(
         Tag,
         related_name='routes',
-        verbose_name='Теги',
-        blank=True
+        verbose_name='Теги'
     )
     url = models.CharField(max_length=200, null=True)
+    date_pub = models.DateTimeField(auto_now_add=True)
+    date_edit = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.title[:15]
+        return self.title[:30]
 
     class Meta:
         ordering = ['title']

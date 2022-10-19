@@ -18,22 +18,22 @@
     </div>
   </div>
   <div class="event-page__info">
-    <div class="event-page__info-col-1">
+    <div class="event-page__info-col event-page__info-col_1">
       <div class="event-page__icons">
-        <span class="icon-bike"></span>
+        <i class="fa fa-bicycle fa-lg"></i>
       </div>
     </div>
-    <div class="event-page__info-col-2">
+    <div class="event-page__info-col event-page__info-col_2">
       <div class="event-page-author">
         Автор:
         <span class="event-page-author__value">{{ event.author }}</span>
       </div>
       <div class="event-page-date-edited">
         Изменено:
-        <span class="event-page-date-edited__value">{{ event.date_edited|date:"d.m.Y" }}</span>
+        <span class="event-page-date-edited__value">{{ event.date_edit|date:"d.m.Y" }}</span>
       </div>
     </div>
-    <div class="event-page__info-col-3">
+    <div class="event-page__info-col event-page__info-col_3">
       <div class="event-page__views">
         Просмотров:
         <span class="event-page__views-value">20</span>
@@ -42,7 +42,7 @@
         Комментарии (<span class="event-page__views-value">10</span>)
       </div>
     </div>
-    <div class="event-page__info-col-4">
+    <div class="event-page__info-col event-page__info-col_4">
       <div class="event-page__date">
         Дата события:
         <span class="event-page__date-value">{{ event.date_planned|date:"d.m.Y" }}</span>

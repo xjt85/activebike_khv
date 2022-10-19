@@ -7,7 +7,7 @@ class EventTypeAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
 
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'title', 'event_type', 'author', 'date_pub', 'date_planned', 'date_edited')
+    list_display = ('pk', 'title', 'event_type', 'author', 'date_planned', 'date_pub', 'date_edit')
     list_editable = ('event_type',)
     search_fields = ('description',)
     list_filter = ('date_planned',)

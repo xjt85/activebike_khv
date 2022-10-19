@@ -29,22 +29,22 @@
         </div>
       </div>
       <div class="event__info">
-        <div class="event__info-col-1">
+        <div class="event__info-col event__info-col_1">
           <div class="event__icons">
             <i class="fa fa-bicycle fa-lg"></i>
           </div>
         </div>
-        <div class="event__info-col-2">
+        <div class="event__info-col event__info-col_2">
           <div class="event-author">
             Автор:
             <span class="event-author__value">{{ event.author }}</span>
           </div>
           <div class="event-date-edited">
             Изменено:
-            <span class="event-date-edited__value">{{ event.date_edited|date:"d.m.Y" }}</span>
+            <span class="event-date-edited__value">{{ event.date_edit|date:"d.m.Y" }}</span>
           </div>
         </div>
-        <div class="event__info-col-3">
+        <div class="event__info-col event__info-col_3">
           <div class="event__views">
             Просмотров:
             <span class="event__views-value">20</span>
@@ -53,7 +53,7 @@
             Комментарии (<span class="event__views-value">10</span>)
           </div>
         </div>
-        <div class="event__info-col-4">
+        <div class="event__info-col event__info-col_4">
           <div class="event__date">
             Дата события:
             <span class="event__date-value">{{ event.date_planned|date:"d.m.Y" }}</span>
