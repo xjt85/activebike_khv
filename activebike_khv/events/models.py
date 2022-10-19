@@ -36,6 +36,19 @@ class SurfaceType(models.Model):
         return self.name
 
 
+class RouteType(models.Model):
+    name = models.CharField(max_length=200, unique=True,
+                            verbose_name='Имя')
+
+    class Meta:
+        ordering = ['-id']
+        verbose_name = 'Тип маршрута'
+        verbose_name_plural = 'Типы маршрутов'
+
+    def __str__(self):
+        return self.name
+
+
 class EventType(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=50, unique=True)
@@ -73,6 +86,7 @@ class Event(models.Model):
         Tag,
         related_name='events',
         verbose_name='Теги',
+        blank=True,
     )
     date_pub = models.DateTimeField(auto_now_add=True)
     date_planned = models.DateTimeField()
@@ -111,6 +125,7 @@ class Article(models.Model):
         Tag,
         related_name='articles',
         verbose_name='Теги',
+        blank=True,
     )
     date_pub = models.DateTimeField(auto_now_add=True)
     date_edit = models.DateTimeField(auto_now_add=True)
@@ -154,10 +169,17 @@ class Media(models.Model):
 
 class Route(models.Model):
     title = models.CharField(max_length=200)
+    type = models.ForeignKey(
+        RouteType,
+        on_delete=SET_NULL,
+        blank=True,
+        null=True,
+        related_name='routes'
+    ) 
     length = models.IntegerField(null=True)
     height_gain = models.IntegerField(null=True)
     surface_type = models.ForeignKey(
-        EventType,
+        SurfaceType,
         on_delete=SET_NULL,
         blank=True,
         null=True,
@@ -167,6 +189,7 @@ class Route(models.Model):
         Tag,
         related_name='routes',
         verbose_name='Теги',
+        blank=True
     )
     url = models.CharField(max_length=200, null=True)
 

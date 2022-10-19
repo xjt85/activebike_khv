@@ -12,12 +12,12 @@
 <div class="events__content">
   {% for event in events %}
     <article class="event">
-      <h3 class="event__caption"><a href="{% url 'events:event_detail' event.id %}" class="event__caption-link">{{ event.date_planned|date:"d.m.Y" }} - {{ event.caption }}</a></h3>
+      <h3 class="event__caption"><a href="{% url 'events:event_detail' event.id %}" class="event__caption-link">{{ event.date_planned|date:"d.m.Y" }} - {{ event.title }}</a></h3>
       <div class="event__main">
         <div class="event__left">
           <div class="event__image">
             {% thumbnail event.image "300x300" crop="center" upscale=True as im %}
-              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ event.caption }}" class="event__image-img">
+              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ event.title }}" class="event__image-img">
             {% endthumbnail %}
           </div>
         </div>
