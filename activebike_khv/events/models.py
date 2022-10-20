@@ -104,17 +104,10 @@ class Article(models.Model):
         upload_to='articles/',
         blank=True
     )
-    description = models.TextField()
+    text = models.TextField()
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='articles'
-    )
-    event_type = models.ForeignKey(
-        EventType,
-        on_delete=SET_NULL,
-        blank=True,
-        null=True,
         related_name='articles'
     )
     tags = models.ManyToManyField(
