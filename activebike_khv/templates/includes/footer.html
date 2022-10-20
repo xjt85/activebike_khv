@@ -5,13 +5,13 @@
         
         <div class="col-4 col-md-2">
           <div class="site-logo-wrapper site-logo-wrapper_footer">
-            <div class="site-logo site-logo_footer"></div>
+            <a href="/" class="site-logo"></a>
           </div>
         </div>
         
         <div class="col-8 col-md-10">
             <div class="footer-menu"> 
-              <ul>
+              <ul class="footer-menu__ul">
                 {% load menubuilder %}
                 {% menu menu %}
                 {% for item in menuitems %}
@@ -30,8 +30,7 @@
   <div class="footer-copyright">
     <div class="container">
       <div class="row">
-        <div class="col-4 col-md-2">
-        </div>
+        <div class="col-4 col-md-2"></div>
         <div class="col-8 col-md-10">
           <p class="footer__copyright-text">&copy; "ACTIVE BIKE", 2021.</p>
           <p class="footer__copyright-text footer__copyright-text_2">Разработка сайта:

@@ -128,6 +128,37 @@ class Article(models.Model):
         verbose_name_plural = 'Статьи'
 
 
+class Report(models.Model):
+    title = models.CharField(max_length=200)
+    image = models.ImageField(
+        'Картинка',
+        upload_to='reports/',
+        blank=True
+    )
+    text = models.TextField()
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='reports'
+    )
+    tags = models.ManyToManyField(
+        Tag,
+        related_name='reports',
+        verbose_name='Теги',
+        blank=True,
+    )
+    date_pub = models.DateTimeField(auto_now_add=True)
+    date_edit = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title[:30]
+
+    class Meta:
+        ordering = ['-date_pub']
+        verbose_name = 'Отчет'
+        verbose_name_plural = 'Отчеты'
+
+
 class Link(models.Model):
     text = models.CharField(max_length=200)
     url = models.CharField(max_length=200)

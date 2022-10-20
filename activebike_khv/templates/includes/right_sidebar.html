@@ -1,0 +1,130 @@
+{% load thumbnail %}
+<aside class="sidebar">
+  <div class="top-articles">
+    <h2 class="top-articles__title">Популярные статьи</h2>
+    <ul class="top-articles-list">
+      {% for article in popular_articles %}
+        <li class="single-article">
+          <a href="/" class="single-article__link">
+            {% thumbnail article.image "200x200" crop="center" upscale=True as im %}
+              <img src="{{ im.url }}" alt="{{ article.title }}" class="single-article__img">
+            {% endthumbnail %}
+            <h3 class="single-article__title">{{ article.title }}</h3>
+            <p class="single-article__text">{{ article.text|truncatechars:100 }}</p>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="links-block">
+    <h2 class="links-block__caption links-caption">Ссылки</h2>
+    <ul class="links-block__list">
+      <li class="links-block__li">
+        <span class="links-block__text">Сообщество ACTIVE BIKE:</span>
+        <span class="social-links">
+          <a
+            href="https://vk.com/bikekhv"
+            class="social-link social-link_vk"
+            title="Вконтакте"
+            ><i class="fa fa-vk fa-lg"></i
+          ></a>
+          <a
+            href="https://www.instagram.com/activebike_khv"
+            class="social-link social-link_instagram"
+            title="Instagram"
+            ><i class="fa fa-instagram fa-lg"></i
+          ></a>
+        </span>
+      </li>
+      <li class="links-block__li">
+        <span class="links-block__text">Dvride.Ru (наш форум):</span>
+        <span class="social-links">
+          <a
+            href="https://www.dvride.ru"
+            class="social-link social-link_dvride"
+            title="Форум Dvride.Ru"
+            ><i class="fa fa-bicycle fa-lg"></i
+          ></a>
+          <a
+            href="https://t.me/dvride"
+            class="social-link social-link_telegram"
+            title="чат ВелоХа в Telegram"
+            ><i class="fa fa-telegram fa-lg"></i
+          ></a>
+          <a
+            href="https://www.strava.com/clubs/dvride"
+            class="social-link social-link_strava"
+            title="Клуб Dvride в Strava"
+            ><i class="icon-strava"></i
+          ></a>
+        </span>
+      </li>
+      <li class="links-block__li">
+        <span class="links-block__text">Чат "Куда поехать":</span>
+        <span class="social-links">
+          <a
+            href="https://chat.whatsapp.com/Evl24E6CGerETihtyJQtDE"
+            class="social-link social-link_whatsapp"
+            title="WhatsApp"
+            ><i class="fa fa-whatsapp fa-lg"></i
+          ></a>
+        </span>
+      </li>
+      <li class="links-block__li">
+        <span class="links-block__text">Туристический клуб "Горизонт":</span>
+        <span class="social-links">
+          <a
+            href="https://vk.com/togu_gorizont"
+            class="social-link social-link_vk"
+            title="Вконтакте"
+            ><i class="fa fa-vk fa-lg"></i
+          ></a>
+          <a
+            href="https://instagram.com/tc_gorizont_khv"
+            class="social-link social-link_instagram"
+            title="Instagram"
+            ><i class="fa fa-instagram fa-lg"></i
+          ></a>
+        </span>
+      </li>
+      <li class="links-block__li">
+        <span class="links-block__text"
+          >Веломастерская "Вел.Ком" @nefelim1988:</span
+        >
+        <span class="social-links">
+          <a
+            href="https://www.instagram.com/velcomebike"
+            class="social-link social-link_instagram"
+            title="Instagram"
+            ><i class="fa fa-instagram fa-lg"></i
+          ></a>
+          <a
+            href="https://www.strava.com/clubs/velcombike"
+            class="social-link social-link_strava"
+            title="Strava"
+            ><i class="icon-strava"></i
+          ></a>
+        </span>
+      </li>
+      <li class="links-block__li">
+        <span class="links-block__text"
+          >Веломастерская @velomaster27 (Nick_NeoCOM):</span
+        >
+        <span class="social-links">
+          <a
+            href="https://www.instagram.com/velomaster27/"
+            class="social-link social-link_instagram"
+            title="Instagram"
+            ><i class="fa fa-instagram fa-lg"></i
+          ></a>
+        </span>
+      </li>
+      <li class="links-block__li">
+        <a href="https://rudolf-khb.livejournal.com/124304.html" class="link"
+          >Веломаршруты по окрестностям Хабаровска (Rudolf)</a
+        >
+      </li>
+    </ul>
+  </div>
+</aside>
