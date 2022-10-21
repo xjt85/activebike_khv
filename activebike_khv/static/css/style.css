@@ -156,13 +156,14 @@ h3 {
 
 .top-articles {
   width: 100%;
-  padding: 15px;
+  padding: 20px 15px;
   margin-bottom: 20px;
   background-color: #fff;
 }
 
 .top-articles__title {
   margin-bottom: 20px;
+  font-weight: 700;
 }
 
 .top-articles-list {
@@ -171,18 +172,12 @@ h3 {
 
 .single-article {
   padding: 15px;
-  /* border-top: 1px solid #b2d5eb; */
   border-bottom: 1px solid #b2d5eb;
   transition: all 0.2s;
 }
 
 .single-article:hover {
-  text-decoration: underline;
-  /* box-shadow: 0px 0px 20px rgb(0, 0, 0, 0.3); */
-}
-
-.single-article:hover p {
-  text-decoration: underline;
+  box-shadow: 0px 0px 5px rgb(124, 124, 124);
 }
 
 .single-article__link {
@@ -194,7 +189,7 @@ h3 {
 .single-article__img {
   display: block;
   width: 40%;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   object-fit: cover;
   object-position: center top;
 }
@@ -420,7 +415,7 @@ h3 {
 .event {
   box-sizing: border-box;
   text-align: center;
-  padding: 20px 0;
+  padding: 20px 15px;
   box-shadow: 0px 0px 20px rgb(0, 0, 0, 0.1);
   margin-bottom: 20px;
 }
