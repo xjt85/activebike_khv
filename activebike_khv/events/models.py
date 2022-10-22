@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.db.models.constraints import UniqueConstraint
+# from django.db.models.constraints import UniqueConstraint
 from django.db.models.deletion import SET_NULL
 
 User = get_user_model()
@@ -190,8 +190,10 @@ class Media(models.Model):
         verbose_name = 'Медиа'
         verbose_name_plural = 'Медиа'
 
+
 def user_directory_path(instance, filename):
-    return 'routes/user_{0}/{1}'.format(instance.user.id, filename)
+    return 'routes/user_{0}/{1}'.format(instance.author.id, filename)
+
 
 class Route(models.Model):
     title = models.CharField(max_length=200)
@@ -234,4 +236,3 @@ class Route(models.Model):
         ordering = ['title']
         verbose_name = 'Маршрут'
         verbose_name_plural = 'Маршруты'
-
