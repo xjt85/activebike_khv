@@ -1,11 +1,12 @@
 {% load thumbnail %}
 <aside class="sidebar">
+  
   <div class="top-articles">
     <h2 class="top-articles__title">Популярные статьи</h2>
     <ul class="top-articles-list">
       {% for article in popular_articles %}
         <li class="single-article">
-          <a href="/" class="single-article__link">
+          <a href="{% url 'events:article_detail' article.id %}" class="single-article__link">
             {% thumbnail article.image "200x200" crop="center" upscale=True as im %}
               <img src="{{ im.url }}" alt="{{ article.title }}" class="single-article__img">
             {% endthumbnail %}

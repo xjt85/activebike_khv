@@ -26,7 +26,7 @@ def event_detail(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
     # comments = Comment.objects.filter(event=event)
     # author = event.author
-    author_events_count = Event.objects.filter(author=event.author).count()
+    # author_events_count = Event.objects.filter(author=event.author).count()
     # form = CommentForm(request.POST or None)
 
     context = {
@@ -38,18 +38,19 @@ def event_detail(request, event_id):
 
 def articles_index(request):
     template = 'articles/index.html'
-    events = Article.objects.all()
+    articles = Article.objects.all()
     # posts = Post.objects.select_related('group')
     # paginator = Paginator(posts, settings.POSTS_PER_PAGE)
     # page_number = request.GET.get('page')
     # page_obj = paginator.get_page(page_number)
     context = {
-        'events': events
+        'articles': articles
     }
     return render(request, template, context)
 
 
 def article_detail(request, article_id):
+    template = 'articles/article_detail.html'
     article = get_object_or_404(Article, pk=article_id)
     # comments = Comment.objects.filter(event=event)
     # author = event.author
@@ -58,4 +59,4 @@ def article_detail(request, article_id):
     context = {
         'article': article,
     }
-    return render(request, 'articles/article_detail.html', context)
+    return render(request, template, context)

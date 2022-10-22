@@ -2,29 +2,29 @@
 {% load static %}
 {% load cache %}
 {% load thumbnail %}
-{% block title %}События - {% endblock %}
+{% block title %}Статьи, отчеты - {% endblock %}
 
 {% block content %}
 <h2 class="events__h2">
-  <span class="events__h2_1">События</span>
+  <span class="events__h2_1">Статьи, отчеты</span>
 </h2>
 
 <div class="events__content">
-  {% for event in events %}
+  {% for article in articles %}
     <article class="event">
-      <h3 class="event__caption"><a href="{% url 'events:event_detail' event.id %}" class="event__caption-link">{{ event.date_planned|date:"d.m.Y" }} - {{ event.title }}</a></h3>
+      <h3 class="event__caption"><a href="{% url 'events:article_detail' article.id %}" class="event__caption-link">{{ article.title }}</a></h3>
       <div class="event__main">
         <div class="event__left">
           <div class="event__image">
-            {% thumbnail event.image "300x300" crop="center" upscale=True as im %}
-              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ event.title }}" class="event__image-img">
+            {% thumbnail article.image "300x300" crop="center" upscale=True as im %}
+              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ article.title }}" class="event__image-img">
             {% endthumbnail %}
           </div>
         </div>
         <div class="event__right">
           <div class="event-descr">
-            <p class="event-descr__text">{{ event.description|truncatechars:300 }}</p>
-            <a href="{% url 'events:event_detail' event.id %}" class="event-descr__more">Читать далее</a>
+            <p class="event-descr__text">{{ article.text|truncatechars:300 }}</p>
+            <a href="{% url 'events:article_detail' article.id %}" class="event-descr__more">Читать далее</a>
           </div>
         </div>
       </div>
@@ -37,11 +37,11 @@
         <div class="event__info-col event__info-col_2">
           <div class="event-author">
             Автор:
-            <span class="event-author__value">{{ event.author }}</span>
+            <span class="event-author__value">{{ article.author }}</span>
           </div>
           <div class="event-date-edited">
             Изменено:
-            <span class="event-date-edited__value">{{ event.date_edit|date:"d.m.Y" }}</span>
+            <span class="event-date-edited__value">{{ article.date_edit|date:"d.m.Y" }}</span>
           </div>
         </div>
         <div class="event__info-col event__info-col_3">
@@ -55,8 +55,8 @@
         </div>
         <div class="event__info-col event__info-col_4">
           <div class="event__date">
-            Дата события:
-            <span class="event__date-value">{{ event.date_planned|date:"d.m.Y" }}</span>
+            Опубликовано:
+            <span class="event__date-value">{{ event.date_pub|date:"d.m.Y" }}</span>
           </div>
           <div class="event__share">
             <a class="event__date-value" href="">Поделиться</a>

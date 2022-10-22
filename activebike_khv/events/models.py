@@ -60,7 +60,7 @@ class EventType(models.Model):
 
 class Event(models.Model):
     title = models.CharField(max_length=200)
-    description = models.TextField()
+    text = models.TextField()
     image = models.ImageField(
         'Картинка',
         upload_to='events/',
@@ -165,7 +165,7 @@ class Link(models.Model):
     description = models.TextField(blank=True)
     date_pub = models.DateTimeField(auto_now_add=True)
     date_edit = models.DateTimeField(auto_now=True)
-    
+
     def __str__(self):
         return self.text[:30]
 
@@ -190,6 +190,8 @@ class Media(models.Model):
         verbose_name = 'Медиа'
         verbose_name_plural = 'Медиа'
 
+def user_directory_path(instance, filename):
+    return 'routes/user_{0}/{1}'.format(instance.user.id, filename)
 
 class Route(models.Model):
     title = models.CharField(max_length=200)
@@ -220,6 +222,7 @@ class Route(models.Model):
         verbose_name='Теги'
     )
     url = models.CharField(max_length=200, null=True)
+    gpx = models.FileField(upload_to=user_directory_path, blank=True)
     date_pub = models.DateTimeField(auto_now_add=True)
     date_edit = models.DateTimeField(auto_now=True)
 
@@ -230,3 +233,4 @@ class Route(models.Model):
         ordering = ['title']
         verbose_name = 'Маршрут'
         verbose_name_plural = 'Маршруты'
+
