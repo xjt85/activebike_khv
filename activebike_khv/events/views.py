@@ -6,7 +6,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 
 # from .forms import CommentForm, PostForm
-from .models import EventType, Event, User, Article
+from .models import User, Event, Article, Route
 
 
 def events_index(request):
@@ -58,5 +58,31 @@ def article_detail(request, article_id):
     # form = CommentForm(request.POST or None)
     context = {
         'article': article,
+    }
+    return render(request, template, context)
+
+
+def routes_index(request):
+    template = 'routes/index.html'
+    routes = Route.objects.all()
+    # posts = Post.objects.select_related('group')
+    # paginator = Paginator(posts, settings.POSTS_PER_PAGE)
+    # page_number = request.GET.get('page')
+    # page_obj = paginator.get_page(page_number)
+    context = {
+        'routes': routes
+    }
+    return render(request, template, context)
+
+
+def route_detail(request, route_id):
+    template = 'routes/route_detail.html'
+    route = get_object_or_404(Route, pk=route_id)
+    # comments = Comment.objects.filter(event=event)
+    # author = event.author
+    # author_events_count = Event.objects.filter(author=event.author).count()
+    # form = CommentForm(request.POST or None)
+    context = {
+        'route': route,
     }
     return render(request, template, context)

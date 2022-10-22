@@ -12,7 +12,7 @@
         </div>
         
         <div class="col-3">
-          <h1 class="header-text__title">ACTIVE BIKE KHV</h1>
+          <h1 class="header-text__title">ACTIVE_BIKE_KHV</h1>
           {% comment %} <div class="topline-text-left">
             <span class="header-text__subtitle">больше, чем покатушки</span>
           </div> {% endcomment %}
@@ -40,7 +40,7 @@
           {% menu menu %}
           {% for item in menuitems %}
             <li class="header-menu__list-item">
-              <a href="{{ item.url }}" title="{{ item.title|escape }}"  class="header-menu__link {% if item.current %} current {% endif %}">{{ item.title }}</a>
+              <a href="{{ item.url }}" title="{{ item.title|escape }}"  class="header-menu__link {% if item.current %}current{% endif %}">{{ item.title }}</a>
             </li>
           {% endfor %}
         </ul>
