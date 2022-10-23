@@ -127,17 +127,18 @@ class Report(models.Model):
         upload_to='reports/',
         blank=True
     )
-    text = models.TextField()
-    author = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name='reports'
-    )
+    text = models.TextField(blank=True)
+    text_html = models.TextField(blank=True, editable = False)
     tags = models.ManyToManyField(
         Tag,
         related_name='reports',
         verbose_name='Теги',
         blank=True,
+    )
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='reports'
     )
     date_pub = models.DateTimeField(auto_now_add=True)
     date_edit = models.DateTimeField(auto_now=True)
@@ -149,42 +150,15 @@ class Report(models.Model):
         ordering = ['-date_pub']
         verbose_name = 'Отчет'
         verbose_name_plural = 'Отчеты'
-
-
-class Link(models.Model):
-    text = models.CharField(max_length=200)
-    url = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
-    date_pub = models.DateTimeField(auto_now_add=True)
-    date_edit = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.text[:30]
-
-    class Meta:
-        ordering = ['text']
-        verbose_name = 'Ссылка'
-        verbose_name_plural = 'Ссылки'
-
-
-class Media(models.Model):
-    text = models.CharField(max_length=200)
-    url = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
-    date_pub = models.DateTimeField(auto_now_add=True)
-    date_edit = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.text[:30]
-
-    class Meta:
-        ordering = ['text']
-        verbose_name = 'Медиа'
-        verbose_name_plural = 'Медиа'
+    
+    def save(self):
+        self.text_html = markdown(self.text)
+        super(Report, self).save()
 
 
 def user_directory_path(instance, filename):
     return 'routes/user_{0}/{1}'.format(instance.author.id, filename)
+
 
 
 class Route(models.Model):
@@ -243,10 +217,43 @@ class Route(models.Model):
             self.polyline = polyline.encode(data)
             super().save(*args, **kwargs)
 
+
+class Link(models.Model):
+    text = models.CharField(max_length=200)
+    url = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
+    date_pub = models.DateTimeField(auto_now_add=True)
+    date_edit = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.text[:30]
+
+    class Meta:
+        ordering = ['text']
+        verbose_name = 'Ссылка'
+        verbose_name_plural = 'Ссылки'
+
+
+class Media(models.Model):
+    text = models.CharField(max_length=200)
+    url = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
+    date_pub = models.DateTimeField(auto_now_add=True)
+    date_edit = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.text[:30]
+
+    class Meta:
+        ordering = ['text']
+        verbose_name = 'Медиа'
+        verbose_name_plural = 'Медиа'
+
+
 class About(models.Model):
     title = models.CharField(max_length=200)
-    markdown_field = models.TextField()
-    html_field = models.TextField(editable = False)
+    markdown_field = models.TextField(blank=True)
+    html_field = models.TextField(blank=True, editable = False)
 
     def __str__(self):
         return self.title[:30]

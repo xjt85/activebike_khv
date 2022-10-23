@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 import json
 
 # from .forms import CommentForm, PostForm
-from .models import User, Event, Article, Route, Link, About
+from .models import User, Event, Article, Report, Route, Link, About
 
 
 def events_index(request):
@@ -59,6 +59,32 @@ def article_detail(request, article_id):
     # form = CommentForm(request.POST or None)
     context = {
         'article': article,
+    }
+    return render(request, template, context)
+
+
+def reports_index(request):
+    template = 'reports/index.html'
+    reports = Report.objects.all()
+    # posts = Post.objects.select_related('group')
+    # paginator = Paginator(posts, settings.POSTS_PER_PAGE)
+    # page_number = request.GET.get('page')
+    # page_obj = paginator.get_page(page_number)
+    context = {
+        'reports': reports
+    }
+    return render(request, template, context)
+
+
+def report_detail(request, report_id):
+    template = 'reports/report_detail.html'
+    report = get_object_or_404(Report, pk=report_id)
+    # comments = Comment.objects.filter(event=event)
+    # author = event.author
+    # author_events_count = Event.objects.filter(author=event.author).count()
+    # form = CommentForm(request.POST or None)
+    context = {
+        'report': report,
     }
     return render(request, template, context)
 
