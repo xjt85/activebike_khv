@@ -2,24 +2,57 @@
 {% load static %}
 {% load cache %}
 {% load thumbnail %}
-{% block title %}Маршруты - {% endblock %}
+{% block title %}Маршруты - {% endblock %} {% block content %}
 
-{% block content %}
 <h2 class="events__h2">
   <span class="events__h2_1">Маршруты</span>
 </h2>
 
 <div class="events__content">
   {% for route in routes %}
-    <article class="event">
-      <h3 class="event__caption"><a href="{% url 'events:route_detail' route.id %}" class="event__caption-link">{{ route.title }}</a></h3>
-      <div class="event__main">
-        
-      </div>
-      <div class="event__info">
-
-      </div>
-    </article>
+  <article class="event">
+    <h3 class="event__caption">
+      <a
+        href="{% url 'events:route_detail' route.id %}"
+        class="event__caption-link"
+        >{{ route.title }}</a
+      >
+    </h3>
+    <div class="route__main">
+        <div class="route__left">
+            <div class="map" id=""></div>
+        </div>
+        <div class="route__right">
+            <div class="route__info">
+                <div class="route__info-item">
+                    Тип:
+                    <span class="route__info-value">{{ route.type }}</span>
+                </div>
+                <div class="route__info-item">
+                    Дистанция:
+                    <span class="route__info-value">{{ route.length }}</span>
+                </div>
+                <div class="route__info-item">
+                    Набор высоты:
+                    <span class="route__info-value">{{ route.height_gain }}</span>
+                </div>
+                <div class="route__info-item">
+                    Автор:
+                    <span class="route__info-value">{{ route.author }}</span>
+                </div>
+                <div class="route__info-item">
+                    Опубликовано:
+                    <span class="route__info-value">{{ route.date_pub|date:"d.m.Y" }}</span>
+                </div>
+                <div class="route__info-item">
+                    Просмотров:
+                    <span class="route__info-value">10</span>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+  </article>
   {% endfor %}
 </div>
 {% endblock %}

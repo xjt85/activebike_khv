@@ -12,4 +12,6 @@ urlpatterns = [
     path('articles/<int:article_id>/', views.article_detail, name='article_detail'),
     path('routes/', views.routes_index, name='routes_index'),
     path('routes/<int:route_id>/', views.route_detail, name='route_detail'),
+    path('links/', views.links_index, name='links_index'),
+    path('about/', views.about_page, name='about_page'),
 ]

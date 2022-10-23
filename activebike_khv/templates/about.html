@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cache %}
+{% load thumbnail %}
+{% block title %}О нас - {% endblock %}
+
+{% block content %}
+  <div class="events__content">
+    {% for about_single in about_page %}
+      <div class="about">
+        <h2 class="about__title">{{ about_single.title }}</h3>
+        <p class="about__text">{{ about_single.html_field|safe }}</p>
+      </div>
+    {% endfor %}
+</div>
+{% endblock %}

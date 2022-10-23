@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load cache %}
+{% load thumbnail %}
+{% block title %}Ссылки - {% endblock %} {% block content %}
+
+<h2 class="events__h2">
+  <span class="events__h2_1">Ссылки</span>
+</h2>
+
+<div class="events__content">
+  <ol type="1" class="links">
+    {% for link in links %}
+    <li class="links-item">
+      <a href="{{ link.url }}" class="links-link">{{ link.text }}</a>
+    </li>
+    {% endfor %}
+  </div>
+</ol>
+{% endblock %}

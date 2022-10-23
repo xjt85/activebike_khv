@@ -4,9 +4,10 @@ from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
+import json
 
 # from .forms import CommentForm, PostForm
-from .models import User, Event, Article, Route
+from .models import User, Event, Article, Route, Link, About
 
 
 def events_index(request):
@@ -84,5 +85,32 @@ def route_detail(request, route_id):
     # form = CommentForm(request.POST or None)
     context = {
         'route': route,
+        'data':json.dumps(route.polyline)
+    }
+    return render(request, template, context)
+
+
+def links_index(request):
+    template = 'links/index.html'
+    links = Link.objects.all()
+    # posts = Post.objects.select_related('group')
+    # paginator = Paginator(posts, settings.POSTS_PER_PAGE)
+    # page_number = request.GET.get('page')
+    # page_obj = paginator.get_page(page_number)
+    context = {
+        'links': links
+    }
+    return render(request, template, context)
+
+
+def about_page(request):
+    template = 'about.html'
+    about_page = About.objects.all()
+    # posts = Post.objects.select_related('group')
+    # paginator = Paginator(posts, settings.POSTS_PER_PAGE)
+    # page_number = request.GET.get('page')
+    # page_obj = paginator.get_page(page_number)
+    context = {
+        'about_page': about_page
     }
     return render(request, template, context)

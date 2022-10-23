@@ -7,6 +7,7 @@
 {% block content %}
 <article class="event-page">
   <h3 class="event-page__caption">{{ route.title }}</h3>
+  <div id="map" class="route__map"></div>
   <div class="event-page__main">
     <div class="event-page-descr">
       <p class="event-page-descr__text">{{ route.description|linebreaks }}</p>
@@ -48,4 +49,22 @@
     </div>
   </div>
 </article>
+
+<script>
+  var data = JSON.parse("{{ data|escapejs }}");
+  var map = L.map("map").setView([48.0, 135.0], 13);
+  L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 18,
+  }).addTo(map);
+
+  var coordinates = L.Polyline.fromEncoded(data).getLatLngs();
+
+  L.polyline(coordinates, {
+    color: "#db2242",
+    weight: 5,
+    opacity: 1.0,
+    lineJoin: "round",
+  }).addTo(map);
+  
+</script>
 {% endblock %}

@@ -1,7 +1,12 @@
+from markdown import markdown
 from django.contrib.auth import get_user_model
 from django.db import models
 # from django.db.models.constraints import UniqueConstraint
 from django.db.models.deletion import SET_NULL
+import gpxpy
+import gpxpy.gpx
+import polyline
+from django.conf import settings
 
 User = get_user_model()
 
@@ -27,19 +32,6 @@ class SurfaceType(models.Model):
         ordering = ['-id']
         verbose_name = 'Тип дорожного покрытия'
         verbose_name_plural = 'Типы дорожных покрытий'
-
-    def __str__(self):
-        return self.name
-
-
-class RouteType(models.Model):
-    name = models.CharField(max_length=200, unique=True,
-                            verbose_name='Имя')
-
-    class Meta:
-        ordering = ['-id']
-        verbose_name = 'Тип маршрута'
-        verbose_name_plural = 'Типы маршрутов'
 
     def __str__(self):
         return self.name
@@ -199,13 +191,14 @@ class Route(models.Model):
     title = models.CharField(max_length=200)
     url = models.CharField(max_length=200, null=True, blank=True)
     gpx = models.FileField(upload_to=user_directory_path, blank=True)
+    polyline = models.TextField(blank=True)
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         related_name='routes'
     )
     type = models.ForeignKey(
-        RouteType,
+        EventType,
         on_delete=SET_NULL,
         blank=True,
         null=True,
@@ -236,3 +229,33 @@ class Route(models.Model):
         ordering = ['title']
         verbose_name = 'Маршрут'
         verbose_name_plural = 'Маршруты'
+    
+    def save(self, *args, **kwargs):
+        if self.gpx:
+            with open(self.gpx.path,"r", encoding="utf-8") as file:
+                gpx = gpxpy.parse(file)
+            data = []
+            for track in gpx.tracks:
+                for segment in track.segments:
+                    for point in segment.points:
+                        data.append([float(point.latitude), float(point.longitude)])
+
+            self.polyline = polyline.encode(data)
+            super().save(*args, **kwargs)
+
+class About(models.Model):
+    title = models.CharField(max_length=200)
+    markdown_field = models.TextField()
+    html_field = models.TextField(editable = False)
+
+    def __str__(self):
+        return self.title[:30]
+
+    class Meta:
+        ordering = ['title']
+        verbose_name = 'О нас'
+        verbose_name_plural = 'О нас'
+
+    def save(self):
+        self.html_field = markdown(self.markdown_field)
+        super(About, self).save()
