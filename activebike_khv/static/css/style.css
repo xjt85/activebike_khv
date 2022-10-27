@@ -5,6 +5,7 @@ body {
   font-size: 16px;
   font-weight: 500;
   line-height: 1.5em;
+  position: relative;
 }
 
 h2,
@@ -769,6 +770,20 @@ strong {
 
 /*------------------------------------------*/
 
+/*--------------------- ROUTE: DETAIL --------------------------*/
+
+.map-wrapper.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  height: 100vh;
+  z-index: 200;
+}
+
+/*------------------------------------------*/
+
 /*--------------------- LINKS:INDEX --------------------------*/
 .links {
   list-style: auto;
@@ -795,6 +810,8 @@ strong {
 
 .about {
   padding: 20px;
+  border-top: 1px solid #b2d5eb;
+  border-bottom: 1px solid #b2d5eb;
 }
 
 .about__title {

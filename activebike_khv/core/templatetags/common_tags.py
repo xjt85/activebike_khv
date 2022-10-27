@@ -1,4 +1,5 @@
 from django import template
+
 from core.models import Menu
 
 register = template.Library()

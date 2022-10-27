@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import EventType, Tag, Event, Article, Link, Media, Route, SurfaceType, Report, About
+
+from .models import (About, Article, Event, EventType, Link, Media, Report,
+                     Route, SurfaceType, Tag)
 
 
 @admin.register(EventType)

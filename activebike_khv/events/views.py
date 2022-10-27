@@ -1,13 +1,17 @@
-from multiprocessing import Event
+import json
+
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
-import json
 
 # from .forms import CommentForm, PostForm
-from .models import User, Event, Article, Report, Route, Link, About
+from .models import About, Article, Event, Link, Report, Route, User
+
+# from multiprocessing import Event
+
+
 
 
 def events_index(request):

@@ -23,7 +23,7 @@
         </div>
         <div class="event__right">
           <div class="event-descr">
-            <p class="event-descr__text">{{ article.text|truncatechars:300 }}</p>
+            <p class="event-descr__text">{{ article.text_html|safe|truncatechars:300 }}</p>
             <a href="{% url 'events:article_detail' article.id %}" class="event-descr__more">Читать далее</a>
           </div>
         </div>

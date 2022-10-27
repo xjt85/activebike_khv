@@ -1,12 +1,12 @@
-from markdown import markdown
-from django.contrib.auth import get_user_model
-from django.db import models
-# from django.db.models.constraints import UniqueConstraint
-from django.db.models.deletion import SET_NULL
 import gpxpy
 import gpxpy.gpx
 import polyline
 from django.conf import settings
+from django.contrib.auth import get_user_model
+from django.db import models
+# from django.db.models.constraints import UniqueConstraint
+from django.db.models.deletion import SET_NULL
+from markdown import markdown
 
 User = get_user_model()
 
@@ -42,17 +42,18 @@ class EventType(models.Model):
     slug = models.SlugField(max_length=50, unique=True)
     description = models.TextField(blank=True)
 
-    def __str__(self):
-        return self.title
-
     class Meta:
         verbose_name = 'Тип события'
         verbose_name_plural = 'Типы событий'
+
+    def __str__(self):
+        return self.title
 
 
 class Event(models.Model):
     title = models.CharField(max_length=200)
     text = models.TextField()
+    text_html = models.TextField(blank=True, editable=False)
     image = models.ImageField(
         'Картинка',
         upload_to='events/',
@@ -80,13 +81,17 @@ class Event(models.Model):
     date_edit = models.DateTimeField(auto_now=True)
     date_planned = models.DateTimeField()
 
-    def __str__(self):
-        return self.title[:30]
-
     class Meta:
         ordering = ['-date_planned']
         verbose_name = 'Событие'
         verbose_name_plural = 'События'
+
+    def __str__(self):
+        return self.title[:30]
+
+    def save(self):
+        self.text_html = markdown(self.text)
+        super(Event, self).save()
 
 
 class Article(models.Model):
@@ -96,7 +101,8 @@ class Article(models.Model):
         upload_to='articles/',
         blank=True
     )
-    text = models.TextField()
+    text = models.TextField(blank=True)
+    text_html = models.TextField(blank=True, editable=False)
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -111,13 +117,17 @@ class Article(models.Model):
     date_pub = models.DateTimeField(auto_now_add=True)
     date_edit = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return self.title[:30]
-
     class Meta:
         ordering = ['-date_pub']
         verbose_name = 'Статья'
         verbose_name_plural = 'Статьи'
+
+    def __str__(self):
+        return self.title[:30]
+
+    def save(self):
+        self.text_html = markdown(self.text)
+        super(Article, self).save()
 
 
 class Report(models.Model):
@@ -128,7 +138,7 @@ class Report(models.Model):
         blank=True
     )
     text = models.TextField(blank=True)
-    text_html = models.TextField(blank=True, editable = False)
+    text_html = models.TextField(blank=True, editable=False)
     tags = models.ManyToManyField(
         Tag,
         related_name='reports',
@@ -143,14 +153,14 @@ class Report(models.Model):
     date_pub = models.DateTimeField(auto_now_add=True)
     date_edit = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return self.title[:30]
-
     class Meta:
         ordering = ['-date_pub']
         verbose_name = 'Отчет'
         verbose_name_plural = 'Отчеты'
-    
+
+    def __str__(self):
+        return self.title[:30]
+
     def save(self):
         self.text_html = markdown(self.text)
         super(Report, self).save()
@@ -158,7 +168,6 @@ class Report(models.Model):
 
 def user_directory_path(instance, filename):
     return 'routes/user_{0}/{1}'.format(instance.author.id, filename)
-
 
 
 class Route(models.Model):
@@ -196,17 +205,17 @@ class Route(models.Model):
     date_pub = models.DateTimeField(auto_now_add=True)
     date_edit = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return self.title[:30]
-
     class Meta:
         ordering = ['title']
         verbose_name = 'Маршрут'
         verbose_name_plural = 'Маршруты'
-    
+
+    def __str__(self):
+        return self.title[:30]
+
     def save(self, *args, **kwargs):
         if self.gpx:
-            with open(self.gpx.path,"r", encoding="utf-8") as file:
+            with open(self.gpx.path, "r", encoding="utf-8") as file:
                 gpx = gpxpy.parse(file)
             data = []
             for track in gpx.tracks:
@@ -225,13 +234,13 @@ class Link(models.Model):
     date_pub = models.DateTimeField(auto_now_add=True)
     date_edit = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return self.text[:30]
-
     class Meta:
         ordering = ['text']
         verbose_name = 'Ссылка'
         verbose_name_plural = 'Ссылки'
+
+    def __str__(self):
+        return self.text[:30]
 
 
 class Media(models.Model):
@@ -241,27 +250,27 @@ class Media(models.Model):
     date_pub = models.DateTimeField(auto_now_add=True)
     date_edit = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return self.text[:30]
-
     class Meta:
         ordering = ['text']
         verbose_name = 'Медиа'
         verbose_name_plural = 'Медиа'
 
+    def __str__(self):
+        return self.text[:30]
+
 
 class About(models.Model):
     title = models.CharField(max_length=200)
     markdown_field = models.TextField(blank=True)
-    html_field = models.TextField(blank=True, editable = False)
-
-    def __str__(self):
-        return self.title[:30]
+    html_field = models.TextField(blank=True, editable=False)
 
     class Meta:
         ordering = ['title']
         verbose_name = 'О нас'
         verbose_name_plural = 'О нас'
+
+    def __str__(self):
+        return self.title[:30]
 
     def save(self):
         self.html_field = markdown(self.markdown_field)

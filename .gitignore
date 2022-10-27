@@ -129,4 +129,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-.sqlite3
+activebike_khv/*.sqlite3
+
+*.gpx
+activebike_khv/static/
+activebike_khv/media/
