@@ -173,7 +173,7 @@ def user_directory_path(instance, filename):
 class Route(models.Model):
     title = models.CharField(max_length=200)
     url = models.CharField(max_length=200, null=True, blank=True)
-    gpx = models.FileField(upload_to=user_directory_path, blank=True)
+    track = models.FileField(upload_to=user_directory_path, null=True, blank=True)
     polyline = models.TextField(blank=True)
     author = models.ForeignKey(
         User,
@@ -187,8 +187,8 @@ class Route(models.Model):
         null=True,
         related_name='routes'
     )
-    length = models.IntegerField(null=True)
-    height_gain = models.IntegerField(null=True)
+    length = models.IntegerField(default=0, blank=True)
+    height_gain = models.IntegerField(default=0, blank=True)
     surface_type = models.ForeignKey(
         SurfaceType,
         on_delete=SET_NULL,
@@ -200,13 +200,14 @@ class Route(models.Model):
     tags = models.ManyToManyField(
         Tag,
         related_name='routes',
-        verbose_name='Теги'
+        verbose_name='Теги',
+        blank=True,
     )
     date_pub = models.DateTimeField(auto_now_add=True)
     date_edit = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['title']
+        ordering = ['-date_pub']
         verbose_name = 'Маршрут'
         verbose_name_plural = 'Маршруты'
 
@@ -214,8 +215,9 @@ class Route(models.Model):
         return self.title[:30]
 
     def save(self, *args, **kwargs):
-        if self.gpx:
-            with open(self.gpx.path, "r", encoding="utf-8") as file:
+        super().save(*args, **kwargs)
+        if self.track.path:
+            with open(self.track.path, "r", encoding="utf-8") as file:
                 gpx = gpxpy.parse(file)
             data = []
             for track in gpx.tracks:
