@@ -13,7 +13,7 @@ class EventTypeAdmin(admin.ModelAdmin):
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'title', 'event_type', 'author', 'date_planned', 'date_pub', 'date_edit')
+    list_display = ('title', 'event_type', 'author', 'date_planned', 'date_pub', 'date_edit')
     list_editable = ('event_type',)
     search_fields = ('title',)
     list_filter = ('date_planned',)
@@ -33,6 +33,7 @@ class ReportAdmin(admin.ModelAdmin):
     search_fields = ('title',)
     empty_value_display = '-пусто-'
 
+
 @admin.register(Link)
 class LinkAdmin(admin.ModelAdmin):
     list_display = ('text', 'url', 'description')
@@ -40,8 +41,18 @@ class LinkAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
 
 
+@admin.register(Route)
+class RouteAdmin(admin.ModelAdmin):
+    list_display = ('title', 'description', 'author', 'date_pub', 'date_edit')
+    search_fields = ('title',)
+    empty_value_display = '-пусто-'
+    
+    def save_model(self, request, obj, form, change):
+            obj.author = request.user
+            obj.save()
+
+
 admin.site.register(Tag)
-admin.site.register(Route)
 admin.site.register(SurfaceType)
 admin.site.register(Media)
 admin.site.register(About)

@@ -1,7 +1,3 @@
-from django import template
-
-from ..models import Article
-
 import json
 
 from telethon.sync import TelegramClient
@@ -26,6 +22,8 @@ client = TelegramClient(username, api_id, api_hash)
 
 client.start()
 
+msgs = []
+
 all_messages = []   # список всех сообщений
 
 
@@ -35,7 +33,7 @@ async def dump_all_messages(channel):
     limit_msg = 3   # максимальное число записей, передаваемых за один раз
 
     total_messages = 0
-    total_count_limit = 3  # поменяйте это значение, если вам нужны не все сообщения
+    total_count_limit = 5  # поменяйте это значение, если вам нужны не все сообщения
 
     while True:
         history = await client(GetHistoryRequest(
@@ -49,8 +47,6 @@ async def dump_all_messages(channel):
         messages = history.messages
         for message in messages:
             all_messages.append(message.to_dict())
-            if message.message == "":
-                total_count_limit += 1
         offset_msg = messages[len(messages) - 1].id
         total_messages = len(all_messages)
         if total_count_limit != 0 and total_messages >= total_count_limit:
@@ -66,16 +62,11 @@ async def main():
 with client:
     res = client.loop.run_until_complete(main())
 
+for msg in all_messages:
+    print(msg['date'])
+    text = msg['message'].replace('\n',' ')[:100]
+    print(f"{text}...")
+    print(f"https://t.me/activebike/{msg['id']}")
+    # print("")
 
-register = template.Library()
 
-
-@register.inclusion_tag("includes/right_sidebar.html")
-def show_sidebar():
-    articles = Article.objects.all()
-    # for msg in all_messages:
-    #     msg['message'] = msg['message'].replace('\n',' ')[:100] + '...'
-    return {
-        'popular_articles': articles,
-        'all_messages': all_messages
-        }

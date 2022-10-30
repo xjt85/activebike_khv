@@ -116,7 +116,7 @@ strong {
 .header-menu {
   position: sticky;
   top: 0;
-  z-index: 60;
+  z-index: 1200;
   margin-bottom: 20px;
   background-color: #fff;
   border-top: 1px solid #3483aa;
@@ -187,7 +187,7 @@ strong {
 
 .single-article {
   padding: 15px;
-  border-bottom: 1px solid #b2d5eb;
+  border-bottom: 1px solid #eaeeef;
   transition: all 0.2s;
 }
 
@@ -224,10 +224,84 @@ strong {
 }
 
 /*----------------------- /SIDEBAR ------------------------------*/
+/*-----------------------------------------------------*/
+
+/*----------------------- TELEGRAM MESSAGES ------------------------------*/
+.sidebar-widget {
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #fff;
+}
+
+.tlg-messages {
+  padding: 0; 
+}
+
+.tlg-messages__title {
+  margin-bottom: 20px;
+}
+
+.tlg-message {
+  position: relative;
+  padding: 30px 0 5px;
+  border-bottom: 1px solid #eaeeef;
+  transition: all 0.2s;
+}
+
+.tlg-message__tlg-icon {
+  position: absolute;
+  top: 10px;
+  right: 0px;
+  color: #249ACC;
+}
+
+.tlg-message:first-child {
+  border-top: 1px solid #eaeeef;
+}
+
+
+.tlg-message__link {
+  display: block;
+  text-decoration: none;
+}
+
+.tlg-message__text {
+  color: rgb(33, 33, 33);
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  transition: all 0.2s;
+}
+
+.tlg-message:hover .tlg-message__text {
+  /* text-decoration: underline; */
+  color: rgb(72, 114, 132);
+}
+
+.tlg-message__info {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  color: rgb(115, 140, 167);
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+}
+.tlg-message__views {
+  width: 20%;
+}
+.tlg-message__author {
+  width: 41%;
+}
+.tlg-message__date {
+  width: 25%;
+}
+/*----------------------- TELEGRAM MESSAGES end ------------------------------*/
 
 .links-block {
   width: 100%;
-  padding: 15px 0;
+  padding: 15px;
   margin-bottom: 20px;
   background-color: #fff;
 }
@@ -250,7 +324,7 @@ strong {
   align-items: center;
   padding: 10px;
   transition: all 0.3s;
-  border-bottom: 1px solid #b2d5eb;
+  border-bottom: 1px solid #eaeeef;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -457,7 +531,7 @@ strong {
   width: 100%;
   padding-bottom: 20px;
   justify-content: space-between;
-  /* border-bottom: 1px solid #b2d5eb; */
+  /* border-bottom: 1px solid #eaeeef; */
 }
 
 .event__left {
@@ -511,8 +585,8 @@ strong {
   text-align: left;
   font-size: 14px;
   display: flex;
-  border-top: 1px solid #b2d5eb;
-  border-bottom: 1px solid #b2d5eb;
+  border-top: 1px solid #eaeeef;
+  border-bottom: 1px solid #eaeeef;
   padding: 10px 0;
 }
 
@@ -637,8 +711,8 @@ strong {
   padding: 20px;
   box-sizing: border-box;
   text-align: center;
-  border-top: 1px solid #b2d5eb;
-  border-bottom: 1px solid #b2d5eb;
+  border-top: 1px solid #eaeeef;
+  border-bottom: 1px solid #eaeeef;
 }
 
 .event-page__caption {
@@ -673,8 +747,8 @@ strong {
   padding: 15px 0;
   text-align: left;
   font-weight: 400;
-  border-top: 1px solid #b2d5eb;
-  border-bottom: 1px solid #b2d5eb;
+  border-top: 1px solid #eaeeef;
+  border-bottom: 1px solid #eaeeef;
 }
 
 .event-page-descr__text {
@@ -725,15 +799,47 @@ strong {
   font-size: 30px;
 }
 
-.route__map {
-  width: 100%;
-  height: 500px;
-  margin-bottom: 20px;
-}
-
 /*------------------------------------------*/
 
 /*--------------------- ROUTES:INDEX --------------------------*/
+.routes-item {
+  box-sizing: border-box;
+  text-align: center;
+  padding: 20px 15px;
+  margin-bottom: 20px;
+  /* border-top: 1px solid #eaeeef;
+  border-bottom: 1px solid #eaeeef; */
+  box-shadow: 0px 0px 20px rgb(0, 0, 0, 0.1);
+}
+
+.routes-item__caption {
+  display: block;
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+.routes-item__caption-link {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s;
+}
+
+.routes-item__image {
+  display: block;
+  height: 100%;
+  border: 1px solid #eaeeef;
+}
+
+.routes-item__image-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
 .route__main {
   display: flex;
   justify-content: space-between;
@@ -741,18 +847,16 @@ strong {
   align-content: center;
   align-items: center;
   padding: 20px 0;
-  border-top: 1px solid #b2d5eb;
-  border-bottom: 1px solid #b2d5eb;
 }
 
 .route__left {
   width: 30%;
-  min-height: 200px;
-  background-color: rgb(253, 255, 142);
+  /* min-height: 200px; */
+  /* background-color: rgb(253, 255, 142); */
 }
 
 .route__right {
-  width: 70%;
+  width: 66%;
   padding: 20px;
   /* background-color: rgb(172, 172, 172); */
 }
@@ -772,6 +876,13 @@ strong {
 
 /*--------------------- ROUTE: DETAIL --------------------------*/
 
+.route__map {
+  width: 100%;
+  height: 500px;
+  margin-bottom: 20px;
+  border: 1px solid #eaeeef;
+}
+
 .map-wrapper.modal {
   position: fixed;
   top: 50%;
@@ -788,8 +899,8 @@ strong {
 .links {
   list-style: auto;
   padding: 20px;
-  border-top: 1px solid #b2d5eb;
-  border-bottom: 1px solid #b2d5eb;
+  border-top: 1px solid #eaeeef;
+  border-bottom: 1px solid #eaeeef;
 }
 
 .links-link {
@@ -810,8 +921,8 @@ strong {
 
 .about {
   padding: 20px;
-  border-top: 1px solid #b2d5eb;
-  border-bottom: 1px solid #b2d5eb;
+  border-top: 1px solid #eaeeef;
+  border-bottom: 1px solid #eaeeef;
 }
 
 .about__title {

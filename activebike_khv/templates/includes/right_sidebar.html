@@ -1,7 +1,29 @@
 {% load thumbnail %}
 <aside class="sidebar">
-  
-  <div class="top-articles">
+  <section class="tlg-channel sidebar-widget">
+    <h3 class="tlg-messages__title">Канал ACTIVE BIKE (Telegram)</h3>
+    <ul class="tlg-messages">
+      {% for msg in all_messages %}
+      {% if msg.message != "" %}
+        <li class="tlg-message">
+          <i class="fa fa-telegram fa-lg tlg-message__tlg-icon"></i>
+          <a href="https://t.me/activebike/{{ msg.id }}/" class="tlg-message__link">
+            <p class="tlg-message__text">{{ msg.message|truncatechars:100 }}</p>
+            <div class="tlg-message__info">
+              <div class="tlg-message__views"><i class="fa fa-eye" aria-hidden="true"></i> {{ msg.views }}</div>
+              <div class="tlg-message__author">{{ msg.post_author|truncatechars:15 }}</div>
+              <div class="tlg-message__date">{{ msg.date|date:"d.m.Y" }}</div>
+            </div>
+          </a>
+        </li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+    <p>
+      {% comment %} <script async src="https://telegram.org/js/telegram-widget.js?21" data-telegram-post="activebike/81" data-width="100%"></script> {% endcomment %}
+    </p>
+  </section>
+  <section class="top-articles sidebar-widget">
     <h2 class="top-articles__title">Популярные статьи</h2>
     <ul class="top-articles-list">
       {% for article in popular_articles %}
@@ -16,9 +38,9 @@
         </li>
       {% endfor %}
     </ul>
-  </div>
+  </section>
 
-  <div class="links-block">
+  <section class="links-block">
     <h2 class="links-block__caption links-caption">Ссылки</h2>
     <ul class="links-block__list">
       <li class="links-block__li">
@@ -127,5 +149,5 @@
         >
       </li>
     </ul>
-  </div>
+  </section>
 </aside>

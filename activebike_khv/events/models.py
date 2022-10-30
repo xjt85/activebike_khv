@@ -1,3 +1,4 @@
+from tabnanny import verbose
 import gpxpy
 import gpxpy.gpx
 import polyline
@@ -171,32 +172,40 @@ def user_directory_path(instance, filename):
 
 
 class Route(models.Model):
-    title = models.CharField(max_length=200)
-    url = models.CharField(max_length=200, null=True, blank=True)
-    track = models.FileField(upload_to=user_directory_path, null=True, blank=True)
-    polyline = models.TextField(blank=True)
+    title = models.CharField(max_length=200, verbose_name="Название")
+    image = models.ImageField(
+        'Картинка',
+        upload_to='routes/',
+        blank=True
+    )
+    url = models.CharField(max_length=200, null=True, blank=True, verbose_name="ссылка (если есть)")
+    track = models.FileField(upload_to=user_directory_path, null=True, blank=True, verbose_name="GPX-трек (если имеется)")
+    polyline = models.TextField(blank=True, editable=False, verbose_name="Полилиния (необязательно)")
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='routes'
+        related_name='routes',
+        verbose_name="Автор"
     )
     type = models.ForeignKey(
         EventType,
         on_delete=SET_NULL,
         blank=True,
         null=True,
-        related_name='routes'
+        related_name='routes',
+        verbose_name="Тип активности"
     )
-    length = models.IntegerField(default=0, blank=True)
-    height_gain = models.IntegerField(default=0, blank=True)
+    length = models.IntegerField(default=0, blank=True, verbose_name="Дистанция, км")
+    height_gain = models.IntegerField(default=0, blank=True, verbose_name="Набор высоты, м")
     surface_type = models.ForeignKey(
         SurfaceType,
         on_delete=SET_NULL,
         blank=True,
         null=True,
-        related_name='routes'
+        related_name='routes',
+        verbose_name="Покрытие"
     )
-    description = models.TextField(blank=True)
+    description = models.TextField(blank=True, verbose_name="Описание")
     tags = models.ManyToManyField(
         Tag,
         related_name='routes',
