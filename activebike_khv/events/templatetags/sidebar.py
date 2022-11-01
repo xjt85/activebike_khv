@@ -1,24 +1,14 @@
 from django import template
+from django.views.decorators.cache import cache_page
 
 from ..models import Article
 
 import json
 
 from telethon.sync import TelegramClient
-from telethon import connection
-
-# для корректного переноса времени сообщений в json
-from datetime import date, datetime
-
-# классы для работы с каналами
-from telethon.tl.functions.channels import GetParticipantsRequest
-from telethon.tl.types import ChannelParticipantsSearch
-
 from telethon.sessions import StringSession
-
-# класс для работы с сообщениями
 from telethon.tl.functions.messages import GetHistoryRequest
-from decouple import Csv, config
+from decouple import config
 
 API_ID = config('TLG_API_ID')
 API_HASH = config('TLG_API_HASH')
@@ -72,6 +62,9 @@ with client:
 register = template.Library()
 
 
+
+
+@cache_page(60 * 10)
 @register.inclusion_tag("includes/right_sidebar.html")
 def show_sidebar():
     articles = Article.objects.all()

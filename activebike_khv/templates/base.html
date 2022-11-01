@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{% static 'libs/bootstrap-grid.min.css' %}">
     <link rel="stylesheet" href="{% static 'libs/reset.css' %}">
     <link rel="stylesheet" href="{% static 'libs/font-awesome/css/font-awesome.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=1.31">
     <link rel="icon" href="{% static 'img/favicon.png' %}">
     <title>{% block title %}{% endblock %} ACTIVE_BIKE_KHV</title>
 
@@ -99,13 +99,13 @@
       <div class="container">
         <div class="row">
           
-          <div class="col-8">
+          <div class="col-12 col-lg-8">
             <div class="content">
                 {% block content %}Нет событий.{% endblock %}
             </div>
           </div>
           
-          <div class="col-4">
+          <div class="col-12 col-lg-4">
             {% show_sidebar %}
           </div>
         
