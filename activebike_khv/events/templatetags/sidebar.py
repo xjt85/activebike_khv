@@ -14,17 +14,19 @@ from datetime import date, datetime
 from telethon.tl.functions.channels import GetParticipantsRequest
 from telethon.tl.types import ChannelParticipantsSearch
 
+from telethon.sessions import StringSession
+
 # класс для работы с сообщениями
 from telethon.tl.functions.messages import GetHistoryRequest
 from decouple import Csv, config
 
-api_id = config('TLG_API_ID')
-api_hash = config('TLG_API_HASH')
-username = config('TLG_USERNAME')
+API_ID = config('TLG_API_ID')
+API_HASH = config('TLG_API_HASH')
+USERNAME = config('TLG_USERNAME')
+SESSION_STRING = config('TLG_SESSION_STRING')
+TLG_CHANNEL_URL = config('TLG_CHANNEL_URL')
 
-client = TelegramClient(username, api_id, api_hash)
-
-client.start()
+client = TelegramClient(StringSession(SESSION_STRING), API_ID, API_HASH)
 
 all_messages = []   # список всех сообщений
 
@@ -58,7 +60,7 @@ async def dump_all_messages(channel):
 
 
 async def main():
-    url = config('TLG_CHANNEL_URL')
+    url = TLG_CHANNEL_URL
     channel = await client.get_entity(url)
     await dump_all_messages(channel)
 
