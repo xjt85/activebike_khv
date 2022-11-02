@@ -551,6 +551,7 @@ strong {
 }
 
 .event__image {
+  display: block;
   height: 100%;
 }
 
