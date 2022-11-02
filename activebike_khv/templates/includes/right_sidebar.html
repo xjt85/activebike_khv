@@ -1,13 +1,12 @@
 {% load thumbnail %}
 <aside class="sidebar">
   <section class="tlg-channel sidebar-widget">
-    <h2 class="sidebar-widget__title">Канал ACTIVE BIKE (Telegram)</h2>
+    <h2 class="sidebar-widget__title">Канал ACTIVE BIKE <i class="fa fa-telegram fa-lg tlg-channel__tlg-icon"></i></h2>
     <ul class="tlg-messages">
       {% for msg in all_messages %}
       {% if msg.message != "" %}
       <li class="tlg-message">
         <a href="https://t.me/activebike/{{ msg.id }}/" class="tlg-message__link">
-        <i class="fa fa-telegram fa-lg tlg-message__tlg-icon"></i>
           <p class="tlg-message__text">{{ msg.message|truncatechars:100 }}</p>
           <div class="tlg-message__info">
             <div class="tlg-message__views"><i class="fa fa-eye" aria-hidden="true"></i> {{ msg.views }}</div>

@@ -236,6 +236,13 @@ strong {
   border: 1px solid #dfe8ee;
 }
 
+.tlg-channel__tlg-icon {
+  /* position: absolute;
+  top: 20px;
+  left: 0px; */
+  color: #249acc;
+}
+
 .tlg-messages {
   padding: 0;
 }
@@ -251,12 +258,6 @@ strong {
   transition: all 0.2s;
 }
 
-.tlg-message__tlg-icon {
-  position: absolute;
-  top: 20px;
-  left: 0px;
-  color: #249acc;
-}
 
 .tlg-message:first-child {
   border-top: 1px solid #eaeeef;
@@ -880,9 +881,6 @@ strong {
   margin-bottom: 5px;
 }
 
-.route__info-value {
-}
-
 /*------------------------------------------*/
 
 /*--------------------- ROUTE: DETAIL --------------------------*/
@@ -1043,9 +1041,7 @@ strong {
 
 @media (max-width: 576px) {
   .header-text {
-    margin-top: 15px;
-    text-align: center;
-    font-size: 18px;
+    display: none;
   }
   .header-menu__list {
     display: flex;
@@ -1054,6 +1050,10 @@ strong {
   }
   .header-menu__list-item {
     width: 33%;
+  }
+  .container {
+    padding-left: 0;
+    padding-right: 0;
   }
   .main {
     margin-bottom: 15px;

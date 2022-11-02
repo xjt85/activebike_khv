@@ -24,7 +24,7 @@
         <div class="event__right">
           <div class="event-descr">
             <p class="event-descr__text">{{ event.text_html|safe|truncatechars:300 }}</p>
-            <a href="{% url 'events:event_detail' event.id %}" class="event-descr__more">Читать далее</a>
+            <a href="{% url 'events:event_detail' event.id %}" class="event-descr__more">Далее</a>
           </div>
         </div>
       </div>
