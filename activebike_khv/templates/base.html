@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{% static 'libs/bootstrap-grid.min.css' %}">
     <link rel="stylesheet" href="{% static 'libs/reset.css' %}">
     <link rel="stylesheet" href="{% static 'libs/font-awesome/css/font-awesome.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=1.31">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=1.66">
     <link rel="icon" href="{% static 'img/favicon.png' %}">
     <title>{% block title %}{% endblock %} ACTIVE_BIKE_KHV</title>
 
@@ -23,6 +23,7 @@
       src="https://www.googletagmanager.com/gtag/js?id=G-G9961718N0"
     ></script>
     <script>
+      
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
@@ -30,66 +31,8 @@
       gtag("js", new Date());
 
       gtag("config", "G-G9961718N0");
+
     </script>
-
-    {% comment %} <script>
-      $(document).ready(function () {
-        // $('.event-descr').slideUp();
-        // $('.event__show-descr').on('click', function() {;
-        // 	$('.event__show-descr').not($(this)).removeClass('active');
-        // 	$('.event__show-descr').not($(this)).siblings('.event-descr').slideUp();
-
-        // 	$(this).toggleClass('active');
-        // 	$(this).siblings('.event-descr').slideToggle();
-        // });
-
-        $(".header-gallery").owlCarousel({
-          // nav: true,
-          dots: false,
-          loop: false,
-          mouseDrag: true,
-          touchDrag: true,
-          responsiveClass: true,
-          responsive: {
-            0: {
-              items: 2,
-            },
-            400: {
-              items: 2,
-            },
-            500: {
-              items: 3,
-            },
-            600: {
-              items: 4,
-            },
-            1000: {
-              items: 7,
-            },
-          },
-        });
-
-        $(".li-gallery").owlCarousel({
-          nav: true,
-          dots: false,
-          loop: true,
-          mouseDrag: true,
-          touchDrag: true,
-          items: 1,
-          responsiveClass: true,
-          responsive: {
-            0: {
-              nav: false,
-              dots: true,
-            },
-            576: {
-              nav: true,
-              dots: false,
-            },
-          },
-        });
-      });
-    </script> {% endcomment %}
   </head>
 
   <body>
@@ -114,5 +57,10 @@
     </main>
 
     {% include 'includes/footer.html' %}
+    <script>
+      $("#menu-button").on("click", function() {
+        $("#header-menu-mobile").toggleClass('active')
+      });
+    </script>
   </body>
 </html>

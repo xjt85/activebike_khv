@@ -12,6 +12,13 @@ from markdown import markdown
 User = get_user_model()
 
 
+class Ip(models.Model): # наша таблица где будут айпи адреса
+    ip = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.ip
+
+
 class Tag(models.Model):
     name = models.CharField(max_length=200, unique=True,
                             verbose_name='Название тега')
@@ -81,6 +88,7 @@ class Event(models.Model):
     date_pub = models.DateTimeField(auto_now_add=True)
     date_edit = models.DateTimeField(auto_now=True)
     date_planned = models.DateTimeField()
+    views = models.ManyToManyField(Ip, related_name="events_views", blank=True)
 
     class Meta:
         ordering = ['-date_planned']
@@ -93,6 +101,9 @@ class Event(models.Model):
     def save(self):
         self.text_html = markdown(self.text)
         super(Event, self).save()
+
+    def total_views(self):
+        return self.views.count()
 
 
 class Article(models.Model):
@@ -117,6 +128,7 @@ class Article(models.Model):
     )
     date_pub = models.DateTimeField(auto_now_add=True)
     date_edit = models.DateTimeField(auto_now=True)
+    views = models.ManyToManyField(Ip, related_name="articles_views", blank=True)
 
     class Meta:
         ordering = ['-date_pub']
@@ -129,6 +141,9 @@ class Article(models.Model):
     def save(self):
         self.text_html = markdown(self.text)
         super(Article, self).save()
+
+    def total_views(self):
+        return self.views.count()
 
 
 class Report(models.Model):
@@ -153,6 +168,7 @@ class Report(models.Model):
     )
     date_pub = models.DateTimeField(auto_now_add=True)
     date_edit = models.DateTimeField(auto_now=True)
+    views = models.ManyToManyField(Ip, related_name="reports_views", blank=True)
 
     class Meta:
         ordering = ['-date_pub']
@@ -165,6 +181,9 @@ class Report(models.Model):
     def save(self):
         self.text_html = markdown(self.text)
         super(Report, self).save()
+
+    def total_views(self):
+        return self.views.count()
 
 
 def user_directory_path(instance, filename):
@@ -214,6 +233,7 @@ class Route(models.Model):
     )
     date_pub = models.DateTimeField(auto_now_add=True)
     date_edit = models.DateTimeField(auto_now=True)
+    views = models.ManyToManyField(Ip, related_name="routes_views", blank=True)
 
     class Meta:
         ordering = ['-date_pub']
@@ -237,6 +257,9 @@ class Route(models.Model):
             self.polyline = polyline.encode(data)
             super().save(*args, **kwargs)
 
+    def total_views(self):
+        return self.views.count()
+
 
 class Link(models.Model):
     text = models.CharField(max_length=200)
@@ -246,7 +269,7 @@ class Link(models.Model):
     date_edit = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['text']
+        ordering = ['id']
         verbose_name = 'Ссылка'
         verbose_name_plural = 'Ссылки'
 

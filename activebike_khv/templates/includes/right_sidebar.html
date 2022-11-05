@@ -1,27 +1,6 @@
 {% load thumbnail %}
 <aside class="sidebar">
-  <section class="tlg-channel sidebar-widget">
-    <h2 class="sidebar-widget__title">Канал ACTIVE BIKE <i class="fa fa-telegram fa-lg tlg-channel__tlg-icon"></i></h2>
-    <ul class="tlg-messages">
-      {% for msg in all_messages %}
-      {% if msg.message != "" %}
-      <li class="tlg-message">
-        <a href="https://t.me/activebike/{{ msg.id }}/" class="tlg-message__link">
-          <p class="tlg-message__text">{{ msg.message|truncatechars:100 }}</p>
-          <div class="tlg-message__info">
-            <div class="tlg-message__views"><i class="fa fa-eye" aria-hidden="true"></i> {{ msg.views }}</div>
-            <div class="tlg-message__author">{{ msg.post_author|truncatechars:15 }}</div>
-            <div class="tlg-message__date">{{ msg.date|date:"d.m.Y" }}</div>
-          </div>
-        </a>
-      </li>
-      {% endif %}
-      {% endfor %}
-    </ul>
-    <p>
-      {% comment %} <script async src="https://telegram.org/js/telegram-widget.js?21" data-telegram-post="activebike/81" data-width="100%"></script> {% endcomment %}
-    </p>
-  </section>
+  
   <section class="top-articles sidebar-widget">
     <h2 class="sidebar-widget__title">Популярные статьи</h2>
     <ul class="top-articles-list">
@@ -34,6 +13,11 @@
             <h3 class="single-article__title">{{ article.title }}</h3>
             <p class="single-article__text">{{ article.text|truncatechars:100 }}</p>
           </a>
+          <div class="article-info">
+            <div class="article-info__views"><i class="fa fa-eye" aria-hidden="true"></i> {{ article.total_views }}</div>
+            <div class="article-info__comments"><i class="fa fa-comment-o" aria-hidden="true"></i>  0</div>
+            <div class="article-info__edit"><i class="fa fa-pencil" aria-hidden="true"></i> {{ article.date_edit|date:"d.m.Y" }}</div>
+          </div>
         </li>
       {% endfor %}
     </ul>
@@ -42,111 +26,11 @@
   <section class="links-block sidebar-widget">
     <h2 class="sidebar-widget__title">Ссылки</h2>
     <ul class="links-block__list">
+      {% for link in links %}
       <li class="links-block__li">
-        <span class="links-block__text">Сообщество ACTIVE_BIKE_KHV:</span>
-        <span class="social-links">
-          <a
-            href="https://vk.com/bikekhv"
-            class="social-link social-link_vk"
-            title="Вконтакте"
-            ><i class="fa fa-vk fa-lg"></i
-          ></a>
-          {% comment %} <a
-            href="https://www.instagram.com/activebike_khv"
-            class="social-link social-link_instagram"
-            title="Instagram"
-            ><i class="fa fa-instagram fa-lg"></i
-          ></a> {% endcomment %}
-        </span>
+        <a href="{{ link.url }}" class="links-block__link">{{ link.text }}</a>
       </li>
-      <li class="links-block__li">
-        <span class="links-block__text">Dvride.Ru (наш форум):</span>
-        <span class="social-links">
-          <a
-            href="https://www.dvride.ru"
-            class="social-link social-link_dvride"
-            title="Форум Dvride.Ru"
-            ><i class="fa fa-bicycle fa-lg"></i
-          ></a>
-          <a
-            href="https://t.me/dvride"
-            class="social-link social-link_telegram"
-            title="чат ВелоХа в Telegram"
-            ><i class="fa fa-telegram fa-lg"></i
-          ></a>
-          <a
-            href="https://www.strava.com/clubs/dvride"
-            class="social-link social-link_strava"
-            title="Клуб Dvride в Strava"
-            ><i class="icon-strava"></i
-          ></a>
-        </span>
-      </li>
-      <li class="links-block__li">
-        <span class="links-block__text">Чат "Куда поехать":</span>
-        <span class="social-links">
-          <a
-            href="https://chat.whatsapp.com/Evl24E6CGerETihtyJQtDE"
-            class="social-link social-link_whatsapp"
-            title="WhatsApp"
-            ><i class="fa fa-whatsapp fa-lg"></i
-          ></a>
-        </span>
-      </li>
-      <li class="links-block__li">
-        <span class="links-block__text">Туристический клуб "Горизонт":</span>
-        <span class="social-links">
-          <a
-            href="https://vk.com/togu_gorizont"
-            class="social-link social-link_vk"
-            title="Вконтакте"
-            ><i class="fa fa-vk fa-lg"></i
-          ></a>
-          {% comment %} <a
-            href="https://instagram.com/tc_gorizont_khv"
-            class="social-link social-link_instagram"
-            title="Instagram"
-            ><i class="fa fa-instagram fa-lg"></i
-          ></a> {% endcomment %}
-        </span>
-      </li>
-      <li class="links-block__li">
-        <span class="links-block__text"
-          >Веломастерская "Вел.Ком" @nefelim1988:</span
-        >
-        <span class="social-links">
-          {% comment %} <a
-            href="https://www.instagram.com/velcomebike"
-            class="social-link social-link_instagram"
-            title="Instagram"
-            ><i class="fa fa-instagram fa-lg"></i
-          ></a> {% endcomment %}
-          <a
-            href="https://www.strava.com/clubs/velcombike"
-            class="social-link social-link_strava"
-            title="Strava"
-            ><i class="icon-strava"></i
-          ></a>
-        </span>
-      </li>
-      <li class="links-block__li">
-        <span class="links-block__text"
-          >Веломастерская @velomaster27 (Nick_NeoCOM):</span
-        >
-        <span class="social-links">
-          {% comment %} <a
-            href="https://www.instagram.com/velomaster27/"
-            class="social-link social-link_instagram"
-            title="Instagram"
-            ><i class="fa fa-instagram fa-lg"></i
-          ></a> {% endcomment %}
-        </span>
-      </li>
-      <li class="links-block__li">
-        <a href="https://rudolf-khb.livejournal.com/124304.html" class="link"
-          >Веломаршруты по окрестностям Хабаровска (Rudolf)</a
-        >
-      </li>
+      {% endfor %}
     </ul>
   </section>
 </aside>

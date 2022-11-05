@@ -5,7 +5,7 @@ from . import views
 app_name = 'events'
 
 urlpatterns = [
-    path('', views.events_index, name='events_index'),
+    path('', views.main_page, name='main_page'),
 
     path('events/', views.events_index, name='events_index'),
     path('events/<int:event_id>/', views.event_detail, name='event_detail'),
@@ -18,8 +18,6 @@ urlpatterns = [
 
     path('reports/', views.reports_index, name='reports_index'),
     path('reports/<int:report_id>/', views.report_detail, name='report_detail'),
-
-    path('links/', views.links_index, name='links_index'),
 
     path('about/', views.about_page, name='about_page'),
 ]

@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import (About, Article, Event, EventType, Link, Media, Report,
-                     Route, SurfaceType, Tag)
+                     Route, SurfaceType, Tag, Ip)
 
 
 @admin.register(EventType)
@@ -56,3 +56,4 @@ admin.site.register(Tag)
 admin.site.register(SurfaceType)
 admin.site.register(Media)
 admin.site.register(About)
+admin.site.register(Ip)

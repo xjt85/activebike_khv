@@ -7,6 +7,7 @@ from django.urls.conf import include
 urlpatterns = [
     path('', include('events.urls')),
     path('admin/', admin.site.urls),
+    path("accounts/", include("django.contrib.auth.urls")),
 ]
 
 if settings.DEBUG:

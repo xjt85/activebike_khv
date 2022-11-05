@@ -1,0 +1,21 @@
+
+
+
+{% extends 'base.html' %}
+{% load static %}
+{% load cache %}
+{% load thumbnail %}
+{% block title %}Войти{% endblock %}
+
+{% block content %}
+<!-- templates/registration/login.html -->
+<section class="content-section">
+    <h2 class="content__h2">Войти</h2>
+    <form method="post" class="auth-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="auth-form__submit">ОК</button>
+    </form>
+</section>
+{% endblock %}
+

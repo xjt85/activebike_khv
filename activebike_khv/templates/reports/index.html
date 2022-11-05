@@ -5,65 +5,34 @@
 {% block title %}Отчеты - {% endblock %}
 
 {% block content %}
-<h2 class="events__h2">
-  <span class="events__h2_1">Отчеты</span>
-</h2>
 
-<div class="events__content">
+<section class="content-section">
+  <h2 class="content-section__title content-section__title_nearest">Отчеты</h2>
   {% for report in reports %}
-    <article class="event">
-      <h3 class="event__caption"><a href="{% url 'events:report_detail' report.id %}" class="event__caption-link">{{ report.title }}</a></h3>
-      <div class="event__main">
-        <div class="event__left">
-          <div class="event__image">
+    <article class="article">
+      <h3 class="article-title"><a href="{% url 'events:report_detail' report.id %}" class="article-title__link">{{ report.title }}</a></h3>
+      <div class="article__main">
+        <div class="article__left">
+          <a href="{% url 'events:report_detail' report.id %}" class="article__image">
             {% thumbnail report.image "300x300" crop="center" upscale=True as im %}
-              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ report.title }}" class="event__image-img">
+              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ report.title }}" class="article__image-img">
             {% endthumbnail %}
-          </div>
+          </a>
         </div>
-        <div class="event__right">
-          <div class="event-descr">
-            <p class="event-descr__text">{{ report.text_html|safe|truncatechars:300 }}</p>
-            <a href="{% url 'events:report_detail' report.id %}" class="event-descr__more">Читать далее</a>
+        <div class="article__right">
+          <div class="article-descr">
+            <p class="article-descr__text">{{ report.text_html|safe|truncatechars:300 }}</p>
+            <a href="{% url 'events:report_detail' report.id %}" class="article__more">Читать дальше →</a>
           </div>
         </div>
       </div>
-      <div class="event__info">
-        <div class="event__info-col event__info-col_1">
-          <div class="event__icons">
-            <i class="fa fa-bicycle fa-lg"></i>
-          </div>
-        </div>
-        <div class="event__info-col event__info-col_2">
-          <div class="event-author">
-            Автор:
-            <span class="event-author__value">{{ report.author }}</span>
-          </div>
-          <div class="event-date-edited">
-            Изменено:
-            <span class="event-date-edited__value">{{ report.date_edit|date:"d.m.Y" }}</span>
-          </div>
-        </div>
-        <div class="event__info-col event__info-col_3">
-          <div class="event__views">
-            Просмотров:
-            <span class="event__views-value">20</span>
-          </div>
-          <div class="event__comments">
-            Комментарии (<span class="event__views-value">10</span>)
-          </div>
-        </div>
-        <div class="event__info-col event__info-col_4">
-          <div class="event__date">
-            Опубликовано:
-            <span class="event__date-value">{{ report.date_pub|date:"d.m.Y" }}</span>
-          </div>
-          <div class="event__share">
-            <a class="event__date-value" href="">Поделиться</a>
-          </div>
-        </div>
+      <div class="article-info">
+        <div class="article-info__views"><i class="fa fa-eye" aria-hidden="true"></i>{{ report.total_views }}</div>
+        <div class="article-info__comments"><i class="fa fa-comment-o" aria-hidden="true"></i>  0</div>
+        <div class="article-info__author">{{ report.author|truncatechars:15 }}</div>
+        <div class="article-info__edit"><i class="fa fa-pencil" aria-hidden="true"></i> {{ report.date_edit|date:"d.m.Y" }}</div>
       </div>
     </article>
   {% endfor %}
-</div>
+</section>
 {% endblock %}

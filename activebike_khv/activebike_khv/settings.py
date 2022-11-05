@@ -8,9 +8,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY', default='string_from_.env', )
 
-# if SECRET_KEY:
-#     print(f'secret key successfully readed:{SECRET_KEY}')
-
 DEBUG = True
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='activebike-khv.ru',
@@ -95,6 +92,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -114,6 +113,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 if DEBUG:
     STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
