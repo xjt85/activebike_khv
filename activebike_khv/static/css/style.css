@@ -295,6 +295,7 @@ strong {
 /*--------------------- ARTICLES --------------------------*/
 
 .article {
+  position: relative;
   padding: 10px 0 0;
   margin-right: 20px;
   margin-left: 20px;
@@ -349,6 +350,19 @@ strong {
 
 .article-title__link:hover {
   color: #aa0131;
+}
+
+.article__edit-button {
+  display: block;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #d3446c;
+  font-size: 22px;
+}
+
+.article__edit-button_page {
+  top: 0px;
 }
 
 .article__main {
@@ -1152,42 +1166,22 @@ strong {
     line-height: 1.5;
   }
 
-  /* .event {
-    padding-left: 0;
-    padding-right: 0;
+  .article__more {
+    padding: 4px 14px;
+    margin-top: 10px;
+    font-size: 14px;
   }
-  .event__title {
-    margin-bottom: 10px;
-  }
-  .event__main {
-    justify-content: center;
-  }
-  .event__left {
-    margin-bottom: 10px;
-    margin-right: 0;
-  }
-  .event__left,
-  .event__right {
+
+  .article__left,
+  .article__right {
     width: 100%;
   }
-  .event-info__views {
-    width: 17%;
+
+  .article__left {
+    margin-right: 0;
+    margin-bottom: 10px;
   }
-  .event-info__comments {
-    width: 16%;
-  }
-  .event-info__author {
-    width: 35%;
-  }
-  .event-info__edit {
-    width: 33%;
-  }
-  .routes-item {
-    padding: 15px 10px 0;
-  }
-  .event-page {
-    padding: 10px;
-  } */
+
   .route__main {
     padding: 0;
   }

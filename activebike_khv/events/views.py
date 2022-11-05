@@ -74,7 +74,7 @@ def get_client_ip(request):
     return ip
 
 
-@cache_page(60 * 2)
+# @cache_page(60 * 2)
 def main_page(request):
     template = 'main.html'
     events = Event.objects.all()
@@ -91,7 +91,7 @@ def main_page(request):
     return render(request, template, context)
 
 
-@cache_page(60 * 2)
+# @cache_page(60 * 2)
 def events_index(request):
     template = 'events/index.html'
     events = Event.objects.all()
@@ -125,7 +125,7 @@ def event_detail(request, event_id):
     return render(request, 'events/event_detail.html', context)
 
 
-@cache_page(60 * 2)
+# @cache_page(60 * 2)
 def articles_index(request):
     template = 'articles/index.html'
     articles = Article.objects.all()
@@ -158,7 +158,7 @@ def article_detail(request, article_id):
     return render(request, template, context)
 
 
-@cache_page(60 * 2)
+# @cache_page(60 * 2)
 def reports_index(request):
     template = 'reports/index.html'
     reports = Report.objects.all()
@@ -192,7 +192,7 @@ def report_detail(request, report_id):
     return render(request, template, context)
 
 
-@cache_page(60 * 2)
+# @cache_page(60 * 2)
 def routes_index(request):
     template = 'routes/index.html'
     routes = Route.objects.all()
@@ -226,7 +226,7 @@ def route_detail(request, route_id):
     return render(request, template, context)
 
 
-@cache_page(60 * 2)
+# @cache_page(60 * 2)
 def about_page(request):
     template = 'about.html'
     about_page = About.objects.all()

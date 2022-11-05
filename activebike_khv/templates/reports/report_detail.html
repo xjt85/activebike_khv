@@ -8,6 +8,9 @@
 <section class="content-section">
   <article class="article article_page">
     <h2 class="article-title article-title_page">{{ report.title }}</h2>
+    {% if user.is_authenticated %}
+      <a class="article__edit-button article__edit-button_page" href="{% url 'admin:index' %}events/report/{{ report.id }}/change/"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+    {% endif %}
     <div class="article__main article__main_page">
       <div class="article__image article__image_page">
         {% thumbnail report.image "700x400" upscale=True as im %}
@@ -21,7 +24,7 @@
     <div class="article-info article-info_page">
       <div class="article-info__views"><i class="fa fa-eye" aria-hidden="true"></i>{{ report.total_views }}</div>
       <div class="article-info__comments"><i class="fa fa-comment-o" aria-hidden="true"></i>  0</div>
-      <div class="article-info__author">{{ report.author|truncatechars:15 }}</div>
+      <div class="article-info__author">{{ report.author|truncatechars:9 }}</div>
       <div class="article-info__edit"><i class="fa fa-pencil" aria-hidden="true"></i> {{ report.date_edit|date:"d.m.Y" }}</div>
     </div>
   </article>

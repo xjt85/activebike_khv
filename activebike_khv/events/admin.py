@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from .models import (About, Article, Event, EventType, Link, Media, Report,
                      Route, SurfaceType, Tag, Ip)
 
@@ -48,8 +47,8 @@ class RouteAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
     
     def save_model(self, request, obj, form, change):
-            obj.author = request.user
-            obj.save()
+        obj.author = request.user
+        obj.save()
 
 
 admin.site.register(Tag)

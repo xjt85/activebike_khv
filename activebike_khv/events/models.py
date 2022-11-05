@@ -14,6 +14,7 @@ User = get_user_model()
 
 class Ip(models.Model): # наша таблица где будут айпи адреса
     ip = models.CharField(max_length=100)
+    date_edit = models.DateTimeField(auto_now=True, null=True)
 
     def __str__(self):
         return self.ip
@@ -245,7 +246,7 @@ class Route(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        if self.track.path:
+        if self.track:
             with open(self.track.path, "r", encoding="utf-8") as file:
                 gpx = gpxpy.parse(file)
             data = []
