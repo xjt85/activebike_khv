@@ -5,8 +5,8 @@
 {% block title %}Главная - {% endblock %}
 
 {% block content %}
-<section class="content-section">
-  <h2 class="content-section__title content-section__title_nearest">Ближайшее событие</h2>
+<section class="content-section content-section_pt0">
+  {% comment %} <h2 class="content-section__title content-section__title_nearest">Ближайшее событие</h2> {% endcomment %}
   <article class="article">
     <h3 class="article-title"><a href="{% url 'events:event_detail' nearest_event.id %}" class="article-title__link">{{ nearest_event.title }}</a></h3>
     {% if user.is_authenticated and request.user == nearest_event.author %}

@@ -6,8 +6,8 @@
 
 {% block content %}
 
-<section class="content-section">
-  <h2 class="content-section__title content-section__title_nearest">Отчеты</h2>
+<section class="content-section content-section_pt0">
+  {% comment %} <h2 class="content-section__title content-section__title_nearest">Отчеты</h2> {% endcomment %}
   {% for report in reports %}
     <article class="article">
       <h3 class="article-title"><a href="{% url 'events:report_detail' report.id %}" class="article-title__link">{{ report.title }}</a></h3>

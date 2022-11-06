@@ -6,10 +6,10 @@
 
 {% block content %}
 <section class="content-section">
-  <article class="article article_page">
+  <article class="article article_page article_route">
     <h2 class="article-title article-title_page">{{ route.title }}</h2>
     {% if user.is_authenticated and request.user == route.author %}
-      <a class="article__edit-button" href="{% url 'admin:index' %}events/route/{{ route.id }}/change/"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+      <a class="article__edit-button article__edit-button_page" href="{% url 'admin:index' %}events/route/{{ route.id }}/change/"><i class="fa fa-pencil" aria-hidden="true"></i></a>
     {% endif %}
     <div class="route__info">
       <div class="route__info-item">
@@ -31,7 +31,7 @@
     </div>
     <div class="article__main article__main_page">
       <div class="article-descr article-descr_page">
-        <p class="article-descr__text article-descr__text_page">{{ route.description|safe }}</p>
+        <p class="article-descr__text article-descr__text_page article-descr__text_route">{{ route.description|safe }}</p>
       </div>
     </div>
     <div class="map-wrapper">

@@ -50,9 +50,9 @@
           <ul class="header-menu-mobile" id="header-menu-mobile">
             {% load menubuilder %}
             {% menu menu %}
-            {% for item in menuitems %}
+              {% for item in menuitems %}
               <li class="header-menu-mobile__item">
-                <a href="{{ item.url }}" title="{{ item.title|escape }}"  class="header-menu-mobile__link {% if item.current %}current{% endif %}">{{ item.title }}</a>
+                <a href="{{ item.url }}" title="{{ item.title|escape }}" class="header-menu-mobile__link {% if item.current %}current{% endif %}">{{ item.title }}</a>
               </li>
               {% endfor %}
               <li class="auth">
@@ -69,3 +69,17 @@
     </div>
   </div>
 </nav>
+
+<div class="chapter-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="chapter">
+          {% for item in menuitems %}
+          <h2 class="chapter__title">{% if item.current %}{{ item.title|escape }}{% endif %}</h2>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
