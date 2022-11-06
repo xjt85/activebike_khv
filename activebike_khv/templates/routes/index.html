@@ -12,6 +12,9 @@
     <h3 class="article-title">
       <a href="{% url 'events:route_detail' route.id %}" class="routes-item__title-link">{{ route.title }}</a>
     </h3>
+    {% if user.is_authenticated and request.user == route.author %}
+      <a class="article__edit-button" href="{% url 'admin:index' %}events/route/{{ route.id }}/change/"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+    {% endif %}
     <div class="article__main">
         <div class="route__left">
             <a href="{% url 'events:route_detail' route.id %}" class="routes-item__image">

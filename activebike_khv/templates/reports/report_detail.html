@@ -8,8 +8,8 @@
 <section class="content-section">
   <article class="article article_page">
     <h2 class="article-title article-title_page">{{ report.title }}</h2>
-    {% if user.is_authenticated %}
-      <a class="article__edit-button article__edit-button_page" href="{% url 'admin:index' %}events/report/{{ report.id }}/change/"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+    {% if user.is_authenticated and request.user == report.author %}
+      <a class="article__edit-button" href="{% url 'admin:index' %}events/report/{{ report.id }}/change/"><i class="fa fa-pencil" aria-hidden="true"></i></a>
     {% endif %}
     <div class="article__main article__main_page">
       <div class="article__image article__image_page">

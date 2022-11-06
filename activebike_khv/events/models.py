@@ -89,7 +89,7 @@ class Event(models.Model):
     date_pub = models.DateTimeField(auto_now_add=True)
     date_edit = models.DateTimeField(auto_now=True)
     date_planned = models.DateTimeField()
-    views = models.ManyToManyField(Ip, related_name="events_views", blank=True)
+    views = models.ManyToManyField(Ip, related_name="events_views", blank=True, editable=False)
 
     class Meta:
         ordering = ['-date_planned']
@@ -129,7 +129,7 @@ class Article(models.Model):
     )
     date_pub = models.DateTimeField(auto_now_add=True)
     date_edit = models.DateTimeField(auto_now=True)
-    views = models.ManyToManyField(Ip, related_name="articles_views", blank=True)
+    views = models.ManyToManyField(Ip, related_name="articles_views", blank=True, editable=False)
 
     class Meta:
         ordering = ['-date_pub']
@@ -169,7 +169,7 @@ class Report(models.Model):
     )
     date_pub = models.DateTimeField(auto_now_add=True)
     date_edit = models.DateTimeField(auto_now=True)
-    views = models.ManyToManyField(Ip, related_name="reports_views", blank=True)
+    views = models.ManyToManyField(Ip, related_name="reports_views", blank=True, editable=False)
 
     class Meta:
         ordering = ['-date_pub']
@@ -234,7 +234,7 @@ class Route(models.Model):
     )
     date_pub = models.DateTimeField(auto_now_add=True)
     date_edit = models.DateTimeField(auto_now=True)
-    views = models.ManyToManyField(Ip, related_name="routes_views", blank=True)
+    views = models.ManyToManyField(Ip, related_name="routes_views", blank=True, editable=False)
 
     class Meta:
         ordering = ['-date_pub']

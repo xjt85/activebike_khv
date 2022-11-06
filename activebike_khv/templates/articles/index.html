@@ -15,6 +15,9 @@
         <span class="article-date-edit">{{ article.date_pub|date:"d.m.Y" }}</span>
       </div>
       <h3 class="article-title">{{ article.title }}</h3>
+      {% if user.is_authenticated and request.user == article.author %}
+        <a class="article__edit-button" href="{% url 'admin:index' %}events/article/{{ article.id }}/change/"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+      {% endif %}
       <div class="article__main">
         <div class="article__left">
           <div class="article__image">

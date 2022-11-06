@@ -8,6 +8,9 @@
 <section class="content-section">
   <article class="article article_page">
     <h2 class="article-title article-title_page"><span class="article-title__text">{{ event.title }}</span></h2>
+    {% if user.is_authenticated and request.user == event.author %}
+      <a class="article__edit-button" href="{% url 'admin:index' %}events/event/{{ event.id }}/change/"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+    {% endif %}
     <div class="article__main article__main_page">
       <div class="article-descr article-descr_page">
         <p class="article-descr__date">{{ event.date_planned|date:"l, d.m.Y, H:i" }}</p>

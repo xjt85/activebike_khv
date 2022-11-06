@@ -11,7 +11,7 @@
   {% for report in reports %}
     <article class="article">
       <h3 class="article-title"><a href="{% url 'events:report_detail' report.id %}" class="article-title__link">{{ report.title }}</a></h3>
-      {% if user.is_authenticated %}
+      {% if user.is_authenticated and request.user == report.author %}
         <a class="article__edit-button" href="{% url 'admin:index' %}events/report/{{ report.id }}/change/"><i class="fa fa-pencil" aria-hidden="true"></i></a>
       {% endif %}
       <div class="article__main">
