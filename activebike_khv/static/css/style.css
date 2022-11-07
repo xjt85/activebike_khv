@@ -247,26 +247,49 @@ strong {
 .auth-form input {
   display: inline-block;
   width: 30%;
+  border: 1px solid #b8babb;
+  background-color: #fff;
+  border-radius: 3px;
+  padding: 4px 10px;
 }
 
-.auth-form__submit {
-  padding: 5px 30px;
+.auth-form__button {
+  display: inline-block;
+  padding: 4px 36px;
+  cursor: pointer;
+  text-decoration: none;
+  color: #d3446c;
+  background-color: transparent;
+  border: 1px solid #d3446c;
+  border-radius: 3px;
+  transition: all 0.2s;
+  font-size: 16px;
+}
+
+.auth-form__button:hover {
+  background-color: #d3446c;
+  color: #fff;
 }
 
 .chapter-wrapper {
   background-color: #fff;
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
+  border-bottom: 1px solid #b8babb;
   display: none;
 }
 
 .chapter {
   background-color: #fff;
-  padding: 3px 20px;
+  padding: 7px 10px;
 }
 
-.chapter__title {
-  color: #265e7a;
+.chapter-title {
   text-align: left;
+}
+
+.chapter-title__link {
+  text-decoration: none;
+  color: #265e7a;
   font-size: 20px;
 }
 
@@ -655,48 +678,66 @@ strong {
   padding: 20px;
 }
 
-.route__info {
+.route-info {
   text-align: left;
 }
 
-.route__info-item {
-  /* color: rgb(115, 140, 167); */
+.route-info__item {
+  color: rgb(75, 75, 75);
   margin-bottom: 5px;
 }
 
-/*------------------------------------------*/
+.route-info__item_page {
+  background-color: #fff;
+  color: rgb(75, 75, 75);
+  margin-bottom: 5px;
+  border-radius: 3px;
+  border: 1px solid rgb(255, 36, 36);
+  padding: 0 7px;
+}
 
 /*--------------------- ROUTE: DETAIL --------------------------*/
 
-.route-h2 {
-  margin-bottom: 20px;
+.route__map-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.route-info_page {
+  position: absolute;
+  top: 10px;
+  left: 65px;
+  z-index: 99;
 }
 
 .route__map {
   width: 100%;
   height: 500px;
-  margin-bottom: 20px;
-  border: 1px solid #eaeeef;
+  border: 1px solid #b8babb;
+  margin-bottom: 10px;
 }
 
-.map-wrapper.modal {
-  position: fixed;
-  top: 50%;
+.route__track-download {
+  display: inline-block;
+  position: absolute;
+  z-index: 99;
+  bottom: 24px;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90vw;
-  height: 100vh;
-  z-index: 200;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 250px;
+  padding: 5px 20px;
+  border-radius: 3px;
+  background-color: rgb(255, 36, 36);
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  text-align: center;
 }
 
-/*------------------------------------------*/
-
-/*--------------------- REPORT: DETAIL --------------------------*/
-
-/* .report-page-descr {
-  padding: 15px;
-  text-align: left;
-} */
+.route__track-download:hover {
+  text-decoration: none;
+}
 
 /*----------------------- SIDEBAR ------------------------------*/
 
@@ -1171,8 +1212,8 @@ strong {
     padding-right: 0;
   }
 
-  .article-title {
-    margin-bottom: 10px;
+  .article-title_route-page {
+    margin-bottom: 0px;
   }
 
   .article-title_page {
@@ -1241,6 +1282,13 @@ strong {
 
   .route__right {
     padding: 10px 0 0;
+  }
+
+  .route__map-wrapper {
+    height: 77vh;
+  }
+  .route__map {
+    height: 77vh;
   }
 
   .sidebar-widget {

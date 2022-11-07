@@ -8,22 +8,20 @@
     
     <script src="{% static 'libs/leaflet/leaflet.js' %}"></script>
     <script src="{% static 'libs/leaflet/Polyline.encoded.js' %}"></script>
+    <script src="{% static 'libs/leaflet-gpx/gpx.js' %}"></script>
     <link rel="stylesheet" href="{% static 'libs/leaflet/leaflet.css' %}">
 
     <link rel="stylesheet" href="{% static 'libs/bootstrap-grid.min.css' %}">
     <link rel="stylesheet" href="{% static 'libs/reset.css' %}">
     <link rel="stylesheet" href="{% static 'libs/font-awesome/css/font-awesome.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=1.71">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=1.76">
     <link rel="icon" href="{% static 'img/favicon.png' %}">
     <title>{% block title %}{% endblock %} ACTIVE_BIKE_KHV</title>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-G9961718N0"
-    ></script>
-    <script>
-      
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G9961718N0"></script>
+
+    <script>  
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
@@ -31,8 +29,8 @@
       gtag("js", new Date());
 
       gtag("config", "G-G9961718N0");
-
     </script>
+    
   </head>
 
   <body>

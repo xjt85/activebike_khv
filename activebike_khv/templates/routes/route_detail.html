@@ -7,72 +7,66 @@
 {% block content %}
 <section class="content-section">
   <article class="article article_page article_route">
-    <h2 class="article-title article-title_page">{{ route.title }}</h2>
+    <h2 class="article-title article-title_page article-title_route-page">{{ route.title }}</h2>
     {% if user.is_authenticated and request.user == route.author %}
       <a class="article__edit-button article__edit-button_page" href="{% url 'admin:index' %}events/route/{{ route.id }}/change/"><i class="fa fa-pencil" aria-hidden="true"></i></a>
     {% endif %}
-    <div class="route__info">
-      <div class="route__info-item">
-          Тип:
-          <span class="route__info-value">{{ route.type }}</span>
-      </div>
-      <div class="route__info-item">
-          Дистанция:
-          <span class="route__info-value">{{ route.length }} км</span>
-      </div>
-      <div class="route__info-item">
-          Набор высоты:
-          <span class="route__info-value">{{ route.height_gain }} м</span>
-      </div>
-      <div class="route__info-item">
-          Опубликовано:
-          <span class="route__info-value">{{ route.date_pub|date:"d.m.Y" }} г.</span>
-      </div>
-    </div>
     <div class="article__main article__main_page">
-      <div class="article-descr article-descr_page">
+      {% comment %} <div class="article-descr article-descr_page">
         <p class="article-descr__text article-descr__text_page article-descr__text_route">{{ route.description|safe }}</p>
-      </div>
+      </div> {% endcomment %}
     </div>
-    <div class="map-wrapper">
+    <div class="route__map-wrapper">
+      <div class="route-info route-info_page">
+        <div class="route-info__item route-info__item_page">Тип: <span class="route-info__value">{{ route.type }}</span></div>
+        <div class="route-info__item route-info__item_page">Дистанция: <span class="route-info__value" id="route_distance"> -- </span></div>
+        <div class="route-info__item route-info__item_page">Набор высоты: <span class="route-info__value" id="route_elev_gain"> -- </span></div>
+        {% comment %} <div class="route-info__item">Опубликовано: <span class="route-info__value">{{ route.date_pub|date:"d.m.Y" }} г.</span></div> {% endcomment %}
+      </div>
       <div id="map" class="route__map"></div>
+      <a class="route__track-download" href="{{ route.track.url }}" download>Скачать трек</a>
     </div>
     <div class="article-info article-info_page">
       <div class="article-info__views"><i class="fa fa-eye" aria-hidden="true"></i>{{ route.total_views }}</div>
-      <div class="article-info__comments"><i class="fa fa-comment-o" aria-hidden="true"></i>  0</div>
+      <div class="article-info__comments"><i class="fa fa-comment-o" aria-hidden="true"></i> 0</div>
       <div class="article-info__author">{{ route.author|truncatechars:9 }}</div>
       <div class="article-info__edit"><i class="fa fa-pencil" aria-hidden="true"></i> {{ route.date_edit|date:"d.m.Y" }}</div>
     </div>
   </article>
 </section>
 <script>
-  var data = JSON.parse("{{ data|escapejs }}");
+
+  var distance = document.getElementById('route_distance');
+  var elev_gain = document.getElementById('route_elev_gain');
   var map = L.map("map");
-  var coordinates = L.Polyline.fromEncoded(data).getLatLngs();
-  
-  
-  
-  
-  L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 18,
+    attribution:
+      '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map);
-  
+
+  var url = '{{ route.track.url }}'; // URL to your GPX file
+  new L.GPX(url, {
+    gpx_options: {
+      joinTrackSegments: true
+    },
+    async: true
+  }).on('loaded', function(e) {
+    map.fitBounds(e.target.getBounds());
+    distance.innerText = (e.target.get_distance() / 1000).toFixed(1) + ' км';
+    elev_gain.innerText = (e.target.get_elevation_gain()).toFixed(1) + ' м';
+  });
+
+  var data = JSON.parse("{{ data|escapejs }}");
+  var coordinates = L.Polyline.fromEncoded(data).getLatLngs();
+
   track = L.polyline(coordinates, {
-    color: "#db2242",
-    weight: 5,
+    color: "#FF0000",
+    weight: 3,
     opacity: 1.0,
     lineJoin: "round",
   }).addTo(map);
 
-  map.fitBounds(track.getBounds());
-
-  var trackStart = [coordinates[0].lat,coordinates[0].lng]
-  var trackFinish = [coordinates[coordinates.length - 1].lat,coordinates[coordinates.length - 1].lng]
-
-  L.marker(trackStart).addTo(map);
-  L.marker(trackFinish).addTo(map);
-
-
-  
 </script>
 {% endblock %}
