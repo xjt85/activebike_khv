@@ -4,15 +4,15 @@
 {% block title %}{{ route.title }} - Маршруты{% endblock %}
 
 {% block site_main %}
-  <article class="route-page">
-    {% if user.is_authenticated and request.user == route.author %}
-      <a class="article__edit-button article__edit-button_page" href="{% url 'admin:index' %}events/route/{{ route.id }}/change/"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-    {% endif %}
+  <article class="route-map-page">
     <div class="route__map-wrapper">
+      {% if user.is_authenticated and request.user == route.author %}
+        <a class="article__edit-button article__edit-button_page" href="{% url 'admin:index' %}events/route/{{ route.id }}/change/"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+      {% endif %}
       <div id="map" class="route__map"></div>
       <div class="route__track-download-wrapper">
         <a class="route-map__button route-map__button_download" href="" download>Скачать трек</a>
-        <a class="route-map__button route-map__button_back" href="{% url 'events:route_detail' route.id %}">Назад</a>
+        {% comment %} <a class="route-map__button route-map__button_back" href="{% url 'events:route_detail' route.id %}">Назад</a> {% endcomment %}
       </div>
     </div>
   </article>
@@ -22,11 +22,36 @@
   var map = L.map("map");
   var coordinates = L.Polyline.fromEncoded(data).getLatLngs();
 
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  osMap = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 18,
-    attribution:
-      '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-  }).addTo(map);
+    attribution: '© OpenStreetMap'
+  });
+
+  googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+    maxZoom: 20,
+    subdomains:['mt0','mt1','mt2','mt3']
+  });
+
+  var trackStart = [coordinates[0].lat,coordinates[0].lng]
+  var trackFinish = [coordinates[coordinates.length - 1].lat,coordinates[coordinates.length - 1].lng]
+
+  var startMarker = L.marker(trackStart).addTo(map);
+  var finishMarker = L.marker(trackFinish).addTo(map);
+
+  osMap.addTo(map);
+  googleSat.addTo(map);
+
+  var baseMaps = {
+    "OpenStreetMap": osMap,
+    "Google Satellite": googleSat
+  };
+  
+  var overlays = {
+    "startMarker": startMarker,
+    "finishMarker": finishMarker
+  };
+
+  var layerControl = L.control.layers(baseMaps, overlays).addTo(map);
 
   track = L.polyline(coordinates, {
     color: "#FF0000",
@@ -37,11 +62,8 @@
 
   map.fitBounds(track.getBounds());
 
-  var trackStart = [coordinates[0].lat,coordinates[0].lng]
-  var trackFinish = [coordinates[coordinates.length - 1].lat,coordinates[coordinates.length - 1].lng]
 
-  L.marker(trackStart).addTo(map);
-  L.marker(trackFinish).addTo(map);
+
 
 </script>
 {% endblock %}
