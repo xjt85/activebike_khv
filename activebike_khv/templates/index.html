@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load sidebar %}
+{% load cache %}
+{% load thumbnail %}
+
+{% block site_main %}
+
+{% include 'includes/header.html' %}
+
+    <main id="primary" class="main site-main">
+      <div class="container">
+        <div class="row">
+          
+          <div class="col-12 col-lg-8">
+            <div class="content">
+                {% block content %}Ошибка отображения событий.{% endblock %}
+            </div>
+          </div>
+          
+          <div class="col-12 col-lg-4">
+            {% show_sidebar %}
+          </div>
+        
+        </div>
+      </div>
+    </main>
+
+{% include 'includes/footer.html' %}
+
+<script>
+    $("#menu-button").on("click", function() {
+        $("#header-menu-mobile").toggleClass('active')
+    });
+</script>
+
+{% endblock %}

@@ -1,5 +1,4 @@
 {% load static %}
-{% load sidebar %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,14 +13,14 @@
     <link rel="stylesheet" href="{% static 'libs/bootstrap-grid.min.css' %}">
     <link rel="stylesheet" href="{% static 'libs/reset.css' %}">
     <link rel="stylesheet" href="{% static 'libs/font-awesome/css/font-awesome.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=1.76">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=1.86">
     <link rel="icon" href="{% static 'img/favicon.png' %}">
     <title>{% block title %}{% endblock %} ACTIVE_BIKE_KHV</title>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-G9961718N0"></script>
-
-    <script>  
+    
+    <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
@@ -34,31 +33,8 @@
   </head>
 
   <body>
-    {% include 'includes/header.html' %}
-
-    <main id="primary" class="main site-main">
-      <div class="container">
-        <div class="row">
-          
-          <div class="col-12 col-lg-8">
-            <div class="content">
-                {% block content %}Нет событий.{% endblock %}
-            </div>
-          </div>
-          
-          <div class="col-12 col-lg-4">
-            {% show_sidebar %}
-          </div>
-        
-        </div>
-      </div>
-    </main>
-
-    {% include 'includes/footer.html' %}
-    <script>
-      $("#menu-button").on("click", function() {
-        $("#header-menu-mobile").toggleClass('active')
-      });
-    </script>
+    
+    {% block site_main %}Ошибка отображения основного раздела.{% endblock %}
+    
   </body>
 </html>

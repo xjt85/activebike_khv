@@ -649,7 +649,12 @@ strong {
 .routes-item__image {
   display: block;
   height: 100%;
-  border: 1px solid #eaeeef;
+  border: 1px solid #b8babb;
+}
+
+.routes-item__image_page {
+  width: 28%;
+  height: 200px;
 }
 
 .routes-item__image-img {
@@ -670,11 +675,11 @@ strong {
 }
 
 .route__left {
-  width: 40%;
+  width: 25%;
 }
 
 .route__right {
-  width: 55%;
+  width: 73%;
   padding: 20px;
 }
 
@@ -701,6 +706,7 @@ strong {
 .route__map-wrapper {
   position: relative;
   width: 100%;
+  height: 100vh;
 }
 
 .route-info_page {
@@ -712,31 +718,56 @@ strong {
 
 .route__map {
   width: 100%;
-  height: 500px;
+  height: 100%;
   border: 1px solid #b8babb;
   margin-bottom: 10px;
 }
 
-.route__track-download {
-  display: inline-block;
+.route__track-download-wrapper {
   position: absolute;
-  z-index: 99;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  z-index: 2000;
+  bottom: 0;
+  left: 0;
   width: 100%;
+  padding: 10px 20px;
+  text-align: center;
+  background-color: #fff;
+  border: 1px solid #b8babb;
+}
+
+.route-map__button {
+  display: inline-block;
+  width: 45%;
   max-width: 250px;
-  padding: 5px 20px;
+  padding: 5px 10px;
   border-radius: 3px;
   background-color: rgb(255, 36, 36);
   color: #fff;
   text-decoration: none;
   font-size: 16px;
-  text-align: center;
+  transition: all 0.2s ease-in;
 }
 
-.route__track-download:hover {
-  text-decoration: none;
+.route-map__button:not(:last-child) {
+  margin-right: 20px;
+}
+
+.route-map__button:hover {
+  background-color: rgb(184, 26, 26);
+}
+
+.route-map__button_back {
+  background-color: rgb(236, 236, 236);
+  color: #000;
+  border: 1px solid #696969;
+}
+
+.route-map__button_back:hover {
+  background-color: rgb(179, 179, 179);
 }
 
 /*----------------------- SIDEBAR ------------------------------*/
@@ -1227,7 +1258,7 @@ strong {
   .article__right {
     width: 60%;
   }
-/* 
+  /* 
   .article__main_page {
     padding-bottom: 0px;
   } */
@@ -1277,18 +1308,30 @@ strong {
 
   .route__left,
   .route__right {
-    width: 100%;
+    width: 48%;
   }
 
+  .routes-item__image {
+    height: auto;
+  }
+
+  .routes-item__image_page {
+    width: 100%;
+  }
   .route__right {
     padding: 10px 0 0;
   }
 
-  .route__map-wrapper {
-    height: 77vh;
+  .route-info {
+    font-size: 14px;
   }
-  .route__map {
-    height: 77vh;
+
+  .route__map-wrapper {
+    height: 100vh;
+}
+
+  .route__track-download-wrapper {
+    bottom: 60px;
   }
 
   .sidebar-widget {

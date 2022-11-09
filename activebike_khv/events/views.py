@@ -95,10 +95,6 @@ def main_page(request):
 def events_index(request):
     template = 'events/index.html'
     events = Event.objects.all()
-    # posts = Post.objects.select_related('group')
-    # paginator = Paginator(posts, settings.POSTS_PER_PAGE)
-    # page_number = request.GET.get('page')
-    # page_obj = paginator.get_page(page_number)
     context = {
         'events': events
     }
@@ -129,10 +125,6 @@ def event_detail(request, event_id):
 def articles_index(request):
     template = 'articles/index.html'
     articles = Article.objects.all()
-    # posts = Post.objects.select_related('group')
-    # paginator = Paginator(posts, settings.POSTS_PER_PAGE)
-    # page_number = request.GET.get('page')
-    # page_obj = paginator.get_page(page_number)
     context = {
         'articles': articles
     }
@@ -148,10 +140,6 @@ def article_detail(request, article_id):
     else:
         Ip.objects.create(ip=ip)
         article.views.add(Ip.objects.get(ip=ip))
-    # comments = Comment.objects.filter(event=event)
-    # author = event.author
-    # author_events_count = Event.objects.filter(author=event.author).count()
-    # form = CommentForm(request.POST or None)
     context = {
         'article': article,
     }
@@ -162,10 +150,6 @@ def article_detail(request, article_id):
 def reports_index(request):
     template = 'reports/index.html'
     reports = Report.objects.all()
-    # posts = Post.objects.select_related('group')
-    # paginator = Paginator(posts, settings.POSTS_PER_PAGE)
-    # page_number = request.GET.get('page')
-    # page_obj = paginator.get_page(page_number)
     context = {
         'reports': reports
     }
@@ -181,11 +165,6 @@ def report_detail(request, report_id):
     else:
         Ip.objects.create(ip=ip)
         report.views.add(Ip.objects.get(ip=ip))
-    
-    # comments = Comment.objects.filter(event=event)
-    # author = event.author
-    # author_events_count = Event.objects.filter(author=event.author).count()
-    # form = CommentForm(request.POST or None)
     context = {
         'report': report,
     }
@@ -196,10 +175,6 @@ def report_detail(request, report_id):
 def routes_index(request):
     template = 'routes/index.html'
     routes = Route.objects.all()
-    # posts = Post.objects.select_related('group')
-    # paginator = Paginator(posts, settings.POSTS_PER_PAGE)
-    # page_number = request.GET.get('page')
-    # page_obj = paginator.get_page(page_number)
     context = {
         'routes': routes
     }
@@ -215,13 +190,19 @@ def route_detail(request, route_id):
     else:
         Ip.objects.create(ip=ip)
         route.views.add(Ip.objects.get(ip=ip))
-    # comments = Comment.objects.filter(event=event)
-    # author = event.author
-    # author_events_count = Event.objects.filter(author=event.author).count()
-    # form = CommentForm(request.POST or None)
     context = {
         'route': route,
         'data':json.dumps(route.polyline)
+    }
+    return render(request, template, context)
+
+
+def route_map(request, route_id):
+    template = 'routes/route_map_fullscreen.html'
+    route = get_object_or_404(Route, pk=route_id)
+    context = {
+        'route': route,
+        'polyline_data':json.dumps(route.polyline)
     }
     return render(request, template, context)
 
@@ -231,10 +212,6 @@ def about_page(request):
     template = 'about.html'
     about_page = About.objects.all()
     links = Link.objects.all()
-    # posts = Post.objects.select_related('group')
-    # paginator = Paginator(posts, settings.POSTS_PER_PAGE)
-    # page_number = request.GET.get('page')
-    # page_obj = paginator.get_page(page_number)
     context = {
         'about_page': about_page,
         'links': links
