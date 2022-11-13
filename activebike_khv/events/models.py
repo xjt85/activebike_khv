@@ -93,7 +93,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     text = models.TextField(blank=True)
     text_html = models.TextField(blank=True, editable=False)
-    album = models.OneToOneField(ImageAlbum, related_name='model', on_delete=models.CASCADE)
+    album = models.OneToOneField(ImageAlbum, related_name='image_album', on_delete=models.CASCADE)
     tags = models.ManyToManyField(
         Tag,
         verbose_name='Теги',
