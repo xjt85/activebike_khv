@@ -13,8 +13,13 @@
     <link rel="stylesheet" href="{% static 'libs/bootstrap-grid.min.css' %}">
     <link rel="stylesheet" href="{% static 'libs/reset.css' %}">
     <link rel="stylesheet" href="{% static 'libs/font-awesome/css/font-awesome.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=1.86">
+    
+    <link rel="stylesheet" href="{% static 'libs/owl-carousel/assets/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'libs/owl-carousel/assets/owl.theme.default.min.css' %}">
+    
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=1.89">
     <link rel="icon" href="{% static 'img/favicon.png' %}">
+    
     <title>{% block title %}{% endblock %} ACTIVE_BIKE_KHV</title>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -35,6 +40,9 @@
   <body>
     
     {% block site_main %}Ошибка отображения основного раздела.{% endblock %}
+    <script src="{% static 'libs/leaflet-gpx/gpx.js' %}"></script>
+    <script src="{% static 'libs/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'libs/owl-carousel/owl.carousel.min.js' %}"></script>
     
   </body>
 </html>

@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import (About, Article, Event, EventType, Link, Media, Report,
-                     Route, SurfaceType, Tag, Ip)
+from .models import (About, Article, Event, EventType, Link, Report,
+                     Route, ImageAlbum, Image, SurfaceType, Tag, Ip)
 
 
 @admin.register(EventType)
@@ -40,12 +40,20 @@ class LinkAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
 
 
+# class ImageInline(admin.StackedInline):
+#     model = Image
+
+
 @admin.register(Route)
 class RouteAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description', 'author', 'date_pub', 'date_edit')
+    list_display = ('title', 'text', 'author', 'date_pub', 'date_edit')
     search_fields = ('title',)
     empty_value_display = '-пусто-'
-    
+    # inlines = [ImageInline]
+
+    class Meta:
+        model = Route
+
     def save_model(self, request, obj, form, change):
         obj.author = request.user
         obj.save()
@@ -53,6 +61,6 @@ class RouteAdmin(admin.ModelAdmin):
 
 admin.site.register(Tag)
 admin.site.register(SurfaceType)
-admin.site.register(Media)
 admin.site.register(About)
 admin.site.register(Ip)
+admin.site.register(Image)

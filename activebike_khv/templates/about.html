@@ -8,7 +8,7 @@
 <section class="content-section content-section_about">
   {% for about_single in about_page %}
     <h2 class="article-title article-title_page">{{ about_single.title }}</h3>
-    <p class="article-descr">{{ about_single.html_field|safe }}</p>
+    <p class="article-descr">{{ about_single.text_html|safe }}</p>
   {% endfor %}
 </section>
 <section class="content-section content-section_about">

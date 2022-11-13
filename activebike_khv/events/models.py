@@ -8,11 +8,13 @@ from django.db import models
 # from django.db.models.constraints import UniqueConstraint
 from django.db.models.deletion import SET_NULL
 from markdown import markdown
+from django.template.defaultfilters import slugify
+
 
 User = get_user_model()
 
 
-class Ip(models.Model): # наша таблица где будут айпи адреса
+class Ip(models.Model):  # наша таблица где будут айпи адреса
     ip = models.CharField(max_length=100)
     date_edit = models.DateTimeField(auto_now=True, null=True)
 
@@ -59,19 +61,54 @@ class EventType(models.Model):
         return self.title
 
 
-class Event(models.Model):
+# ---------------------------- НОВАЯ СТРУКТУРА -----------------------------------------------------
+
+
+def get_image_upload_path(instance, filename):
+    model = instance.album.model.__class__._meta
+    name = model.verbose_name_plural.replace(' ', '_')
+    return f'{name}/images/{filename}'
+
+
+class Image(models.Model):
+    name = models.CharField(max_length=255)
+    image = models.ImageField(upload_to=get_image_upload_path)
+    default = models.BooleanField(default=False)
+    width = models.FloatField(default=100)
+    length = models.FloatField(default=100)
+    # album = models.ForeignKey(ImageAlbum, related_name='images', on_delete=models.CASCADE)
+
+
+class ImageAlbum(models.Model):
+    images = models.ForeignKey(Image, related_name='images', on_delete=models.CASCADE)
+
+    def default(self):
+        return self.images.filter(default=True).first()
+
+    def thumbnails(self):
+        return self.images.filter(width__lt=100, length_lt=100)
+
+
+class Post(models.Model):
     title = models.CharField(max_length=200)
-    text = models.TextField()
+    text = models.TextField(blank=True)
     text_html = models.TextField(blank=True, editable=False)
+    album = models.OneToOneField(ImageAlbum, related_name='model', on_delete=models.CASCADE)
+    tags = models.ManyToManyField(
+        Tag,
+        verbose_name='Теги',
+        blank=True
+    )
+    date_pub = models.DateTimeField(auto_now_add=True)
+    date_edit = models.DateTimeField(auto_now=True)
+    views = models.ManyToManyField(Ip, blank=True, editable=False)
+
+
+class Event(Post):
     image = models.ImageField(
         'Картинка',
         upload_to='events/',
         blank=True
-    )
-    author = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name='events'
     )
     event_type = models.ForeignKey(
         EventType,
@@ -80,16 +117,13 @@ class Event(models.Model):
         null=True,
         related_name='events'
     )
-    tags = models.ManyToManyField(
-        Tag,
-        related_name='events',
-        verbose_name='Теги',
-        blank=True,
+    author = models.ForeignKey(
+        User,
+        on_delete=SET_NULL,
+        null=True,
+        related_name='posts'
     )
-    date_pub = models.DateTimeField(auto_now_add=True)
-    date_edit = models.DateTimeField(auto_now=True)
     date_planned = models.DateTimeField()
-    views = models.ManyToManyField(Ip, related_name="events_views", blank=True, editable=False)
 
     class Meta:
         ordering = ['-date_planned']
@@ -107,29 +141,18 @@ class Event(models.Model):
         return self.views.count()
 
 
-class Article(models.Model):
-    title = models.CharField(max_length=200)
+class Article(Post):
     image = models.ImageField(
         'Картинка',
         upload_to='articles/',
         blank=True
     )
-    text = models.TextField(blank=True)
-    text_html = models.TextField(blank=True, editable=False)
     author = models.ForeignKey(
         User,
-        on_delete=models.CASCADE,
+        on_delete=SET_NULL,
+        null=True,
         related_name='articles'
     )
-    tags = models.ManyToManyField(
-        Tag,
-        related_name='articles',
-        verbose_name='Теги',
-        blank=True,
-    )
-    date_pub = models.DateTimeField(auto_now_add=True)
-    date_edit = models.DateTimeField(auto_now=True)
-    views = models.ManyToManyField(Ip, related_name="articles_views", blank=True, editable=False)
 
     class Meta:
         ordering = ['-date_pub']
@@ -147,29 +170,20 @@ class Article(models.Model):
         return self.views.count()
 
 
-class Report(models.Model):
-    title = models.CharField(max_length=200)
+# ---------------------------------------------------------------------------------
+
+
+class Report(Post):
     image = models.ImageField(
         'Картинка',
         upload_to='reports/',
         blank=True
-    )
-    text = models.TextField(blank=True)
-    text_html = models.TextField(blank=True, editable=False)
-    tags = models.ManyToManyField(
-        Tag,
-        related_name='reports',
-        verbose_name='Теги',
-        blank=True,
     )
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         related_name='reports'
     )
-    date_pub = models.DateTimeField(auto_now_add=True)
-    date_edit = models.DateTimeField(auto_now=True)
-    views = models.ManyToManyField(Ip, related_name="reports_views", blank=True, editable=False)
 
     class Meta:
         ordering = ['-date_pub']
@@ -191,16 +205,21 @@ def user_directory_path(instance, filename):
     return 'routes/user_{0}/{1}'.format(instance.author.id, filename)
 
 
-class Route(models.Model):
-    title = models.CharField(max_length=200, verbose_name="Название")
-    image = models.ImageField(
-        'Картинка',
-        upload_to='routes/',
-        blank=True
-    )
-    url = models.CharField(max_length=200, null=True, blank=True, verbose_name="ссылка (если есть)")
-    track = models.FileField(upload_to=user_directory_path, null=True, blank=True, verbose_name="GPX-трек (если имеется)")
-    polyline = models.TextField(blank=True, editable=False, verbose_name="Полилиния (необязательно)")
+def get_height_gain(gpx_data_array):
+    result = 0
+    for i in range(len(gpx_data_array) - 1):
+        z1 = gpx_data_array[i][2]
+        z2 = gpx_data_array[i + 1][2]
+        if z2 > z1:
+            result += z2 - z1
+    return result
+
+
+class Route(Post):
+    image = models.FileField(blank=True, upload_to='routes/images', verbose_name="Скрин маршрута")
+    url = models.CharField(max_length=200, null=True, blank=True, verbose_name="ссылка на трек (необязательно)")
+    track = models.FileField(upload_to=user_directory_path, null=True, blank=True, verbose_name="GPX-трек (необязательно)")
+    polyline = models.TextField(blank=True, editable=False, verbose_name="Полилиния (генерируется автоматически при загрузке трека GPX)")
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -215,8 +234,8 @@ class Route(models.Model):
         related_name='routes',
         verbose_name="Тип активности"
     )
-    length = models.IntegerField(default=0, blank=True, verbose_name="Дистанция, км")
-    height_gain = models.IntegerField(default=0, blank=True, verbose_name="Набор высоты, м")
+    length = models.FloatField(default=0, null=True, verbose_name="Дистанция, км")
+    height_gain = models.PositiveSmallIntegerField(default=0, null=True, verbose_name="Набор высоты, м")
     surface_type = models.ForeignKey(
         SurfaceType,
         on_delete=SET_NULL,
@@ -225,16 +244,6 @@ class Route(models.Model):
         related_name='routes',
         verbose_name="Покрытие"
     )
-    description = models.TextField(blank=True, verbose_name="Описание")
-    tags = models.ManyToManyField(
-        Tag,
-        related_name='routes',
-        verbose_name='Теги',
-        blank=True,
-    )
-    date_pub = models.DateTimeField(auto_now_add=True)
-    date_edit = models.DateTimeField(auto_now=True)
-    views = models.ManyToManyField(Ip, related_name="routes_views", blank=True, editable=False)
 
     class Meta:
         ordering = ['-date_pub']
@@ -245,17 +254,31 @@ class Route(models.Model):
         return self.title[:30]
 
     def save(self, *args, **kwargs):
+        self.text_html = markdown(self.text)
+        # super(Route, self).save()
         super().save(*args, **kwargs)
+
         if self.track:
             with open(self.track.path, "r", encoding="utf-8") as file:
                 gpx = gpxpy.parse(file)
+
             data = []
+            polyline_data = []
+
             for track in gpx.tracks:
                 for segment in track.segments:
                     for point in segment.points:
-                        data.append([float(point.latitude), float(point.longitude)])
+                        data.append([float(point.latitude), float(point.longitude), point.elevation])
+                        polyline_data.append([float(point.latitude), float(point.longitude)])
 
-            self.polyline = polyline.encode(data)
+            self.polyline = polyline.encode(polyline_data)
+
+            if self.length == 0:
+                self.length = round(gpx.get_moving_data(raw=True).moving_distance / 1000, 1)
+
+            if self.height_gain == 0:
+                self.height_gain = get_height_gain(data)
+
             super().save(*args, **kwargs)
 
     def total_views(self):
@@ -278,26 +301,10 @@ class Link(models.Model):
         return self.text[:30]
 
 
-class Media(models.Model):
-    text = models.CharField(max_length=200)
-    url = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
-    date_pub = models.DateTimeField(auto_now_add=True)
-    date_edit = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        ordering = ['text']
-        verbose_name = 'Медиа'
-        verbose_name_plural = 'Медиа'
-
-    def __str__(self):
-        return self.text[:30]
-
-
 class About(models.Model):
     title = models.CharField(max_length=200)
-    markdown_field = models.TextField(blank=True)
-    html_field = models.TextField(blank=True, editable=False)
+    text = models.TextField(blank=True)
+    text_html = models.TextField(blank=True, editable=False)
 
     class Meta:
         ordering = ['title']
@@ -308,5 +315,5 @@ class About(models.Model):
         return self.title[:30]
 
     def save(self):
-        self.html_field = markdown(self.markdown_field)
+        self.text_html = markdown(self.text)
         super(About, self).save()

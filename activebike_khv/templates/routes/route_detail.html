@@ -6,27 +6,38 @@
 
 {% block content %}
 <section class="content-section">
-  <article class="article article_page article_route">
-    <h2 class="article-title article-title_page article-title_route-page">{{ route.title }}</h2>
+  <article class="route-page">
+    <h2 class="route-page__route-title">{{ route.title }}</h2>
     {% if user.is_authenticated and request.user == route.author %}
-      <a class="article__edit-button article__edit-button_page" href="{% url 'admin:index' %}events/route/{{ route.id }}/change/"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+      <a class="article__edit-button route__edit-button" href="{% url 'admin:index' %}events/route/{{ route.id }}/change/"><i class="fa fa-pencil" aria-hidden="true"></i></a>
     {% endif %}
     <div class="article__main article__main_page">
-      <div class="route-info">
-        <div class="route-info__item">Тип: <span class="route-info__value">{{ route.type }}</span></div>
-        <div class="route-info__item">Дистанция: <span class="route-info__value">{{ route.length }} км</span></div>
-        <div class="route-info__item">Набор высоты: <span class="route-info__value">{{ route.height_gain }} м</span></div>
+      <div class="route-page-info">
+        <div class="route-page-info__item"><span class="route-page-info__item-title">Тип:</span><span class="route-page-info__item-value">{{ route.type }}</span></div>
+        <div class="route-page-info__item"><span class="route-page-info__item-title">Дистанция:</span><span class="route-page-info__item-value">{{ route.length }} км</span></div>
+        <div class="route-page-info__item"><span class="route-page-info__item-title">Набор высоты:</span><span class="route-page-info__item-value">{{ route.height_gain }} м</span></div>
       </div>
-      <div class="article-descr article-descr_page">
-        <p class="article-descr__text article-descr__text_page article-descr__text_route">{{ route.description|safe }}</p>
+      <div class="route-gallery owl-carousel">
+        <div class="route-gallery__item">
+        <a href="{% url 'events:route_map' route.id %}" class="route-gallery__link">
+          {% thumbnail route.image "300x300" crop="center" upscale=True as im %}
+          <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ route.title }}" class="route-gallery__img">
+          {% endthumbnail %}
+        </a>
       </div>
+      {% for images in gallery %}
+      <div class="route-gallery__item">
+        {% thumbnail images.image "300x300" crop="center" upscale=True as im %}
+        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ route.title }}" class="route-gallery__img">
+        {% endthumbnail %}
+      </div>
+      {% endfor %}
     </div>
-    <a href="{% url 'events:route_map' route.id %}" class="routes-item__image routes-item__image_page">
-      {% thumbnail route.image "300x300" crop="center" upscale=True as im %}
-      <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ route.title }}" class="routes-item__image-img">
-      {% endthumbnail %}
-    </a>
-    <a class="route-map__button" href="" download>Скачать трек</a>
+    <div class="route-descr">
+      <p class="route-descr__text">{{ route.text_html|safe }}</p>
+    </div>
+  </div>
+    <a class="route__track-download" href="">Скачать трек</a>
     <div class="article-info article-info_page">
       <div class="article-info__views"><i class="fa fa-eye" aria-hidden="true"></i>{{ route.total_views }}</div>
       <div class="article-info__comments"><i class="fa fa-comment-o" aria-hidden="true"></i> 0</div>
@@ -35,4 +46,30 @@
     </div>
   </article>
 </section>
+<script>
+  $(document).ready(function(){
+    $(".owl-carousel").owlCarousel({
+      loop:true,
+      margin:3,
+      responsiveClass:true,
+      responsive:{
+        0:{
+            items:1.2,
+            nav:false,
+            loop:false
+          },
+          600:{
+            items:2,
+            nav:false,
+            loop:false
+          },
+          1000:{
+            items:3,
+            nav:false,
+            loop:false
+        }
+      }
+    });
+  });
+</script>
 {% endblock %}

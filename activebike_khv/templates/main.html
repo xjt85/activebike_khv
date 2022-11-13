@@ -6,6 +6,7 @@
 
 {% block content %}
 <section class="content-section content-section_pt0">
+  {% if nearest_event %}
   <article class="article">
     <h3 class="article-title"><a href="{% url 'events:event_detail' nearest_event.id %}" class="article-title__link">{{ nearest_event.title }}</a></h3>
     {% if user.is_authenticated and request.user == nearest_event.author %}
@@ -24,7 +25,7 @@
           <p class="article-descr__date">{{ nearest_event.date_planned|date:"l, d.m.Y, H:i" }}</p>
           <p class="article-descr__text">{{ nearest_event.text_html|safe|truncatechars:300 }}</p>
         </div>
-        <a href="{% url 'events:event_detail' nearest_event.id %}" class="article__more">Читать дальше →</a>
+        {% comment %} <a href="{% url 'events:event_detail' nearest_event.id %}" class="article__more">Читать дальше →</a> {% endcomment %}
       </div>
     </div>
     <div class="article-info">
@@ -34,6 +35,7 @@
       <div class="article-info__edit"><i class="fa fa-pencil" aria-hidden="true"></i> {{ nearest_event.date_edit|date:"d.m.Y H:i" }}</div>
     </div>
   </article>
+  {% endif %}
 </section>
 
 <section class="content-section tlg-channel">
@@ -66,17 +68,17 @@
   <h2 class="content-section__title content-section__title_events">Все события</h2>
   {% for event in events %}
     <article class="article">
-      <h3 class="article-title"><a href="{% url 'events:event_detail' event.id %}" class="article-title__link">{{ event.title }}</a></h3>
+      {% comment %} <h3 class="article-title"><a href="{% url 'events:event_detail' event.id %}" class="article-title__link">{{ event.title }}</a></h3> {% endcomment %}
       {% if user.is_authenticated and request.user == event.author %}
         <a class="article__edit-button" href="{% url 'admin:index' %}events/event/{{ event.id }}/change/"><i class="fa fa-pencil" aria-hidden="true"></i></a>
       {% endif %}
       <div class="article__main">
         <div class="article__left">
-          <a href="{% url 'events:event_detail' event.id %}" class="article__image">
+          {% comment %} <a href="{% url 'events:event_detail' event.id %}" class="article__image">
             {% thumbnail event.image "300x300" crop="center" upscale=True as im %}
               <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ event.title }}" class="article__image-img">
             {% endthumbnail %}
-          </a>
+          </a> {% endcomment %}
         </div>
         <div class="article__right">
           <div class="article-descr">

@@ -6,9 +6,14 @@ from django.core.cache import cache
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 from datetime import date
+from django.forms import modelformset_factory
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.http import HttpResponseRedirect
+# from .forms import MultipleImage, RouteFullForm
 
 # from .forms import CommentForm, PostForm
-from .models import About, Article, Event, Link, Report, Route, User, Ip
+from .models import About, Article, Event, Link, Report, Route, Image, ImageAlbum, Ip
 
 from telethon.sync import TelegramClient
 from telethon.sessions import StringSession
@@ -70,7 +75,7 @@ def get_client_ip(request):
     if x_forwarded_for:
         ip = x_forwarded_for.split(',')[0]
     else:
-        ip = request.META.get('REMOTE_ADDR') # В REMOTE_ADDR значение айпи пользователя
+        ip = request.META.get('REMOTE_ADDR')  # В REMOTE_ADDR значение IP пользователя
     return ip
 
 
@@ -181,9 +186,27 @@ def routes_index(request):
     return render(request, template, context)
 
 
+# def route_detail(request, route_id):
+#     template = 'routes/route_detail.html'
+#     route = get_object_or_404(Route, pk=route_id)
+#     ip = get_client_ip(request)
+#     if Ip.objects.filter(ip=ip).exists():
+#         route.views.add(Ip.objects.get(ip=ip))
+#     else:
+#         Ip.objects.create(ip=ip)
+#         route.views.add(Ip.objects.get(ip=ip))
+#     context = {
+#         'route': route,
+#         'data':json.dumps(route.polyline)
+#     }
+#     return render(request, template, context)
+
+#  var2
 def route_detail(request, route_id):
     template = 'routes/route_detail.html'
     route = get_object_or_404(Route, pk=route_id)
+    gallery = RouteImage.objects.filter(route=route)
+
     ip = get_client_ip(request)
     if Ip.objects.filter(ip=ip).exists():
         route.views.add(Ip.objects.get(ip=ip))
@@ -192,7 +215,8 @@ def route_detail(request, route_id):
         route.views.add(Ip.objects.get(ip=ip))
     context = {
         'route': route,
-        'data':json.dumps(route.polyline)
+        'data': json.dumps(route.polyline),
+        'gallery': gallery
     }
     return render(request, template, context)
 
@@ -202,7 +226,7 @@ def route_map(request, route_id):
     route = get_object_or_404(Route, pk=route_id)
     context = {
         'route': route,
-        'polyline_data':json.dumps(route.polyline)
+        'polyline_data': json.dumps(route.polyline)
     }
     return render(request, template, context)
 
@@ -217,3 +241,4 @@ def about_page(request):
         'links': links
     }
     return render(request, template, context)
+
