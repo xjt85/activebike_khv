@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.forms import TextInput, Textarea
+from django.db import models
 from .models import (About, Article, Event, EventType, Link, Report,
                      Route, ImageAlbum, Image, SurfaceType, Tag, Ip)
 
@@ -50,6 +52,9 @@ class RouteAdmin(admin.ModelAdmin):
     search_fields = ('title',)
     empty_value_display = '-пусто-'
     # inlines = [ImageInline]
+    formfield_overrides = {
+        models.TextField: {'widget': Textarea(attrs={'style': 'max-height: 500px;'})}
+    }
 
     class Meta:
         model = Route
@@ -64,3 +69,4 @@ admin.site.register(SurfaceType)
 admin.site.register(About)
 admin.site.register(Ip)
 admin.site.register(Image)
+admin.site.register(ImageAlbum)

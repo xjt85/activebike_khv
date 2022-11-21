@@ -70,17 +70,15 @@ def get_image_upload_path(instance, filename):
     return f'{name}/images/{filename}'
 
 
-class Image(models.Model):
-    name = models.CharField(max_length=255)
-    image = models.ImageField(upload_to=get_image_upload_path)
-    default = models.BooleanField(default=False)
-    width = models.FloatField(default=100)
-    length = models.FloatField(default=100)
-    # album = models.ForeignKey(ImageAlbum, related_name='images', on_delete=models.CASCADE)
-
-
 class ImageAlbum(models.Model):
-    images = models.ForeignKey(Image, related_name='images', on_delete=models.CASCADE)
+    name = models.CharField(max_length=100, default="Альбом")
+
+    class Meta:
+        verbose_name = 'Альбом'
+        verbose_name_plural = 'Альбомы'
+
+    def __str__(self):
+        return self.name[:30]
 
     def default(self):
         return self.images.filter(default=True).first()
@@ -89,19 +87,36 @@ class ImageAlbum(models.Model):
         return self.images.filter(width__lt=100, length_lt=100)
 
 
+class Image(models.Model):
+    name = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='posts/images/')
+    default = models.BooleanField(default=False)
+    width = models.FloatField(default=100)
+    length = models.FloatField(default=100)
+    album = models.ForeignKey(
+        ImageAlbum, related_name='images', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name[:30]
+
+
 class Post(models.Model):
-    title = models.CharField(max_length=200)
-    text = models.TextField(blank=True)
-    text_html = models.TextField(blank=True, editable=False)
-    album = models.OneToOneField(ImageAlbum, related_name='image_album', on_delete=models.CASCADE)
+    title = models.CharField(max_length=200, verbose_name="Название")
+    text = models.TextField(blank=True, verbose_name="Описание")
+    text_html = models.TextField(blank=True, editable=False, verbose_name="отформатированное описание")
+    album = models.OneToOneField(ImageAlbum, related_name='model',
+                                 on_delete=SET_NULL, null=True, blank=True, verbose_name="Альбом фото")
     tags = models.ManyToManyField(
         Tag,
-        verbose_name='Теги',
-        blank=True
+        blank=True,
+        verbose_name='Теги'
     )
-    date_pub = models.DateTimeField(auto_now_add=True)
-    date_edit = models.DateTimeField(auto_now=True)
-    views = models.ManyToManyField(Ip, blank=True, editable=False)
+    date_pub = models.DateTimeField(auto_now_add=True, verbose_name="Дата публикации")
+    date_edit = models.DateTimeField(auto_now=True, verbose_name="Дата правки")
+    views = models.ManyToManyField(Ip, blank=True, editable=False, verbose_name="Просмотры")
+
+    def __str__(self):
+        return self.title[:30]
 
 
 class Event(Post):
@@ -129,9 +144,6 @@ class Event(Post):
         ordering = ['-date_planned']
         verbose_name = 'Событие'
         verbose_name_plural = 'События'
-
-    def __str__(self):
-        return self.title[:30]
 
     def save(self):
         self.text_html = markdown(self.text)
@@ -216,16 +228,14 @@ def get_height_gain(gpx_data_array):
 
 
 class Route(Post):
-    image = models.FileField(blank=True, upload_to='routes/images', verbose_name="Скрин маршрута")
-    url = models.CharField(max_length=200, null=True, blank=True, verbose_name="ссылка на трек (необязательно)")
-    track = models.FileField(upload_to=user_directory_path, null=True, blank=True, verbose_name="GPX-трек (необязательно)")
-    polyline = models.TextField(blank=True, editable=False, verbose_name="Полилиния (генерируется автоматически при загрузке трека GPX)")
-    author = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name='routes',
-        verbose_name="Автор"
-    )
+    track = models.FileField(upload_to=user_directory_path, null=True,
+                             blank=True, verbose_name="GPX-трек (необязательно)")
+    length = models.DecimalField(
+        max_digits=7, decimal_places=2, default=0, null=True, verbose_name="Дистанция, км")
+    height_gain = models.PositiveSmallIntegerField(
+        default=0, null=True, verbose_name="Набор высоты, м")
+    image = models.FileField(
+        blank=True, upload_to='routes/images', verbose_name="Скрин маршрута")
     type = models.ForeignKey(
         EventType,
         on_delete=SET_NULL,
@@ -234,8 +244,6 @@ class Route(Post):
         related_name='routes',
         verbose_name="Тип активности"
     )
-    length = models.FloatField(default=0, null=True, verbose_name="Дистанция, км")
-    height_gain = models.PositiveSmallIntegerField(default=0, null=True, verbose_name="Набор высоты, м")
     surface_type = models.ForeignKey(
         SurfaceType,
         on_delete=SET_NULL,
@@ -243,6 +251,17 @@ class Route(Post):
         null=True,
         related_name='routes',
         verbose_name="Покрытие"
+    )
+    url = models.CharField(max_length=200, null=True, blank=True,
+                           verbose_name="ссылка на внешний ресурс с треком (необязательно)")
+    polyline = models.TextField(
+        blank=True, editable=False, verbose_name="Полилиния (генерируется автоматически при загрузке трека GPX)")
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='routes',
+        verbose_name="Автор",
+        editable=False
     )
 
     class Meta:
@@ -268,13 +287,16 @@ class Route(Post):
             for track in gpx.tracks:
                 for segment in track.segments:
                     for point in segment.points:
-                        data.append([float(point.latitude), float(point.longitude), point.elevation])
-                        polyline_data.append([float(point.latitude), float(point.longitude)])
+                        data.append([float(point.latitude), float(
+                            point.longitude), point.elevation])
+                        polyline_data.append(
+                            [float(point.latitude), float(point.longitude)])
 
             self.polyline = polyline.encode(polyline_data)
 
             if self.length == 0:
-                self.length = round(gpx.get_moving_data(raw=True).moving_distance / 1000, 1)
+                self.length = round(gpx.get_moving_data(
+                    raw=True).moving_distance / 1000, 1)
 
             if self.height_gain == 0:
                 self.height_gain = get_height_gain(data)

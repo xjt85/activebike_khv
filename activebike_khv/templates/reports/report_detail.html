@@ -16,6 +16,15 @@
         {% thumbnail report.image "700x400" upscale=True as im %}
           <img src="{{ im.url }}" alt="{{ report.title }}" class="article__image-img">
         {% endthumbnail %}
+
+        {% for images in gallery %}
+          <div class="route-gallery__item">
+            {% thumbnail images.image "300x300" crop="center" upscale=True as im %}
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ route.title }}" class="route-gallery__img">
+            {% endthumbnail %}
+          </div>
+        {% endfor %}
+      
       </div>
       <div class="article-descr">
         <p class="article-descr__text article-descr__text_page">{{ report.text_html|safe }}</p>

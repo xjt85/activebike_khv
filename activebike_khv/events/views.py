@@ -13,7 +13,7 @@ from django.http import HttpResponseRedirect
 # from .forms import MultipleImage, RouteFullForm
 
 # from .forms import CommentForm, PostForm
-from .models import About, Article, Event, Link, Report, Route, Image, ImageAlbum, Ip
+from .models import About, Article, Event, Link, Report, Route, Image, Ip
 
 from telethon.sync import TelegramClient
 from telethon.sessions import StringSession
@@ -139,6 +139,8 @@ def articles_index(request):
 def article_detail(request, article_id):
     template = 'articles/article_detail.html'
     article = get_object_or_404(Article, pk=article_id)
+    gallery = Image.objects.filter(album__model__article=article)
+
     ip = get_client_ip(request)
     if Ip.objects.filter(ip=ip).exists():
         article.views.add(Ip.objects.get(ip=ip))
@@ -172,6 +174,7 @@ def report_detail(request, report_id):
         report.views.add(Ip.objects.get(ip=ip))
     context = {
         'report': report,
+        'gallery': gallery
     }
     return render(request, template, context)
 
@@ -205,7 +208,7 @@ def routes_index(request):
 def route_detail(request, route_id):
     template = 'routes/route_detail.html'
     route = get_object_or_404(Route, pk=route_id)
-    gallery = RouteImage.objects.filter(route=route)
+    gallery = Image.objects.filter(album__model__route=route)
 
     ip = get_client_ip(request)
     if Ip.objects.filter(ip=ip).exists():
