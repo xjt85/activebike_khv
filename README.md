@@ -54,6 +54,6 @@ sudo docker-compose exec backend python manage.py createsuperuser
 python manage.py runserver
 ```
 
-Проект доступен по [адресу](https://activebike-khv.ru).
+Проект [доступен по адресу](https://activebike-khv.ru).
 
 ### Автор: [Роман Чуклинов](https://t.me/xjavue).
