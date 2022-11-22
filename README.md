@@ -1,5 +1,5 @@
 # ACTIVEBIKE_KHV
-## Сайт велосипедного сообщества города Хабаровска
+## Сайт велосипедного сообщества города Хабаровска https://activebike-khv.ru
 
 ### Технологии: Django, HTML5, CSS3, Leaflet.js, gpxpy, polyline.
 
@@ -10,8 +10,6 @@
 ![sass](https://img.shields.io/badge/-sсss-090909?style=for-the-badge&logo=sсss)
 ![JavaScript](https://img.shields.io/badge/-JavaScript-090909?style=for-the-badge&logo=JavaScript)
 ![Jquery](https://img.shields.io/badge/-Jquery-090909?style=for-the-badge&logo=Jquery)
-
-Сайт велосипедного сообщества города Хабаровска https://activebike-khv.ru
 
 ## Подготовка и запуск проекта
 ### Склонировать репозиторий на локальную машину:
