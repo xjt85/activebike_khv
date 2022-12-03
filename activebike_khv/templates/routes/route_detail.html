@@ -19,24 +19,24 @@
       </div>
       <div class="route-gallery owl-carousel">
         <div class="route-gallery__item">
-        <a href="{% url 'events:route_map' route.id %}" class="route-gallery__link">
-          {% thumbnail route.image "300x300" crop="center" upscale=True as im %}
+          <a href="{% url 'events:route_map' route.id %}" class="route-gallery__link">
+            {% thumbnail route.image "300x300" crop="center" upscale=True as im %}
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ route.title }}" class="route-gallery__img">
+            {% endthumbnail %}
+          </a>
+        </div>
+        {% for images in gallery %}
+        <div class="route-gallery__item">
+          {% thumbnail images.image "300x300" crop="center" upscale=True as im %}
           <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ route.title }}" class="route-gallery__img">
           {% endthumbnail %}
-        </a>
+        </div>
+        {% endfor %}
       </div>
-      {% for images in gallery %}
-      <div class="route-gallery__item">
-        {% thumbnail images.image "300x300" crop="center" upscale=True as im %}
-        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ route.title }}" class="route-gallery__img">
-        {% endthumbnail %}
-      </div>
-      {% endfor %}
-    </div>
-    <div class="route-descr">
+      <div class="route-descr">
       <p class="route-descr__text">{{ route.text_html|safe }}</p>
+      </div>
     </div>
-  </div>
     <a class="route__track-download" href="">Скачать трек</a>
     <div class="article-info article-info_page">
       <div class="article-info__views"><i class="fa fa-eye" aria-hidden="true"></i>{{ route.total_views }}</div>

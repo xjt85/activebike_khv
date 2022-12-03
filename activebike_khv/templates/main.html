@@ -5,7 +5,8 @@
 {% block title %}Главная - {% endblock %}
 
 {% block content %}
-<section class="content-section content-section_pt0">
+<section class="content-section">
+  <h2 class="content-section__title content-section__title_events">Ближайшее событие</h2>
   {% if nearest_event %}
   <article class="article">
     <h3 class="article-title"><a href="{% url 'events:event_detail' nearest_event.id %}" class="article-title__link">{{ nearest_event.title }}</a></h3>
@@ -35,29 +36,37 @@
       <div class="article-info__edit"><i class="fa fa-pencil" aria-hidden="true"></i> {{ nearest_event.date_edit|date:"d.m.Y H:i" }}</div>
     </div>
   </article>
+  {% else %}
+  <article class="article">
+    Нет ближайших событий.
+  </article>
   {% endif %}
 </section>
 
 <section class="content-section tlg-channel">
   <h2 class="content-section__title">Канал ACTIVE BIKE  <i class="fa fa-telegram fa-lg tlg-channel__tlg-icon"></i></h2>
   <ul class="tlg-messages">
-    {% for msg in all_messages %}
-    {% if msg.message != "" %}
-    <li class="tlg-message">
-      <a href="https://t.me/activebike/{{ msg.id }}/" class="tlg-message__link">
-        <p class="tlg-message__text">{{ msg.message|truncatechars:200 }}</p>
-      </a>
-      <div class="tlg-message__info">
-        <div class="tlg-message__views"><i class="fa fa-eye" aria-hidden="true"> </i>{{ msg.views }}</div>
-        <a href="{% if msg.replies.max_id %}https://t.me/activebike/{{ msg.id }}?comment={{ msg.replies.max_id }}{% endif %}" class="tlg-message__comments">
-          <i class="fa fa-comment-o" aria-hidden="true"></i> {{ msg.replies.replies }}
-        </a>
-        <div class="tlg-message__author">{{ msg.post_author|truncatechars:15 }}</div>
-        <div class="tlg-message__date">{{ msg.date|date:"d.m.Y" }}</div>
-      </div>
-    </li>
+    {% if all_messages %}
+      {% for msg in all_messages %}
+        {% if msg.message != "" %}
+        <li class="tlg-message">
+          <a href="https://t.me/activebike/{{ msg.id }}/" class="tlg-message__link">
+            <p class="tlg-message__text">{{ msg.message|truncatechars:200 }}</p>
+          </a>
+          <div class="tlg-message__info">
+            <div class="tlg-message__views"><i class="fa fa-eye" aria-hidden="true"> </i>{{ msg.views }}</div>
+            <a href="{% if msg.replies.max_id %}https://t.me/activebike/{{ msg.id }}?comment={{ msg.replies.max_id }}{% endif %}" class="tlg-message__comments">
+              <i class="fa fa-comment-o" aria-hidden="true"></i> {{ msg.replies.replies }}
+            </a>
+            <div class="tlg-message__author">{{ msg.post_author|truncatechars:15 }}</div>
+            <div class="tlg-message__date">{{ msg.date|date:"d.m.Y" }}</div>
+          </div>
+        </li>
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      Нет сообщений.
     {% endif %}
-    {% endfor %}
   </ul>
   <p>
     {% comment %} <script async src="https://telegram.org/js/telegram-widget.js?21" data-telegram-post="activebike/81" data-width="100%"></script> {% endcomment %}
@@ -68,17 +77,17 @@
   <h2 class="content-section__title content-section__title_events">Все события</h2>
   {% for event in events %}
     <article class="article">
-      {% comment %} <h3 class="article-title"><a href="{% url 'events:event_detail' event.id %}" class="article-title__link">{{ event.title }}</a></h3> {% endcomment %}
+      <h3 class="article-title"><a href="{% url 'events:event_detail' event.id %}" class="article-title__link">{{ event.title }}</a></h3>
       {% if user.is_authenticated and request.user == event.author %}
         <a class="article__edit-button" href="{% url 'admin:index' %}events/event/{{ event.id }}/change/"><i class="fa fa-pencil" aria-hidden="true"></i></a>
       {% endif %}
       <div class="article__main">
         <div class="article__left">
-          {% comment %} <a href="{% url 'events:event_detail' event.id %}" class="article__image">
-            {% thumbnail event.image "300x300" crop="center" upscale=True as im %}
+          <a href="{% url 'events:event_detail' event.id %}" class="article__image">
+            {% thumbnail event.default_image "300x300" crop="center" upscale=True as im %}
               <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ event.title }}" class="article__image-img">
             {% endthumbnail %}
-          </a> {% endcomment %}
+          </a>
         </div>
         <div class="article__right">
           <div class="article-descr">

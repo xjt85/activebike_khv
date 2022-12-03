@@ -16,11 +16,23 @@
         <p class="article-descr__date">{{ event.date_planned|date:"l, d.m.Y, H:i" }}</p>
         <p class="article-descr__text article-descr__text_page">{{ event.text_html|safe }}</p>
       </div>
-      <div class="article__image article__image_page">
+
+      {% comment %} <div class="article__image article__image_page">
         {% thumbnail event.image "700x400" crop="center" upscale=True as im %}
           <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ event.title }}" class="article__image-img">
         {% endthumbnail %}
+      </div> {% endcomment %}
+      
+      <div class="event-gallery owl-carousel">
+        {% for images in gallery %}
+        <div class="route-gallery__item">
+          {% thumbnail images.image "300x300" crop="center" upscale=True as im %}
+          <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ route.title }}" class="route-gallery__img">
+          {% endthumbnail %}
+        </div>
+        {% endfor %}
       </div>
+
     </div>
     <div class="article-info article-info_page">
       <div class="article-info__views"><i class="fa fa-eye" aria-hidden="true"></i>{{ event.total_views }}</div>
@@ -30,4 +42,30 @@
     </div>
   </article>
 </section>
+<script>
+  $(document).ready(function(){
+    $(".owl-carousel").owlCarousel({
+      loop:true,
+      margin:3,
+      responsiveClass:true,
+      responsive:{
+        0:{
+            items:1.2,
+            nav:false,
+            loop:false
+          },
+          600:{
+            items:2,
+            nav:false,
+            loop:false
+          },
+          1000:{
+            items:3,
+            nav:false,
+            loop:false
+        }
+      }
+    });
+  });
+</script>
 {% endblock %}

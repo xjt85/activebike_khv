@@ -152,6 +152,10 @@ class Event(Post):
     def total_views(self):
         return self.views.count()
 
+    def default_image(self):
+        print(f'self.album.default = {self.album.default().image}')
+        # return self.album.model.default
+
 
 class Article(Post):
     image = models.ImageField(

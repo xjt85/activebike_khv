@@ -31,42 +31,42 @@ client = TelegramClient(StringSession(SESSION_STRING), API_ID, API_HASH)
 all_messages = []   # список всех сообщений
 
 
-async def dump_all_messages(channel):
-    """Записывает json-файл с информацией о всех сообщениях канала/чата"""
-    offset_msg = 0    # номер записи, с которой начинается считывание
-    limit_msg = 3   # максимальное число записей, передаваемых за один раз
+# async def dump_all_messages(channel):
+#     """Записывает json-файл с информацией о всех сообщениях канала/чата"""
+#     offset_msg = 0    # номер записи, с которой начинается считывание
+#     limit_msg = 3   # максимальное число записей, передаваемых за один раз
 
-    total_messages = 0
-    total_count_limit = 3  # поменяйте это значение, если вам нужны не все сообщения
+#     total_messages = 0
+#     total_count_limit = 3  # поменяйте это значение, если вам нужны не все сообщения
 
-    while True:
-        history = await client(GetHistoryRequest(
-            peer=channel,
-            offset_id=offset_msg,
-            offset_date=None, add_offset=0,
-            limit=limit_msg, max_id=0, min_id=0,
-            hash=0))
-        if not history.messages:
-            break
-        messages = history.messages
-        for message in messages:
-            all_messages.append(message.to_dict())
-            if message.message == "":
-                total_count_limit += 1
-        offset_msg = messages[len(messages) - 1].id
-        total_messages = len(all_messages)
-        if total_count_limit != 0 and total_messages >= total_count_limit:
-            break
-
-
-async def main():
-    url = TLG_CHANNEL_URL
-    channel = await client.get_entity(url)
-    await dump_all_messages(channel)
+#     while True:
+#         history = await client(GetHistoryRequest(
+#             peer=channel,
+#             offset_id=offset_msg,
+#             offset_date=None, add_offset=0,
+#             limit=limit_msg, max_id=0, min_id=0,
+#             hash=0))
+#         if not history.messages:
+#             break
+#         messages = history.messages
+#         for message in messages:
+#             all_messages.append(message.to_dict())
+#             if message.message == "":
+#                 total_count_limit += 1
+#         offset_msg = messages[len(messages) - 1].id
+#         total_messages = len(all_messages)
+#         if total_count_limit != 0 and total_messages >= total_count_limit:
+#             break
 
 
-with client:
-    res = client.loop.run_until_complete(main())
+# async def main():
+#     url = TLG_CHANNEL_URL
+#     channel = await client.get_entity(url)
+#     await dump_all_messages(channel)
+
+
+# with client:
+#     res = client.loop.run_until_complete(main())
 
 
 # Метод для получения айпи
@@ -89,9 +89,9 @@ def main_page(request):
     # page_number = request.GET.get('page')
     # page_obj = paginator.get_page(page_number)
     context = {
-        'events': events,
         'nearest_event': nearest_event,
-        'all_messages': all_messages
+        'events': events,
+        # 'all_messages': all_messages
     }
     return render(request, template, context)
 
@@ -108,6 +108,7 @@ def events_index(request):
 
 def event_detail(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
+    gallery = Image.objects.filter(album__model__event=event)
     ip = get_client_ip(request)
     if Ip.objects.filter(ip=ip).exists():
         event.views.add(Ip.objects.get(ip=ip))
@@ -121,6 +122,7 @@ def event_detail(request, event_id):
 
     context = {
         'event': event,
+        'gallery': gallery
     }
 
     return render(request, 'events/event_detail.html', context)
@@ -149,6 +151,7 @@ def article_detail(request, article_id):
         article.views.add(Ip.objects.get(ip=ip))
     context = {
         'article': article,
+        'gallery': gallery
     }
     return render(request, template, context)
 
@@ -166,6 +169,7 @@ def reports_index(request):
 def report_detail(request, report_id):
     template = 'reports/report_detail.html'
     report = get_object_or_404(Report, pk=report_id)
+    gallery = Image.objects.filter(album__model__report=report)
     ip = get_client_ip(request)
     if Ip.objects.filter(ip=ip).exists():
         report.views.add(Ip.objects.get(ip=ip))

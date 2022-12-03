@@ -336,6 +336,11 @@ strong {
   font-size: 22px;
 }
 
+
+.event-gallery {
+  margin-bottom: 20px;
+}
+
 /*--------------------- ARTICLES --------------------------*/
 
 .article {
