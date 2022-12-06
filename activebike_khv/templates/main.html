@@ -16,7 +16,7 @@
     <div class="article__main">
       <div class="article__left">
         <a href="{% url 'events:event_detail' nearest_event.id %}" class="article__image">
-          {% thumbnail nearest_event.image "300x300" crop="center" upscale=True as im %}
+          {% thumbnail nearest_event.default_image "300x300" crop="center" upscale=True as im %}
             <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ event.title }}" class="article__image-img">
           {% endthumbnail %}
         </a>
@@ -84,6 +84,7 @@
       <div class="article__main">
         <div class="article__left">
           <a href="{% url 'events:event_detail' event.id %}" class="article__image">
+            {% comment %} <img src="{{ event.default_image }}" alt="{{ event.title }}" class="article__image-img"> {% endcomment %}
             {% thumbnail event.default_image "300x300" crop="center" upscale=True as im %}
               <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ event.title }}" class="article__image-img">
             {% endthumbnail %}

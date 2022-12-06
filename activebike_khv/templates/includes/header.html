@@ -33,11 +33,15 @@
           <ul class="header-menu-desktop">
             {% load menubuilder %}
             {% menu menu %}
-            {% for item in menuitems %}
-              <li class="header-menu-desktop__item">
-                <a href="{{ item.url }}" title="{{ item.title|escape }}"  class="header-menu-desktop__link {% if item.current %}current{% endif %}">{{ item.title }}</a>
-              </li>
+            {% if menuitems %}
+              {% for item in menuitems %}
+                <li class="header-menu-desktop__item">
+                  <a href="{{ item.url }}" title="{{ item.title|escape }}"  class="header-menu-desktop__link {% if item.current %}current{% endif %}">{{ item.title }}</a>
+                </li>
               {% endfor %}
+            {% else %}
+              Добавьте меню.
+            {% endif %}
               <li class="auth">
                 {% if user.is_authenticated %}
                   <div class="auth_username">{{ user.username }}:</div><a href="{% url 'admin:index' %}" class="auth-link">Личный кабинет</a>

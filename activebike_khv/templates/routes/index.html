@@ -7,6 +7,7 @@
 
 <section class="content-section content-section_pt0">
   {% comment %} <h2 class="content-section__title content-section__title_events">Маршруты</h2> {% endcomment %}
+{% if routes %}
   {% for route in routes %}
   <article class="article">
     <h3 class="article-title">
@@ -39,5 +40,10 @@
     </div>
   </article>
   {% endfor %}
+{% else %}
+  <article class="article">
+    Нет маршрутов.
+  </article>
+{% endif %}
 </section>
 {% endblock %}

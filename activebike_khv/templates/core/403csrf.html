@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Ошибка CSRF-токена{% endblock %}
+{% block site_main %}
+
+<div class="container">
+  <div class="row no-gutters">
+    <div class="col-12">
+      <div class="header-topline">
+        <div class="site-logo-wrapper">
+          <a href="/" class="site-logo"></a>
+        </div>
+        <h1 class="header-title">
+          <a href="/" class="header-title__link">ACTIVE_BIKE_KHV</a>
+        </h1>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row no-gutters">
+    <div class="col-12">
+        <p class="">Ошибка CSRF-токена</p>
+        <a href="{% url 'events:events_index' %}">Перейти на главную</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Нет такой страницы{% endblock %}
+{% block site_main %}
+
+<div class="container">
+  <div class="row no-gutters">
+    <div class="col-12">
+      <div class="header-topline">
+        <div class="site-logo-wrapper">
+          <a href="/" class="site-logo"></a>
+        </div>
+        <h1 class="header-title">
+          <a href="/" class="header-title__link">ACTIVE_BIKE_KHV</a>
+        </h1>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row no-gutters">
+    <div class="col-12">
+      <h2 class="errpage__h2">Нет такой страницы</h2>
+      <p>Страницы с адресом {{ path }} не существует</p>
+      <a href="{% url 'events:events_index' %}">Перейти на главную</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+

@@ -8,6 +8,7 @@
 
 <section class="content-section content-section_pt0">
   {% comment %} <h2 class="content-section__title content-section__title_nearest">Отчеты</h2> {% endcomment %}
+{% if reports %}
   {% for report in reports %}
     <article class="article">
       <h3 class="article-title"><a href="{% url 'events:report_detail' report.id %}" class="article-title__link">{{ report.title }}</a></h3>
@@ -37,5 +38,10 @@
       </div>
     </article>
   {% endfor %}
+{% else %}
+  <article class="article">
+    Нет отчетов.
+  </article>
+{% endif %}
 </section>
 {% endblock %}

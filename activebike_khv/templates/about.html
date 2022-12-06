@@ -6,19 +6,27 @@
 
 {% block content %}
 <section class="content-section content-section_about">
+{% if about_page %}
   {% for about_single in about_page %}
     <h2 class="article-title article-title_page">{{ about_single.title }}</h3>
     <p class="article-descr">{{ about_single.text_html|safe }}</p>
   {% endfor %}
+{% else %}
+  Нет информации.
+{% endif %}
 </section>
 <section class="content-section content-section_about">
   <h2 class="article-title article-title_page">Ссылки</h2>
   <ol type="1" class="links">
-    {% for link in links %}
-    <li class="links-item">
-      <a href="{{ link.url }}" class="links-link">{{ link.text }}</a>
-    </li>
-    {% endfor %}
+    {% if links %}
+      {% for link in links %}
+      <li class="links-item">
+        <a href="{{ link.url }}" class="links-link">{{ link.text }}</a>
+      </li>
+      {% endfor %}
+    {% else %}
+      Нет ссылок.
+    {% endif %}
   </ol>
 </section>
 {% endblock %}

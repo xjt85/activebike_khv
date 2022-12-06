@@ -153,8 +153,10 @@ class Event(Post):
         return self.views.count()
 
     def default_image(self):
-        print(f'self.album.default = {self.album.default().image}')
-        # return self.album.model.default
+        gallery = self.album.images.all()
+        if gallery.filter(default=True).exists():
+            return gallery.filter(default=True).first().image
+        return gallery.first().image
 
 
 class Article(Post):

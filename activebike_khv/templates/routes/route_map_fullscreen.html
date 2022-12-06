@@ -11,7 +11,7 @@
       {% endif %}
       <div id="map" class="route__map"></div>
       <div class="route__track-download-wrapper">
-        <a class="route-map__button route-map__button_download" href="" download>Скачать трек</a>
+        <a class="route-map__button route-map__button_download" href="{{ route.track.url }}" download>Скачать трек</a>
         {% comment %} <a class="route-map__button route-map__button_back" href="{% url 'events:route_detail' route.id %}">Назад</a> {% endcomment %}
       </div>
     </div>

@@ -8,13 +8,14 @@
 
 <section class="content-section content-section_pt0">
   {% comment %} <h2 class="content-section__title content-section__title_events">Все события</h2> {% endcomment %}
+{% if events %}
   {% for event in events %}
     <article class="article">
       <h3 class="article-title"><a href="{% url 'events:event_detail' event.id %}" class="article-title__link">{{ event.title }}</a></h3>
       <div class="article__main">
         <div class="article__left">
           <a href="{% url 'events:event_detail' event.id %}" class="article__image">
-            {% thumbnail event.image "300x300" crop="center" upscale=True as im %}
+            {% thumbnail event.default_image "300x300" crop="center" upscale=True as im %}
               <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ event.title }}" class="article__image-img">
             {% endthumbnail %}
           </a>
@@ -35,5 +36,10 @@
       </div>
     </article>
   {% endfor %}
+{% else %}
+  <article class="article">
+    Нет событий.
+  </article>
+{% endif %}
 </section>
 {% endblock %}

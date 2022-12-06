@@ -4,6 +4,7 @@
   <section class="top-articles sidebar-widget">
     <h2 class="sidebar-widget__title">Популярные статьи</h2>
     <ul class="top-articles-list">
+    {% if popular_articles %}
       {% for article in popular_articles %}
         <li class="single-article">
           <a href="{% url 'events:article_detail' article.id %}" class="single-article__link">
@@ -20,17 +21,26 @@
           </div>
         </li>
       {% endfor %}
+    {% else %}
+      <li class="single-article">
+        Нет статей.
+      </li>
+    {% endif %}
     </ul>
   </section>
 
   <section class="links-block sidebar-widget">
     <h2 class="sidebar-widget__title">Ссылки</h2>
     <ul class="links-block__list">
+    {% if links %}
       {% for link in links %}
       <li class="links-block__li">
         <a href="{{ link.url }}" class="links-block__link">{{ link.text }}</a>
       </li>
       {% endfor %}
+    {% else %}
+      Нет ссылок.
+    {% endif %}
     </ul>
   </section>
 </aside>

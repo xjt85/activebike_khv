@@ -20,15 +20,15 @@ from telethon.sessions import StringSession
 from telethon.tl.functions.messages import GetHistoryRequest
 from decouple import config
 
-API_ID = config('TLG_API_ID')
-API_HASH = config('TLG_API_HASH')
-USERNAME = config('TLG_USERNAME')
-SESSION_STRING = config('TLG_SESSION_STRING')
-TLG_CHANNEL_URL = config('TLG_CHANNEL_URL')
+# API_ID = config('TLG_API_ID')
+# API_HASH = config('TLG_API_HASH')
+# USERNAME = config('TLG_USERNAME')
+# SESSION_STRING = config('TLG_SESSION_STRING')
+# TLG_CHANNEL_URL = config('TLG_CHANNEL_URL')
 
-client = TelegramClient(StringSession(SESSION_STRING), API_ID, API_HASH)
+# client = TelegramClient(StringSession(SESSION_STRING), API_ID, API_HASH)
 
-all_messages = []   # список всех сообщений
+# all_messages = []   # список всех сообщений
 
 
 # async def dump_all_messages(channel):
@@ -69,7 +69,7 @@ all_messages = []   # список всех сообщений
 #     res = client.loop.run_until_complete(main())
 
 
-# Метод для получения айпи
+# Метод для получения IP
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
@@ -106,6 +106,7 @@ def events_index(request):
     return render(request, template, context)
 
 
+# @cache_page(60 * 2)
 def event_detail(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
     gallery = Image.objects.filter(album__model__event=event)
@@ -138,6 +139,7 @@ def articles_index(request):
     return render(request, template, context)
 
 
+# @cache_page(60 * 2)
 def article_detail(request, article_id):
     template = 'articles/article_detail.html'
     article = get_object_or_404(Article, pk=article_id)
@@ -166,6 +168,7 @@ def reports_index(request):
     return render(request, template, context)
 
 
+# @cache_page(60 * 2)
 def report_detail(request, report_id):
     template = 'reports/report_detail.html'
     report = get_object_or_404(Report, pk=report_id)
@@ -193,22 +196,7 @@ def routes_index(request):
     return render(request, template, context)
 
 
-# def route_detail(request, route_id):
-#     template = 'routes/route_detail.html'
-#     route = get_object_or_404(Route, pk=route_id)
-#     ip = get_client_ip(request)
-#     if Ip.objects.filter(ip=ip).exists():
-#         route.views.add(Ip.objects.get(ip=ip))
-#     else:
-#         Ip.objects.create(ip=ip)
-#         route.views.add(Ip.objects.get(ip=ip))
-#     context = {
-#         'route': route,
-#         'data':json.dumps(route.polyline)
-#     }
-#     return render(request, template, context)
-
-#  var2
+# @cache_page(60 * 2)
 def route_detail(request, route_id):
     template = 'routes/route_detail.html'
     route = get_object_or_404(Route, pk=route_id)
@@ -228,6 +216,7 @@ def route_detail(request, route_id):
     return render(request, template, context)
 
 
+# @cache_page(60 * 2)
 def route_map(request, route_id):
     template = 'routes/route_map_fullscreen.html'
     route = get_object_or_404(Route, pk=route_id)
@@ -248,4 +237,3 @@ def about_page(request):
         'links': links
     }
     return render(request, template, context)
-
