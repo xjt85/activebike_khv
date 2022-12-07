@@ -52,6 +52,15 @@ strong {
   text-align: center;
 }
 
+.header-topline_errpage {
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 .site-logo-wrapper {
   display: flex;
   flex-wrap: wrap;
