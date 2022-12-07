@@ -132,7 +132,6 @@ dmypy.json
 activebike_khv/*.sqlite3
 
 *.gpx
-activebike_khv/static/
 activebike_khv/media/
 utils/
 result.jpg
