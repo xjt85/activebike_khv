@@ -71,11 +71,11 @@ def get_image_upload_path(instance, filename):
 
 
 class ImageAlbum(models.Model):
-    name = models.CharField(max_length=100, default="Альбом")
+    name = models.CharField(max_length=100, default="ФотоАльбом")
 
     class Meta:
-        verbose_name = 'Альбом'
-        verbose_name_plural = 'Альбомы'
+        verbose_name = 'ФотоАльбом'
+        verbose_name_plural = 'ФотоАльбомы'
 
     def __str__(self):
         return self.name[:30]
@@ -85,6 +85,9 @@ class ImageAlbum(models.Model):
 
     def thumbnails(self):
         return self.images.filter(width__lt=100, length_lt=100)
+    
+    def images_count(self):
+        return self.images.count()
 
 
 class Image(models.Model):
@@ -95,6 +98,11 @@ class Image(models.Model):
     length = models.FloatField(default=100)
     album = models.ForeignKey(
         ImageAlbum, related_name='images', on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['album']
+        verbose_name = 'Фото'
+        verbose_name_plural = 'Фото'
 
     def __str__(self):
         return self.name[:30]
@@ -132,6 +140,9 @@ class Event(Post):
         null=True,
         related_name='events'
     )
+    distance = models.DecimalField(
+        max_digits=7, decimal_places=2, default=0, null=True, verbose_name="Дистанция, км")
+    difficulty_level = models.PositiveSmallIntegerField(default=1, null=True, verbose_name="Сложность от 1 до 10")
     author = models.ForeignKey(
         User,
         on_delete=SET_NULL,
@@ -236,7 +247,7 @@ def get_height_gain(gpx_data_array):
 class Route(Post):
     track = models.FileField(upload_to=user_directory_path, null=True,
                              blank=True, verbose_name="GPX-трек (необязательно)")
-    length = models.DecimalField(
+    distance = models.DecimalField(
         max_digits=7, decimal_places=2, default=0, null=True, verbose_name="Дистанция, км")
     height_gain = models.PositiveSmallIntegerField(
         default=0, null=True, verbose_name="Набор высоты, м")
@@ -300,8 +311,8 @@ class Route(Post):
 
             self.polyline = polyline.encode(polyline_data)
 
-            if self.length == 0:
-                self.length = round(gpx.get_moving_data(
+            if self.distance == 0:
+                self.distance = round(gpx.get_moving_data(
                     raw=True).moving_distance / 1000, 1)
 
             if self.height_gain == 0:

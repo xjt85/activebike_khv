@@ -22,10 +22,10 @@
         </a>
       </div>
       <div class="article__right">
-        <div class="article-descr">
-          <p class="article-descr__date">{{ nearest_event.date_planned|date:"l, d.m.Y, H:i" }}</p>
-          <p class="article-descr__text">{{ nearest_event.text_html|safe|truncatechars:300 }}</p>
-        </div>
+        <a href="{% url 'events:event_detail' nearest_event.id %}" class="article-descr">
+            <p class="article-descr__date">{{ nearest_event.date_planned|date:"l, d.m.Y, H:i" }}</p>
+            <p class="article-descr__text">{{ nearest_event.text_html|safe|truncatechars:300 }}</p>
+        </a>
         {% comment %} <a href="{% url 'events:event_detail' nearest_event.id %}" class="article__more">Читать дальше →</a> {% endcomment %}
       </div>
     </div>
@@ -91,10 +91,10 @@
           </a>
         </div>
         <div class="article__right">
-          <div class="article-descr">
+          <a href="{% url 'events:event_detail' event.id %}" class="article-descr">
             <p class="article-descr__date">{{ event.date_planned|date:"l, d.m.Y, H:i" }}</p>
             <p class="article-descr__text">{{ event.text_html|safe|truncatechars:300 }}</p>
-          </div>
+          </a>
           <a href="{% url 'events:event_detail' event.id %}" class="article__more">Читать дальше →</a>
         </div>
       </div>

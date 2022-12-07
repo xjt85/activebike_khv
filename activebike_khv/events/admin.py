@@ -15,7 +15,6 @@ class EventTypeAdmin(admin.ModelAdmin):
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
     list_display = ('title', 'event_type', 'author', 'date_planned', 'date_pub', 'date_edit')
-    list_editable = ('event_type',)
     search_fields = ('title',)
     list_filter = ('date_planned',)
     empty_value_display = '-пусто-'
@@ -25,6 +24,19 @@ class EventAdmin(admin.ModelAdmin):
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ('title', 'text', 'author', 'date_pub', 'date_edit')
     search_fields = ('title',)
+    empty_value_display = '-пусто-'
+
+
+@admin.register(Image)
+class ImageAdmin(admin.ModelAdmin):
+    list_display = ('album', 'name', 'default')
+    list_editable = ('default',)
+    empty_value_display = '-пусто-'
+
+
+@admin.register(ImageAlbum)
+class ImageAlbumAdmin(admin.ModelAdmin):
+    list_display = ('name', 'images_count')
     empty_value_display = '-пусто-'
 
 
@@ -40,10 +52,6 @@ class LinkAdmin(admin.ModelAdmin):
     list_display = ('text', 'url', 'description')
     search_fields = ('text',)
     empty_value_display = '-пусто-'
-
-
-# class ImageInline(admin.StackedInline):
-#     model = Image
 
 
 @admin.register(Route)
@@ -68,5 +76,5 @@ admin.site.register(Tag)
 admin.site.register(SurfaceType)
 admin.site.register(About)
 admin.site.register(Ip)
-admin.site.register(Image)
-admin.site.register(ImageAlbum)
+# admin.site.register(Image)
+# admin.site.register(ImageAlbum)
