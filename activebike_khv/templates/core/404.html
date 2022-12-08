@@ -20,9 +20,11 @@
 <div class="container">
   <div class="row no-gutters">
     <div class="col-12">
-      <h2 class="errpage__h2">Нет такой страницы</h2>
-      <p>Страницы с адресом {{ path }} не существует</p>
-      <a href="{% url 'events:events_index' %}">Перейти на главную</a>
+      <div class="errpage">
+        <h2 class="errpage__h2">Нет такой страницы</h2>
+        <p class="errpage__text">Страницы с адресом <span class="errpage__text-path">{{ path }}</span> не существует</p>
+        <a href="{% url 'events:main_page' %}">Перейти на главную</a>
+      </div>
     </div>
   </div>
 </div>

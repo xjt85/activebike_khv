@@ -6,36 +6,38 @@
 
 {% block content %}
 <section class="content-section">
-  <h2 class="content-section__title content-section__title_events">Ближайшее событие</h2>
-  {% if nearest_event %}
-  <article class="article">
-    <h3 class="article-title"><a href="{% url 'events:event_detail' nearest_event.id %}" class="article-title__link">{{ nearest_event.title }}</a></h3>
-    {% if user.is_authenticated and request.user == nearest_event.author %}
-      <a class="article__edit-button" href="{% url 'admin:index' %}events/event/{{ nearest_event.id }}/change/"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-    {% endif %}
-    <div class="article__main">
-      <div class="article__left">
-        <a href="{% url 'events:event_detail' nearest_event.id %}" class="article__image">
-          {% thumbnail nearest_event.default_image "300x300" crop="center" upscale=True as im %}
-            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ event.title }}" class="article__image-img">
-          {% endthumbnail %}
-        </a>
-      </div>
-      <div class="article__right">
-        <a href="{% url 'events:event_detail' nearest_event.id %}" class="article-descr">
-            <p class="article-descr__date">{{ nearest_event.date_planned|date:"l, d.m.Y, H:i" }}</p>
-            <p class="article-descr__text">{{ nearest_event.text_html|safe|truncatechars:300 }}</p>
-        </a>
-        {% comment %} <a href="{% url 'events:event_detail' nearest_event.id %}" class="article__more">Читать дальше →</a> {% endcomment %}
-      </div>
-    </div>
-    <div class="article-info">
-      <div class="article-info__views"><i class="fa fa-eye" aria-hidden="true"> </i>{{ nearest_event.total_views }}</div>
-      <div class="article-info__comments"><i class="fa fa-comment-o" aria-hidden="true"></i> 0</div>
-      <div class="article-info__author">{{ nearest_event.author|truncatechars:15 }}</div>
-      <div class="article-info__edit"><i class="fa fa-pencil" aria-hidden="true"></i> {{ nearest_event.date_edit|date:"d.m.Y H:i" }}</div>
-    </div>
-  </article>
+  <h2 class="content-section__title content-section__title_events">Ближайшие события</h2>
+  {% if nearest_events %}
+    {% for event in nearest_events %}
+      <article class="article">
+        <h3 class="article-title"><a href="{% url 'events:event_detail' event.id %}" class="article-title__link">{{ event.title }}</a></h3>
+        {% if user.is_authenticated and request.user == event.author %}
+          <a class="article__edit-button" href="{% url 'admin:index' %}events/event/{{ event.id }}/change/"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+        {% endif %}
+        <div class="article__main">
+          <div class="article__left">
+            <a href="{% url 'events:event_detail' event.id %}" class="article__image">
+              {% thumbnail event.default_image "300x300" crop="center" upscale=True as im %}
+                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ event.title }}" class="article__image-img">
+              {% endthumbnail %}
+            </a>
+          </div>
+          <div class="article__right">
+            <a href="{% url 'events:event_detail' event.id %}" class="article-descr">
+                <p class="article-descr__date">{{ event.date_planned|date:"l, d.m.Y, H:i" }}</p>
+                <p class="article-descr__text">{{ event.text_html|safe|truncatechars:200 }}</p>
+            </a>
+            <a href="{% url 'events:event_detail' event.id %}" class="article__more">Читать дальше →</a>
+          </div>
+        </div>
+        <div class="article-info">
+          <div class="article-info__views"><i class="fa fa-eye" aria-hidden="true"> </i>{{ event.total_views }}</div>
+          <div class="article-info__comments"><i class="fa fa-comment-o" aria-hidden="true"></i> 0</div>
+          <div class="article-info__author">{{ event.author|truncatechars:15 }}</div>
+          <div class="article-info__edit"><i class="fa fa-pencil" aria-hidden="true"></i> {{ event.date_edit|date:"d.m.Y H:i" }}</div>
+        </div>
+      </article>
+    {% endfor %}
   {% else %}
   <article class="article">
     Нет ближайших событий.
@@ -43,7 +45,7 @@
   {% endif %}
 </section>
 
-<section class="content-section tlg-channel">
+{% comment %} <section class="content-section tlg-channel">
   <h2 class="content-section__title">Канал ACTIVE BIKE  <i class="fa fa-telegram fa-lg tlg-channel__tlg-icon"></i></h2>
   <ul class="tlg-messages">
     {% if all_messages %}
@@ -69,42 +71,45 @@
     {% endif %}
   </ul>
   <p>
-    {% comment %} <script async src="https://telegram.org/js/telegram-widget.js?21" data-telegram-post="activebike/81" data-width="100%"></script> {% endcomment %}
   </p>
-</section>
+</section> {% endcomment %}
 
 <section class="content-section">
-  <h2 class="content-section__title content-section__title_events">Все события</h2>
-  {% for event in events %}
-    <article class="article">
-      <h3 class="article-title"><a href="{% url 'events:event_detail' event.id %}" class="article-title__link">{{ event.title }}</a></h3>
-      {% if user.is_authenticated and request.user == event.author %}
-        <a class="article__edit-button" href="{% url 'admin:index' %}events/event/{{ event.id }}/change/"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-      {% endif %}
-      <div class="article__main">
-        <div class="article__left">
-          <a href="{% url 'events:event_detail' event.id %}" class="article__image">
-            {% comment %} <img src="{{ event.default_image }}" alt="{{ event.title }}" class="article__image-img"> {% endcomment %}
-            {% thumbnail event.default_image "300x300" crop="center" upscale=True as im %}
-              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ event.title }}" class="article__image-img">
-            {% endthumbnail %}
-          </a>
+  <h2 class="content-section__title content-section__title_events">Прошедшие события</h2>
+  {% if past_events %}
+    {% for event in past_events %}
+      <article class="article">
+        <h3 class="article-title"><a href="{% url 'events:event_detail' event.id %}" class="article-title__link">{{ event.title }}</a></h3>
+        {% if user.is_authenticated and request.user == event.author %}
+          <a class="article__edit-button" href="{% url 'admin:index' %}events/event/{{ event.id }}/change/"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+        {% endif %}
+        <div class="article__main">
+          <div class="article__left">
+            <a href="{% url 'events:event_detail' event.id %}" class="article__image">
+              {% comment %} <img src="{{ event.default_image }}" alt="{{ event.title }}" class="article__image-img"> {% endcomment %}
+              {% thumbnail event.default_image "300x300" crop="center" upscale=True as im %}
+                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ event.title }}" class="article__image-img">
+              {% endthumbnail %}
+            </a>
+          </div>
+          <div class="article__right">
+            <a href="{% url 'events:event_detail' event.id %}" class="article-descr">
+              <p class="article-descr__date">{{ event.date_planned|date:"l, d.m.Y, H:i" }}</p>
+              <p class="article-descr__text">{{ event.text_html|safe|truncatechars:300 }}</p>
+            </a>
+            <a href="{% url 'events:event_detail' event.id %}" class="article__more">Читать дальше →</a>
+          </div>
         </div>
-        <div class="article__right">
-          <a href="{% url 'events:event_detail' event.id %}" class="article-descr">
-            <p class="article-descr__date">{{ event.date_planned|date:"l, d.m.Y, H:i" }}</p>
-            <p class="article-descr__text">{{ event.text_html|safe|truncatechars:300 }}</p>
-          </a>
-          <a href="{% url 'events:event_detail' event.id %}" class="article__more">Читать дальше →</a>
+        <div class="article-info">
+          <div class="article-info__views"><i class="fa fa-eye" aria-hidden="true"> </i>{{ event.total_views }}</div>
+          <div class="article-info__comments"><i class="fa fa-comment-o" aria-hidden="true"></i> 0</div>
+          <div class="article-info__author">{{ event.author|truncatechars:15 }}</div>
+          <div class="article-info__edit"><i class="fa fa-pencil" aria-hidden="true"></i> {{ event.date_edit|date:"d.m.Y H:i" }}</div>
         </div>
-      </div>
-      <div class="article-info">
-        <div class="article-info__views"><i class="fa fa-eye" aria-hidden="true"> </i>{{ event.total_views }}</div>
-        <div class="article-info__comments"><i class="fa fa-comment-o" aria-hidden="true"></i> 0</div>
-        <div class="article-info__author">{{ event.author|truncatechars:15 }}</div>
-        <div class="article-info__edit"><i class="fa fa-pencil" aria-hidden="true"></i> {{ event.date_edit|date:"d.m.Y H:i" }}</div>
-      </div>
-    </article>
-  {% endfor %}
+      </article>
+    {% endfor %}
+  {% else %}
+      Нет прошедших событий.
+  {% endif %}
 </section>
 {% endblock %}

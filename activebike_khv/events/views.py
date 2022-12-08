@@ -83,15 +83,15 @@ def get_client_ip(request):
 def main_page(request):
     template = 'main.html'
     events = Event.objects.all()
-    nearest_event = events.filter(date_planned__gt=date.today()).last()
+    nearest_events = events.filter(date_planned__gte=date.today()).order_by('date_planned')[:2]
+    past_events = events.filter(date_planned__lt=date.today()).order_by('date_planned')
     # posts = Post.objects.select_related('group')
     # paginator = Paginator(posts, settings.POSTS_PER_PAGE)
     # page_number = request.GET.get('page')
     # page_obj = paginator.get_page(page_number)
     context = {
-        'nearest_event': nearest_event,
-        'events': events,
-        # 'all_messages': all_messages
+        'nearest_events': nearest_events,
+        'past_events': past_events
     }
     return render(request, template, context)
 

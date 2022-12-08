@@ -1,6 +1,6 @@
 body {
   background-color: #e6f3ff;
-  color: rgb(61, 62, 64);
+  color: #111;
   font-family: Roboto, Arial, Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 500;
@@ -79,6 +79,37 @@ strong {
   height: 60px;
   background: url(../img/site_logo+.svg) 0px 0px / cover no-repeat;
 }
+
+/*--------------------- Errpage ------------------------*/
+
+.header-topline_errpage {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  padding: 15px;
+}
+
+.errpage {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.errpage__h2 {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.errpage__text {
+  padding: 0 15px;
+  margin-bottom: 10px;
+}
+
+.errpage__text-path {
+  font-weight: 700;
+}
+
+/*--------------------- end errpages ------------------------*/
 
 .menu-button-container {
   position: absolute;
@@ -345,7 +376,6 @@ strong {
   font-size: 22px;
 }
 
-
 .event-gallery {
   margin-bottom: 20px;
 }
@@ -403,7 +433,7 @@ strong {
 .article-title {
   text-align: left;
   font-size: 18px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .article-title_page {
@@ -486,7 +516,7 @@ strong {
 .article-descr {
   display: block;
   padding: 10px 0;
-  color: rgb(102, 104, 107);
+  color: #555;
   text-decoration: none;
   transition: all 0.2s ease-in;
 }
@@ -573,8 +603,15 @@ strong {
 
 /*--------------------- Article page ------------------------*/
 
+.article-descr_page p {
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
 .article-descr_page a {
-  color: rgb(7, 78, 109);
+  color: #333;
   text-decoration: none;
   transition: all 0.2s ease-in;
 }
@@ -998,7 +1035,6 @@ strong {
   color: rgb(61, 62, 64);
 }
 
-
 .links-block__link:hover {
   color: #0b6fc0;
   text-decoration: none;
@@ -1118,7 +1154,6 @@ strong {
   width: 32px;
   height: 20px;
 }
-
 
 /*--------------------- ABOUT --------------------------*/
 
