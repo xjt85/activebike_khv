@@ -28,13 +28,19 @@
         </div>
         <div class="article__right">
           <div class="article-descr">
-            <p class="article-descr__text">{{ article.text_html|safe|truncatechars:300 }}</p>
+            <p class="article-descr__text">{{ article.text_html|safe|truncatechars_html:300 }}</p>
             <a href="{% url 'events:article_detail' article.id %}" class="article__more">Читать дальше →</a>
           </div>
         </div>
       </div>
       <div class="article-info">
-        <div class="article-info__views"><i class="fa fa-eye" aria-hidden="true"></i> {{ article.total_views }}</div>
+        <div class="article-info__views"><i class="fa fa-eye" aria-hidden="true"> </i>{{ article.total_views }}
+          {% if article.last_views %}
+            <span class="article-info__lastviews">
+              +{{ article.last_views }}
+            </span>
+          {% endif %}
+        </div>
         <div class="article-info__comments"><i class="fa fa-comment-o" aria-hidden="true"></i>  0</div>
         <div class="article-info__edit"><i class="fa fa-pencil" aria-hidden="true"></i> {{ article.date_edit|date:"d.m.Y" }}</div>
       </div>

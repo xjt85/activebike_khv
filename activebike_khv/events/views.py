@@ -110,12 +110,11 @@ def events_index(request):
 def event_detail(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
     gallery = Image.objects.filter(album__model__event=event)
+
     ip = get_client_ip(request)
-    if Ip.objects.filter(ip=ip).exists():
-        event.views.add(Ip.objects.get(ip=ip))
-    else:
-        Ip.objects.create(ip=ip)
-        event.views.add(Ip.objects.get(ip=ip))
+    Ip.objects.get_or_create(ip=ip)
+    event.views.add(Ip.objects.get(ip=ip))
+
     # comments = Comment.objects.filter(event=event)
     # author = event.author
     # author_events_count = Event.objects.filter(author=event.author).count()
@@ -146,11 +145,9 @@ def article_detail(request, article_id):
     gallery = Image.objects.filter(album__model__article=article)
 
     ip = get_client_ip(request)
-    if Ip.objects.filter(ip=ip).exists():
-        article.views.add(Ip.objects.get(ip=ip))
-    else:
-        Ip.objects.create(ip=ip)
-        article.views.add(Ip.objects.get(ip=ip))
+    Ip.objects.get_or_create(ip=ip)
+    article.views.add(Ip.objects.get(ip=ip))
+
     context = {
         'article': article,
         'gallery': gallery
@@ -173,12 +170,11 @@ def report_detail(request, report_id):
     template = 'reports/report_detail.html'
     report = get_object_or_404(Report, pk=report_id)
     gallery = Image.objects.filter(album__model__report=report)
+
     ip = get_client_ip(request)
-    if Ip.objects.filter(ip=ip).exists():
-        report.views.add(Ip.objects.get(ip=ip))
-    else:
-        Ip.objects.create(ip=ip)
-        report.views.add(Ip.objects.get(ip=ip))
+    Ip.objects.get_or_create(ip=ip)
+    report.views.add(Ip.objects.get(ip=ip))
+
     context = {
         'report': report,
         'gallery': gallery
@@ -203,11 +199,9 @@ def route_detail(request, route_id):
     gallery = Image.objects.filter(album__model__route=route)
 
     ip = get_client_ip(request)
-    if Ip.objects.filter(ip=ip).exists():
-        route.views.add(Ip.objects.get(ip=ip))
-    else:
-        Ip.objects.create(ip=ip)
-        route.views.add(Ip.objects.get(ip=ip))
+    Ip.objects.get_or_create(ip=ip)
+    route.views.add(Ip.objects.get(ip=ip))
+
     context = {
         'route': route,
         'data': json.dumps(route.polyline),

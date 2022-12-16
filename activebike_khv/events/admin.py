@@ -22,7 +22,7 @@ class EventAdmin(admin.ModelAdmin):
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('title', 'text', 'author', 'date_pub', 'date_edit')
+    list_display = ('title', 'author', 'date_pub', 'date_edit')
     search_fields = ('title',)
     empty_value_display = '-пусто-'
 
@@ -42,7 +42,7 @@ class ImageAlbumAdmin(admin.ModelAdmin):
 
 @admin.register(Report)
 class ReportAdmin(admin.ModelAdmin):
-    list_display = ('title', 'text', 'author', 'date_pub', 'date_edit')
+    list_display = ('title', 'author', 'date_pub', 'date_edit')
     search_fields = ('title',)
     empty_value_display = '-пусто-'
 
@@ -51,6 +51,13 @@ class ReportAdmin(admin.ModelAdmin):
 class LinkAdmin(admin.ModelAdmin):
     list_display = ('text', 'url', 'description')
     search_fields = ('text',)
+    empty_value_display = '-пусто-'
+
+
+@admin.register(Ip)
+class IpAdmin(admin.ModelAdmin):
+    list_display = ('ip', 'date_add')
+    search_fields = ('ip',)
     empty_value_display = '-пусто-'
 
 
@@ -75,6 +82,6 @@ class RouteAdmin(admin.ModelAdmin):
 admin.site.register(Tag)
 admin.site.register(SurfaceType)
 admin.site.register(About)
-admin.site.register(Ip)
+# admin.site.register(Ip)
 # admin.site.register(Image)
 # admin.site.register(ImageAlbum)

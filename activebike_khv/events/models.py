@@ -9,14 +9,15 @@ from django.db import models
 from django.db.models.deletion import SET_NULL
 from markdown import markdown
 from django.template.defaultfilters import slugify
+from datetime import date, timedelta
 
 
 User = get_user_model()
 
 
-class Ip(models.Model):  # наша таблица где будут айпи адреса
-    ip = models.CharField(max_length=100)
-    date_edit = models.DateTimeField(auto_now=True, null=True)
+class Ip(models.Model):
+    ip = models.CharField(max_length=100, unique=True)
+    date_add = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
         return self.ip
@@ -85,7 +86,7 @@ class ImageAlbum(models.Model):
 
     def thumbnails(self):
         return self.images.filter(width__lt=100, length_lt=100)
-    
+
     def images_count(self):
         return self.images.count()
 
@@ -121,10 +122,16 @@ class Post(models.Model):
     )
     date_pub = models.DateTimeField(auto_now_add=True, verbose_name="Дата публикации")
     date_edit = models.DateTimeField(auto_now=True, verbose_name="Дата правки")
-    views = models.ManyToManyField(Ip, blank=True, editable=False, verbose_name="Просмотры")
+    views = models.ManyToManyField(Ip, blank=True, verbose_name="Просмотры")
 
     def __str__(self):
         return self.title[:30]
+
+    def total_views(self):
+        return self.views.count()
+
+    def last_views(self):
+        return self.views.filter(date_add__gte=date.today() - timedelta(days=1)).count()
 
 
 class Event(Post):
@@ -160,9 +167,6 @@ class Event(Post):
         self.text_html = markdown(self.text)
         super(Event, self).save()
 
-    def total_views(self):
-        return self.views.count()
-
     def default_image(self):
         gallery = self.album.images.all()
         if gallery.filter(default=True).exists():
@@ -195,8 +199,8 @@ class Article(Post):
         self.text_html = markdown(self.text)
         super(Article, self).save()
 
-    def total_views(self):
-        return self.views.count()
+    # def total_views(self):
+    #     return self.views.count()
 
 
 # ---------------------------------------------------------------------------------
@@ -226,8 +230,8 @@ class Report(Post):
         self.text_html = markdown(self.text)
         super(Report, self).save()
 
-    def total_views(self):
-        return self.views.count()
+    # def total_views(self):
+    #     return self.views.count()
 
 
 def user_directory_path(instance, filename):
@@ -320,8 +324,8 @@ class Route(Post):
 
             super().save(*args, **kwargs)
 
-    def total_views(self):
-        return self.views.count()
+    # def total_views(self):
+    #     return self.views.count()
 
 
 class Link(models.Model):
@@ -342,6 +346,11 @@ class Link(models.Model):
 
 class About(models.Model):
     title = models.CharField(max_length=200)
+    image = models.ImageField(
+        'Фото',
+        upload_to='about/',
+        blank=True
+    )
     text = models.TextField(blank=True)
     text_html = models.TextField(blank=True, editable=False)
 

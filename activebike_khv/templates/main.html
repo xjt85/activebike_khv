@@ -25,13 +25,19 @@
           <div class="article__right">
             <a href="{% url 'events:event_detail' event.id %}" class="article-descr">
                 <p class="article-descr__date">{{ event.date_planned|date:"l, d.m.Y, H:i" }}</p>
-                <p class="article-descr__text">{{ event.text_html|safe|truncatechars:200 }}</p>
+                <p class="article-descr__text">{{ event.text_html|safe|truncatechars_html:200 }}</p>
             </a>
             <a href="{% url 'events:event_detail' event.id %}" class="article__more">Читать дальше →</a>
           </div>
         </div>
         <div class="article-info">
-          <div class="article-info__views"><i class="fa fa-eye" aria-hidden="true"> </i>{{ event.total_views }}</div>
+          <div class="article-info__views"><i class="fa fa-eye" aria-hidden="true"> </i>{{ event.total_views }}
+            {% if event.last_views %}
+              <span class="article-info__lastviews">
+                +{{ event.last_views }}
+              </span>
+            {% endif %}
+          </div>
           <div class="article-info__comments"><i class="fa fa-comment-o" aria-hidden="true"></i> 0</div>
           <div class="article-info__author">{{ event.author|truncatechars:15 }}</div>
           <div class="article-info__edit"><i class="fa fa-pencil" aria-hidden="true"></i> {{ event.date_edit|date:"d.m.Y H:i" }}</div>
@@ -43,6 +49,9 @@
     Нет ближайших событий.
   </article>
   {% endif %}
+  <div class="events-all">
+    <a href="{% url 'events:events_index' %}" class="article__more">Смотреть все события →</a>
+  </div>
 </section>
 
 {% comment %} <section class="content-section tlg-channel">
@@ -95,13 +104,19 @@
           <div class="article__right">
             <a href="{% url 'events:event_detail' event.id %}" class="article-descr">
               <p class="article-descr__date">{{ event.date_planned|date:"l, d.m.Y, H:i" }}</p>
-              <p class="article-descr__text">{{ event.text_html|safe|truncatechars:300 }}</p>
+              <p class="article-descr__text">{{ event.text_html|safe|truncatechars_html:200 }}</p>
             </a>
             <a href="{% url 'events:event_detail' event.id %}" class="article__more">Читать дальше →</a>
           </div>
         </div>
         <div class="article-info">
-          <div class="article-info__views"><i class="fa fa-eye" aria-hidden="true"> </i>{{ event.total_views }}</div>
+          <div class="article-info__views"><i class="fa fa-eye" aria-hidden="true"> </i>{{ event.total_views }}
+            {% if event.last_views %}
+              <span class="article-info__lastviews">
+                +{{ event.last_views }}
+              </span>
+            {% endif %}
+          </div>
           <div class="article-info__comments"><i class="fa fa-comment-o" aria-hidden="true"></i> 0</div>
           <div class="article-info__author">{{ event.author|truncatechars:15 }}</div>
           <div class="article-info__edit"><i class="fa fa-pencil" aria-hidden="true"></i> {{ event.date_edit|date:"d.m.Y H:i" }}</div>
