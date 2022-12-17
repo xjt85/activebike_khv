@@ -6,6 +6,9 @@
 
 {% block content %}
 <section class="content-section">
+  <div class="backlink-wrapper">
+    <a href="{% url 'events:articles_index' %}" class="backlink">Назад к списку</a>
+  </div>
   <article class="article article_page">
     <div class="article-author-info">
       <span class="article-author">{{ article.author }} </span>
@@ -17,8 +20,8 @@
     {% endif %}
     <div class="article__main article__main_page">
       <div class="article__image article__image_page">
-        {% thumbnail article.image "700x400" upscale=True as im %}
-          <img src="{{ im.url }}" alt="{{ article.title }}" class="article-page__image-img">
+        {% thumbnail article.image "1000x400" upscale=True as im %}
+          <img src="{{ im.url }}" alt="{{ article.title }}" class="article__image-img article__image-img_page">
         {% endthumbnail %}
       </div>
       <div class="article-descr article-descr_page">

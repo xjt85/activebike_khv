@@ -24,10 +24,10 @@
           </a>
         </div>
         <div class="article__right">
-          <div class="article-descr">
+          <a href="{% url 'events:report_detail' report.id %}" class="article-descr">
             <p class="article-descr__text">{{ report.text_html|safe|truncatechars_html:300 }}</p>
-            <a href="{% url 'events:report_detail' report.id %}" class="article__more">Читать дальше →</a>
-          </div>
+          </a>
+          <a href="{% url 'events:report_detail' report.id %}" class="article__more">Читать дальше →</a>
         </div>
       </div>
       <div class="article-info">

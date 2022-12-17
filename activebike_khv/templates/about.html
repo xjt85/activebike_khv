@@ -11,8 +11,8 @@
     {% for about_single in about_page %}
     <h2 class="article-title article-title_page">{{ about_single.title }}</h3>
     <div class="article__image article__image_page">
-      {% thumbnail about_single.image "700x400" upscale=True as im %}
-        <img src="{{ im.url }}" alt="{{ about_single.title }}" class="article__image-img">
+      {% thumbnail about_single.image "700x380" upscale=True as im %}
+        <img src="{{ im.url }}" alt="{{ about_single.title }}" class="article__image-img article__image-img_about-page">
       {% endthumbnail %}
     </div>
     <p class="article-descr">{{ about_single.text_html|safe }}</p>

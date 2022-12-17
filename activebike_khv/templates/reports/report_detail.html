@@ -6,6 +6,9 @@
 
 {% block content %}
 <section class="content-section">
+  <div class="backlink-wrapper">
+    <a href="{% url 'events:reports_index' %}" class="backlink">Назад к списку</a>
+  </div>
   <article class="article article_page">
     <h2 class="article-title article-title_page">{{ report.title }}</h2>
     {% if user.is_authenticated and request.user == report.author %}
@@ -14,7 +17,7 @@
     <div class="article__main article__main_page">
       <div class="article__image article__image_page">
         {% thumbnail report.image "700x400" upscale=True as im %}
-          <img src="{{ im.url }}" alt="{{ report.title }}" class="article__image-img">
+          <img src="{{ im.url }}" alt="{{ report.title }}" class="article__image-img article__image-img_page">
         {% endthumbnail %}
 
         {% for images in gallery %}
