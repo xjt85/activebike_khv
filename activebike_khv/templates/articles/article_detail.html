@@ -17,7 +17,7 @@
     {% endif %}
     <div class="article__main article__main_page">
       <div class="article__image article__image_page">
-        {% thumbnail article.image "500x300" upscale=True as im %}
+        {% thumbnail article.image "700x400" upscale=True as im %}
           <img src="{{ im.url }}" alt="{{ article.title }}" class="article-page__image-img">
         {% endthumbnail %}
       </div>

@@ -1,5 +1,5 @@
 body {
-  background-color: #acd7ff;
+  background-color: #e2f3fb;
   color: #111;
   font-family: Roboto, Arial, Helvetica, sans-serif;
   font-size: 16px;
@@ -186,7 +186,7 @@ strong {
   top: 0;
   z-index: 1200;
   background: linear-gradient(to top, #ededed, #fff, #fff);
-  border-bottom: 1px solid #dfe8ee;
+  border-bottom: 1px solid #c4e8ff;
   margin-bottom: 20px;
 }
 /* 
@@ -240,7 +240,7 @@ strong {
 }
 
 .header-menu-mobile__item:not(:last-child) {
-  border-bottom: 1px solid #dfe8ee;
+  border-bottom: 1px solid #c4e8ff;
 }
 
 .header-menu-mobile__link {
@@ -300,7 +300,7 @@ strong {
 .auth-form input {
   display: inline-block;
   width: 30%;
-  border: 1px solid #b8babb;
+  border: 1px solid #c4e8ff;
   background-color: #fff;
   border-radius: 3px;
   padding: 4px 10px;
@@ -327,7 +327,7 @@ strong {
 .chapter-wrapper {
   background-color: #fff;
   /* margin-bottom: 15px; */
-  border-bottom: 1px solid #b8babb;
+  border-bottom: 1px solid #c4e8ff;
   display: none;
 }
 
@@ -366,11 +366,12 @@ strong {
 }
 
 .content-section__title {
-  text-align: left;
   background-color: #fff;
-  padding: 15px;
-  margin-bottom: 10px;
+  padding: 7px 15px;
+  margin-bottom: 5px;
   font-size: 20px;
+  text-align: left;
+  border: 1px solid #c4e8ff;
 }
 
 .content-section__title_nearest {
@@ -441,9 +442,10 @@ strong {
 
 /* --------------------------------- */
 
-.events-all {
+.events-all-btn-wrapper {
   background: #fff;
-  padding: 15px;
+  padding: 7px 15px;
+  border: 1px solid #c4e8ff;
 }
 
 .backlink-wrapper {
@@ -466,10 +468,10 @@ strong {
 .article {
   position: relative;
   padding: 15px;
-  background-color: #fff;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   text-align: left;
-  border-bottom: 1px solid #b8babb;
+  background-color: #fff;
+  border: 1px solid #c4e8ff;
 }
 
 .article_route {
@@ -578,7 +580,7 @@ strong {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  border: 1px solid #b8babb;
+  border: 1px solid #c4e8ff;
 }
 
 .article-descr {
@@ -648,7 +650,7 @@ strong {
 }
 
 .article-info_page {
-  border-top: 1px solid #b8babb;
+  border-top: 1px solid #c4e8ff;
 }
 
 .article-info__views {
@@ -716,7 +718,7 @@ strong {
   position: relative;
   padding: 15px 0;
   transition: all 0.2s;
-  border-bottom: 1px solid #b8babb;
+  border-bottom: 1px solid #c4e8ff;
 }
 
 .tlg-message__link {
@@ -779,7 +781,7 @@ strong {
   box-sizing: border-box;
   text-align: center;
   padding: 20px 15px;
-  border-bottom: 1px solid #b8babb;
+  border-bottom: 1px solid #c4e8ff;
 }
 
 .routes-item__title {
@@ -799,7 +801,7 @@ strong {
 .routes-item__image {
   display: block;
   height: 100%;
-  border: 1px solid #b8babb;
+  border: 1px solid #c4e8ff;
 }
 
 .routes-item__image_page {
@@ -895,7 +897,7 @@ strong {
 }
 
 .route-page-info__item:not(:first-child) {
-  border-left: 1px solid #b8babb;
+  border-left: 1px solid #c4e8ff;
   padding-left: 30px;
 }
 
@@ -936,7 +938,7 @@ strong {
 .route-gallery__img {
   width: 100%;
   object-fit: cover;
-  border: 1px solid #b8babb;
+  border: 1px solid #c4e8ff;
 }
 
 .route-descr {
@@ -953,7 +955,7 @@ strong {
 .route__map {
   width: 100%;
   height: 100%;
-  border: 1px solid #b8babb;
+  border: 1px solid #c4e8ff;
   margin-bottom: 10px;
 }
 
@@ -982,7 +984,7 @@ strong {
   padding: 30px 15px;
   text-align: center;
   background-color: #fff;
-  border: 1px solid #b8babb;
+  border: 1px solid #c4e8ff;
 }
 
 .route-map__button {
@@ -1026,8 +1028,9 @@ strong {
 .top-articles {
   width: 100%;
   padding: 20px 15px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   background-color: #fff;
+  border: 1px solid #c4e8ff;
 }
 
 .top-articles__title {
@@ -1044,7 +1047,7 @@ strong {
   border-top: 1px solid #eaeeef;
   border-bottom: 1px solid #eaeeef;
   transition: all 0.2s;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
 }
 
 .single-article:hover {
@@ -1087,6 +1090,7 @@ strong {
   padding: 15px;
   margin-bottom: 20px;
   background-color: #fff;
+  border: 1px solid #c4e8ff;
 }
 
 .links-caption {
@@ -1106,7 +1110,7 @@ strong {
   align-items: center;
   /* padding: 10px; */
   transition: all 0.3s;
-  border-bottom: 1px solid #b8babb;
+  border-bottom: 1px solid #c4e8ff;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -1595,6 +1599,7 @@ strong {
   .sidebar-widget {
     padding: 20px 10px;
     margin-bottom: 15px;
+    border: 1px solid #c4e8ff;
   }
 
   .top-articles__title {
