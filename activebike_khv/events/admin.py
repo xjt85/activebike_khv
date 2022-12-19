@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.forms import TextInput, Textarea
 from django.db import models
-from .models import (About, Article, Event, EventType, Link, Report,
+from .models import (About, Article, Event, EventType, LinkIcon, Link, Report,
                      Route, ImageAlbum, Image, SurfaceType, Tag, Ip)
 
 
@@ -49,7 +49,7 @@ class ReportAdmin(admin.ModelAdmin):
 
 @admin.register(Link)
 class LinkAdmin(admin.ModelAdmin):
-    list_display = ('text', 'url', 'description')
+    list_display = ('text', 'icon', 'url', 'description')
     search_fields = ('text',)
     empty_value_display = '-пусто-'
 
@@ -82,6 +82,7 @@ class RouteAdmin(admin.ModelAdmin):
 admin.site.register(Tag)
 admin.site.register(SurfaceType)
 admin.site.register(About)
+admin.site.register(LinkIcon)
 # admin.site.register(Ip)
 # admin.site.register(Image)
 # admin.site.register(ImageAlbum)

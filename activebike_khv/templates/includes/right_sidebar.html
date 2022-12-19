@@ -41,7 +41,7 @@
     {% if links %}
       {% for link in links %}
       <li class="links-block__li">
-        <a href="{{ link.url }}" class="links-block__link">{{ link.text }}</a>
+        <span class="links-block__icon">{{ link.icon.icon_string|safe }}</span><a href="{{ link.url }}" class="links-block__link">{{ link.text }}</a>
       </li>
       {% endfor %}
     {% else %}

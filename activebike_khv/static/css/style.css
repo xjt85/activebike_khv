@@ -359,6 +359,7 @@ strong {
 
 .content-section {
   padding: 0px;
+  border-top: 3px solid #3896c5;
 }
 
 .content-section:not(:last-child) {
@@ -390,61 +391,11 @@ strong {
   margin-bottom: 20px;
 }
 
-/* ----------- ГАЛЕРЕЯ ------------- */
-
-/* .event-gallery .owl-theme .owl-nav {
-  margin-top: 0;
-}
-
-.event-gallery .owl-theme .owl-nav [class*="owl-"] {
-  margin: 0;
-}
-
-.event-gallery .owl-theme .owl-nav [class*="owl-"]:hover {
-  background: transparent;
-  color: #fff;
-  text-decoration: none;
-}
-
-.event-gallery .owl-nav {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.event-gallery .owl-prev,
-.event-gallery .owl-next {
-  position: absolute;
-  top: 0;
-  height: 100%;
-  width: 15%;
-}
-
-.event-gallery .owl-prev {
-  left: 0;
-}
-
-.event-gallery .owl-next {
-  right: 0;
-}
-
-.event-gallery .owl-nav span {
-  color: #fff;
-  transition: all 0.2s;
-  font-size: 100px;
-}
-
-.event-gallery .owl-nav button:hover span {
-  color: rgb(233, 233, 233);
-} */
-
 /* --------------------------------- */
 
 .events-all-btn-wrapper {
   background: #fff;
-  padding: 7px 15px;
+  padding: 10px 15px;
   border: 1px solid #c4e8ff;
 }
 
@@ -473,6 +424,7 @@ strong {
   text-align: left;
   background-color: #fff;
   border: 1px solid #c4e8ff;
+  /* border-top: 2px solid #3896c5; */
 }
 
 .article_route {
@@ -598,10 +550,14 @@ strong {
 
 .article-descr {
   display: block;
-  padding: 10px 0;
+  padding: 0;
   color: #555;
   text-decoration: none;
   transition: all 0.2s ease-in;
+}
+
+.article-descr_page {
+  padding: 10px 0;
 }
 
 .article-descr:hover {
@@ -706,13 +662,13 @@ strong {
 }
 
 .article-descr_page a {
-  color: #333;
-  text-decoration: none;
+  color: #ef6100;
+  text-decoration: underline;
   transition: all 0.2s ease-in;
 }
 
 .article-descr_page a:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 /*----------------------- TELEGRAM MESSAGES ------------------------------*/
 
@@ -852,6 +808,10 @@ strong {
   text-align: left;
 }
 
+.route-info_index {
+  margin-bottom: 10px;
+}
+
 .route-info__item {
   color: rgb(75, 75, 75);
   margin-bottom: 5px;
@@ -964,6 +924,17 @@ strong {
 .route-descr strong {
   margin: 0;
   padding: 0;
+}
+
+.route-descr-index {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s ease-in;
+}
+
+.route-descr-index:hover {
+  text-decoration: none;
+  color: #265e7a;
 }
 
 .route__map {
@@ -1118,8 +1089,8 @@ strong {
 }
 
 .links-block__li {
-  display: block;
   width: 100%;
+  display: flex;
   flex-wrap: wrap;
   align-items: center;
   /* padding: 10px; */
@@ -1128,11 +1099,17 @@ strong {
   -webkit-tap-highlight-color: transparent;
 }
 
+.links-block__icon {
+  display: inline-block;
+  font-size: 16px;
+  margin-right: 5px;
+}
+
 .links-block__link {
-  display: block;
+  display: inline-block;
   padding: 7px 5px;
-  font-size: 14px;
   color: rgb(61, 62, 64);
+  font-size: 12px;
 }
 
 .links-block__link:hover {
@@ -1140,8 +1117,39 @@ strong {
   text-decoration: none;
 }
 
+.links {
+  list-style-type: none;
+  counter-reset: num;
+  padding: 20px;
+}
+
+.links-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  margin-bottom: 10px;
+}
+
+.links-item::before {
+	position: absolute;
+	top: 0px;
+	left: -26px;
+	content: counter(num) ')'; 
+	counter-increment: num;
+	display: inline-block;	
+	width: 20px;    
+	color: #265e7a;
+	text-align: right;
+}
+
+.links-icon {
+  display: inline-block;
+  margin-right: 10px;
+}
+
 .links-link {
-  display: block;
+  display: inline-block;
   color: rgb(61, 62, 64);
 }
 
@@ -1149,81 +1157,20 @@ strong {
   text-decoration: none;
 }
 
-.social-link {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 38px;
-  height: 38px;
-  font-size: 20px;
-  text-decoration: none;
-  background-color: #f2f2f2;
-  border-radius: 10px;
-  color: #fff;
-  position: relative;
-  top: 0;
-  left: 0;
-  cursor: pointer;
+.fa-vk {
+  color: #4f78a3;
 }
 
-.social-link:hover {
-  box-shadow: 0px 0px 5px rgb(99, 99, 99);
+.fa-whatsapp {
+  color: #2bb741;
 }
 
-.social-link:not(:last-child) {
-  margin-right: 10px;
+.fa-telegram {
+  color: #32afed;
 }
 
-.social-link i {
-  font-size: 22px;
-}
-
-.social-link_vk {
-  background-color: #4f78a3;
-}
-
-.social-link_vk:hover {
-  background-color: #6d92b8;
-}
-
-.social-link_instagram {
-  background-color: #ce399d;
-}
-
-.social-link_instagram:hover {
-  background-color: #d862b1;
-}
-
-.social-link_dvride {
-  background-color: #2a6ab8;
-}
-
-.social-link_dvride:hover {
-  background-color: #4183d4;
-}
-
-.social-link_strava {
-  background-color: #fc4c02;
-}
-
-.social-link_strava:hover {
-  background-color: #fd6f34;
-}
-
-.social-link_whatsapp {
-  background-color: #2bb741;
-}
-
-.social-link_whatsapp:hover {
-  background-color: #42d359;
-}
-
-.social-link_telegram {
-  background-color: #32afed;
-}
-
-.social-link_telegram:hover {
-  background-color: #61c1f1;
+.fa-bicycle {
+  color: #2a6ab8;
 }
 
 .social-link_velomaster27 {

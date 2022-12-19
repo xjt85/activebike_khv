@@ -22,11 +22,15 @@
       </div>
       <div class="route-gallery owl-carousel owl-theme">
         <div class="route-gallery__item">
-          <a href="{% url 'events:route_map' route.id %}" class="route-gallery__link">
-            {% thumbnail route.image "300x300" crop="center" upscale=True as im %}
-            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ route.title }}" class="route-gallery__img">
-            {% endthumbnail %}
-          </a>
+          {% if route.track %}
+            <a href="{% url 'events:route_map' route.id %}" class="route-gallery__link">
+              {% thumbnail route.image "300x300" crop="center" upscale=True as im %}
+              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ route.title }}" class="route-gallery__img">
+              {% endthumbnail %}
+            </a>
+          {% else %}
+            Файл трека GPX не задан.
+          {% endif %}
         </div>
         {% for images in gallery %}
         <div class="route-gallery__item">
@@ -39,10 +43,12 @@
         {% endfor %}
       </div>
       <div class="route-descr">
-      <p class="route-descr__text">{{ route.text_html|safe }}</p>
+        <p class="route-descr__text">{{ route.text_html|safe }}</p>
       </div>
     </div>
-    <a class="route__track-download" href="{{ route.track.url }}" download>Скачать трек</a>
+    {% if route.track %}
+      <a class="route__track-download" href="{{ route.track.url }}" download>Скачать трек</a>
+    {% endif %}
     <div class="article-info article-info_page">
       <div class="article-info__views"><i class="fa fa-eye" aria-hidden="true"> </i>{{ route.total_views }}
         {% if route.last_views %}
@@ -72,12 +78,12 @@
           },
           600:{
             items:2,
-            nav:true,
+            nav:false,
             loop:false
           },
           1000:{
             items:3,
-            nav:true,
+            nav:false,
             loop:false
         }
       }

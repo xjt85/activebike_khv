@@ -133,6 +133,13 @@ class Post(models.Model):
     def last_views(self):
         return self.views.filter(date_add__gte=date.today() - timedelta(days=1)).count()
 
+    def default_image(self):
+        gallery = self.album.images.all()
+        if gallery.exists():
+            if gallery.filter(default=True).exists():
+                return gallery.filter(default=True).first().image
+            return gallery.first().image
+
 
 class Event(Post):
     image = models.ImageField(
@@ -167,11 +174,11 @@ class Event(Post):
         self.text_html = markdown(self.text)
         super(Event, self).save()
 
-    def default_image(self):
-        gallery = self.album.images.all()
-        if gallery.filter(default=True).exists():
-            return gallery.filter(default=True).first().image
-        return gallery.first().image
+    def event_reports(self):
+        reports = self.reports.all()
+        if reports.exists():
+            return reports
+        return None
 
 
 class Article(Post):
@@ -199,12 +206,6 @@ class Article(Post):
         self.text_html = markdown(self.text)
         super(Article, self).save()
 
-    # def total_views(self):
-    #     return self.views.count()
-
-
-# ---------------------------------------------------------------------------------
-
 
 class Report(Post):
     image = models.ImageField(
@@ -215,6 +216,13 @@ class Report(Post):
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
+        related_name='reports'
+    )
+    report_event = models.ForeignKey(
+        Event,
+        on_delete=SET_NULL,
+        blank=True,
+        null=True,
         related_name='reports'
     )
 
@@ -229,9 +237,6 @@ class Report(Post):
     def save(self):
         self.text_html = markdown(self.text)
         super(Report, self).save()
-
-    # def total_views(self):
-    #     return self.views.count()
 
 
 def user_directory_path(instance, filename):
@@ -255,8 +260,11 @@ class Route(Post):
         max_digits=7, decimal_places=2, default=0, null=True, verbose_name="Дистанция, км")
     height_gain = models.PositiveSmallIntegerField(
         default=0, null=True, verbose_name="Набор высоты, м")
-    image = models.FileField(
-        blank=True, upload_to='routes/images', verbose_name="Скрин маршрута")
+    image = models.ImageField(
+        'Скрин маршрута',
+        upload_to='routes/images/',
+        blank=True,
+    )
     type = models.ForeignKey(
         EventType,
         on_delete=SET_NULL,
@@ -274,7 +282,7 @@ class Route(Post):
         verbose_name="Покрытие"
     )
     url = models.CharField(max_length=200, null=True, blank=True,
-                           verbose_name="ссылка на внешний ресурс с треком (необязательно)")
+                           verbose_name="ссылка на внешний ресурс с треком (не обязательно)")
     polyline = models.TextField(
         blank=True, editable=False, verbose_name="Полилиния (генерируется автоматически при загрузке трека GPX)")
     author = models.ForeignKey(
@@ -328,10 +336,32 @@ class Route(Post):
     #     return self.views.count()
 
 
+class LinkIcon(models.Model):
+    name = models.CharField(max_length=200)
+    icon_string = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
+
+    class Meta:
+        ordering = ['id']
+        verbose_name = 'Иконка ссылки'
+        verbose_name_plural = 'Иконки ссылок'
+
+    def __str__(self):
+        return self.name[:30]
+
+
 class Link(models.Model):
     text = models.CharField(max_length=200)
     url = models.CharField(max_length=200)
     description = models.TextField(blank=True)
+    icon = models.ForeignKey(
+        LinkIcon,
+        on_delete=SET_NULL,
+        blank=True,
+        null=True,
+        related_name='links',
+        verbose_name="Иконка ссылки"
+    )
     date_pub = models.DateTimeField(auto_now_add=True)
     date_edit = models.DateTimeField(auto_now=True)
 

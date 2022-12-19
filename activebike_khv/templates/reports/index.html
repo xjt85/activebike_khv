@@ -18,9 +18,17 @@
       <div class="article__main">
         <div class="article__left">
           <a href="{% url 'events:report_detail' report.id %}" class="article__image">
-            {% thumbnail report.image "300x300" crop="center" upscale=True as im %}
-              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ report.title }}" class="article__image-img">
-            {% endthumbnail %}
+            {% if report.default_image %}
+              {% thumbnail report.default_image "300x300" crop="center" upscale=True as im %}
+                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ report.title }}" class="article__image-img">
+              {% endthumbnail %}
+            {% elif report.image %}
+              {% thumbnail report.image "300x300" crop="center" upscale=True as im %}
+                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ report.title }}" class="article__image-img">
+              {% endthumbnail %}
+            {% else %}
+              No image.
+            {% endif %}
           </a>
         </div>
         <div class="article__right">

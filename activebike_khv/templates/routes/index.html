@@ -25,11 +25,14 @@
             </a>
         </div>
         <div class="route__right">
-            <div class="route-info">
+            <div class="route-info route-info_index">
                 <div class="route-info__item">Тип: <span class="route-info__value">{{ route.type }}</span></div>
                 <div class="route-info__item">Дистанция: <span class="route-info__value">{{ route.distance }} км</span></div>
                 <div class="route-info__item">Набор высоты: <span class="route-info__value">{{ route.height_gain }} м</span></div>
             </div>
+            <a class="route-descr-index" href="{% url 'events:route_detail' route.id %}">
+              <p class="route-descr__text">{{ route.text_html|safe|truncatechars_html:150 }}</p>
+            </a>
         </div>
     </div>
     <div class="article-info article-info_route">

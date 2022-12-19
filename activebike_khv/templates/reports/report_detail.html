@@ -15,24 +15,33 @@
       <a class="article__edit-button article__edit-button_page" href="{% url 'admin:index' %}events/report/{{ report.id }}/change/"><i class="fa fa-pencil" aria-hidden="true"></i></a>
     {% endif %}
     <div class="article__main article__main_page">
-      <div class="article__image article__image_page">
-        {% thumbnail report.image "700x400" upscale=True as im %}
-          <img src="{{ im.url }}" alt="{{ report.title }}" class="article__image-img article__image-img_page">
-        {% endthumbnail %}
-
-        {% for images in gallery %}
-          <div class="route-gallery__item">
-            {% thumbnail images.image "300x300" crop="center" upscale=True as im %}
-            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ route.title }}" class="route-gallery__img">
-            {% endthumbnail %}
-          </div>
-        {% endfor %}
       
-      </div>
+      {% if report.image %}
+        <div class="article__image article__image_page">
+          {% thumbnail report.image "700x400" upscale=True as im %}
+            <img src="{{ im.url }}" alt="{{ report.title }}" class="article__image-img article__image-img_page">
+          {% endthumbnail %}
+        </div>
+      {% endif %}
+      
       <div class="article-descr article-descr_page">
         <p class="article-descr__text article-descr__text_page">{{ report.text_html|safe }}</p>
       </div>
+      
+      <div class="report-gallery owl-carousel owl-theme">
+        {% for images in gallery %}
+        <div class="report-gallery__item">
+          <a data-fancybox="gallery" href="{{ images.image.url }}" class="route-gallery__link">
+            {% thumbnail images.image "300x300" crop="center" upscale=True as im %}
+              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ route.title }}" class="route-gallery__img">
+            {% endthumbnail %}
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+
     </div>
+
     <div class="article-info article-info_page">
       <div class="article-info__views"><i class="fa fa-eye" aria-hidden="true"> </i>{{ report.total_views }}
         {% if report.last_views %}
@@ -47,4 +56,32 @@
     </div>
   </article>
 </section>
+<script>
+  $(document).ready(function(){
+    //примечание
+    $(".owl-carousel").owlCarousel({
+      loop:true,
+      margin:3,
+      dots:false,
+      responsiveClass:true,
+      responsive:{
+        0:{
+            items:1,
+            nav:false,
+            loop:false
+          },
+          600:{
+            items:2,
+            nav:false,
+            loop:false
+          },
+          1000:{
+            items:3,
+            nav:false,
+            loop:false
+        }
+      }
+    });
+  });
+</script>    
 {% endblock %}
