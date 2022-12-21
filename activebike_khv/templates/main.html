@@ -106,12 +106,14 @@
               <p class="article-descr__date">{{ event.date_planned|date:"l, d.m.Y, H:i" }}</p>
               <p class="article-descr__text">{{ event.text_html|safe|truncatechars_html:200 }}</p>
             </a>
-            <a href="{% url 'events:event_detail' event.id %}" class="article__more">Читать дальше →</a>
-            {% if event.event_reports %}
-              {% for report in event.event_reports %}
-                <a href="{% url 'events:report_detail' report.id %}" class="article__more">Смотреть отчет {{ report.author }} →</a>
-              {% endfor %}
-            {% endif %}
+            <div class="article-descr-buttons">
+              <a href="{% url 'events:event_detail' event.id %}" class="article__more">Читать дальше →</a>
+              {% if event.event_reports %}
+                {% for report in event.event_reports %}
+                  <a href="{% url 'events:report_detail' report.id %}" class="article__more">Смотреть отчет {{ report.author }} →</a>
+                {% endfor %}
+              {% endif %}
+            </div>
           </div>
         </div>
         <div class="article-info">

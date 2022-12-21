@@ -49,8 +49,9 @@ class ReportAdmin(admin.ModelAdmin):
 
 @admin.register(Link)
 class LinkAdmin(admin.ModelAdmin):
-    list_display = ('text', 'icon', 'url', 'description')
-    search_fields = ('text',)
+    list_display = ('order', 'text', 'icon', 'url', 'description')
+    # list_display_links = ('order',)
+    # list_editable = ('order',)
     empty_value_display = '-пусто-'
 
 

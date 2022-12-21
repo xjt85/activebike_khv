@@ -362,11 +362,13 @@ class Link(models.Model):
         related_name='links',
         verbose_name="Иконка ссылки"
     )
+    order = models.PositiveSmallIntegerField(
+        default=1, null=False, verbose_name="Порядковый номер")
     date_pub = models.DateTimeField(auto_now_add=True)
     date_edit = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['id']
+        ordering = ['order']
         verbose_name = 'Ссылка'
         verbose_name_plural = 'Ссылки'
 
