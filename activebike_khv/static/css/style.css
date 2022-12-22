@@ -362,6 +362,11 @@ strong {
   border-top: 3px solid #3896c5;
 }
 
+.content-section_login {
+  background-color: #fff;
+  padding: 20px;
+}
+
 .content-section:not(:last-child) {
   margin-bottom: 15px;
 }

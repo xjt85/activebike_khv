@@ -38,8 +38,8 @@
   var startMarker = L.marker(trackStart).addTo(map);
   var finishMarker = L.marker(trackFinish).addTo(map);
 
-  googleSat.addTo(map);
   osMap.addTo(map);
+  googleSat.addTo(map);
 
   var baseMaps = {
     "Спутник Google": googleSat,
