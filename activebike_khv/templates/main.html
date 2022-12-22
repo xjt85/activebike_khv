@@ -133,5 +133,8 @@
   {% else %}
       Нет прошедших событий.
   {% endif %}
+  <div class="events-all-btn-wrapper">
+    <a href="{% url 'events:events_index' %}" class="article__more">Смотреть все события →</a>
+  </div>
 </section>
 {% endblock %}
