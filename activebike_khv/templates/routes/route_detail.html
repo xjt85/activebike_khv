@@ -10,7 +10,7 @@
     <a href="{% url 'events:routes_index' %}" class="backlink">Назад к списку</a>
   </div>
   <article class="route-page">
-    <h2 class="route-page__route-title">{{ route.title }}</h2>
+    <h2 class="route-title route-title_page">{{ route.title }}</h2>
     {% if user.is_authenticated and request.user == route.author %}
       <a class="article__edit-button route__edit-button" href="{% url 'admin:index' %}events/route/{{ route.id }}/change/"><i class="fa fa-pencil" aria-hidden="true"></i></a>
     {% endif %}
@@ -69,21 +69,19 @@
       loop:true,
       margin:3,
       dots:false,
-      responsiveClass:true,
+      nav:false,
       responsive:{
         0:{
             items:1,
-            nav:false,
-            loop:false
+            loop:true,
+            stagePadding: 20
           },
           600:{
             items:2,
-            nav:false,
             loop:false
           },
           1000:{
             items:3,
-            nav:false,
             loop:false
         }
       }

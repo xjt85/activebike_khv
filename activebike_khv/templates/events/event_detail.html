@@ -19,10 +19,6 @@
       <a class="article__edit-button article__edit-button_page" href="{% url 'admin:index' %}events/event/{{ event.id }}/change/"><i class="fa fa-pencil" aria-hidden="true"></i></a>
     {% endif %}
     <div class="article__main article__main_page">
-      <div class="article-descr article-descr_page">
-        <p class="article-descr__date">{{ event.date_planned|date:"l, d.m.Y, H:i" }}</p>
-        <p class="article-descr__text article-descr__text_page">{{ event.text_html|safe }}</p>
-      </div>
 
       {% comment %} <div class="article__image article__image_page">
         {% thumbnail event.image "700x400" crop="center" upscale=True as im %}
@@ -40,6 +36,11 @@
           </a>
         </div>
         {% endfor %}
+      </div>
+
+      <div class="article-descr article-descr_page">
+        <p class="article-descr__date">{{ event.date_planned|date:"l, d.m.Y, H:i" }}</p>
+        <p class="article-descr__text article-descr__text_page">{{ event.text_html|safe }}</p>
       </div>
 
     </div>
@@ -68,21 +69,19 @@
       loop:true,
       margin:3,
       dots:false,
-      responsiveClass:true,
+      nav:false,
       responsive:{
         0:{
             items:1,
-            nav:false,
-            loop:false
+            loop:true,
+            stagePadding: 20
           },
           600:{
             items:2,
-            nav:false,
             loop:false
           },
           1000:{
             items:3,
-            nav:false,
             loop:false
         }
       }

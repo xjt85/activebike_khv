@@ -131,7 +131,7 @@ class Post(models.Model):
         return self.views.count()
 
     def last_views(self):
-        return self.views.filter(date_add__gte=date.today() - timedelta(days=1)).count()
+        return self.views.filter(date_add__gte=date.today()).count()
 
     def default_image(self):
         gallery = self.album.images.all()
