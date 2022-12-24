@@ -84,7 +84,7 @@ def main_page(request):
     template = 'main.html'
     events = Event.objects.all()
     nearest_events = events.filter(date_planned__gte=date.today()).order_by('date_planned')[:2]
-    past_events = events.filter(date_planned__lt=date.today()).order_by('date_planned')
+    past_events = events.filter(date_planned__lt=date.today()).order_by('-date_planned')[:2]
     # posts = Post.objects.select_related('group')
     # paginator = Paginator(posts, settings.POSTS_PER_PAGE)
     # page_number = request.GET.get('page')
