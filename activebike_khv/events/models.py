@@ -141,6 +141,32 @@ class Post(models.Model):
             return gallery.first().image
 
 
+class Comment(models.Model):
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        related_name='comments'
+    )
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='comments'
+    )
+    text = models.TextField()
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Дата публикации")
+    edited = models.DateTimeField(auto_now=True, verbose_name="Дата правки")
+
+    def __str__(self):
+        return self.text[:30]
+
+    class Meta:
+        ordering = ['-created']
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
+
+
 class Event(Post):
     image = models.ImageField(
         'Картинка',
