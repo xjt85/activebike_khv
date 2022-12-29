@@ -512,9 +512,9 @@ strong {
 }
 
 .article__left {
-  width: calc(30% - 20px);
-  max-height: 200px;
   margin-right: 20px;
+  width: calc(30% - 20px);
+  max-height: 300px;
 }
 
 .article__right {
@@ -907,7 +907,7 @@ strong {
 }
 
 .route-gallery__item {
-  height: 200px;
+  height: 300px;
 }
 
 .route-gallery__link,
@@ -1469,7 +1469,7 @@ strong {
   }
 
   .article-title {
-    /* width: 90%; */
+    width: 90%;
     margin-bottom: 10px;
   }
 
@@ -1551,7 +1551,7 @@ strong {
 
   .route__left,
   .route__right {
-    width: 48%;
+    width: 100%;
   }
 
   .routes-item__image {
