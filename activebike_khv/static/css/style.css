@@ -461,7 +461,7 @@ strong {
 .article-title {
   text-align: left;
   font-size: 17px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .article-title_page {
@@ -624,6 +624,10 @@ strong {
   font-family: Roboto, sans-serif;
   font-size: 14px;
   padding: 10px;
+}
+
+.article-info_widget {
+  font-size: 12px;
 }
 
 .article-info_route {
@@ -1017,7 +1021,7 @@ strong {
 /*----------------------- REPORT ------------------------------*/
 
 .report-gallery__item {
-  height: 200px;
+  height: 300px;
 }
 
 /*-----------------------------------------------------*/
@@ -1470,7 +1474,7 @@ strong {
 
   .article-title {
     width: 90%;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
   }
 
   .article-title_page {
@@ -1515,6 +1519,7 @@ strong {
   .article-descr p {
     font-size: 1rem;
     line-height: 1.5rem;
+    font-weight: 400;
   }
 
   .article__more {

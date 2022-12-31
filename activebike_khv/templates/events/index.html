@@ -12,6 +12,9 @@
   {% for event in events %}
     <article class="article">
       <h3 class="article-title"><a href="{% url 'events:event_detail' event.id %}" class="article-title__link">{{ event.title }}</a></h3>
+      {% if user.is_authenticated and request.user == event.author %}
+        <a class="article__edit-button article__edit-button_page" href="{% url 'admin:index' %}events/event/{{ event.id }}/change/"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+      {% endif %}
       <div class="article__main">
         <div class="article__left">
           <a href="{% url 'events:event_detail' event.id %}" class="article__image">

@@ -1,4 +1,5 @@
 from tabnanny import verbose
+import requests
 import gpxpy
 import gpxpy.gpx
 import polyline
@@ -10,6 +11,9 @@ from django.db.models.deletion import SET_NULL
 from markdown import markdown
 from django.template.defaultfilters import slugify
 from datetime import date, timedelta
+from decouple import config
+import telegram
+from telegram.ext import CommandHandler, Filters, MessageHandler, Updater
 
 
 User = get_user_model()
@@ -168,6 +172,12 @@ class Comment(models.Model):
 
 
 class Event(Post):
+    author = models.ForeignKey(
+        User,
+        on_delete=SET_NULL,
+        null=True,
+        related_name='posts'
+    )
     image = models.ImageField(
         'Картинка',
         upload_to='events/',
@@ -183,13 +193,8 @@ class Event(Post):
     distance = models.DecimalField(
         max_digits=7, decimal_places=2, default=0, null=True, verbose_name="Дистанция, км")
     difficulty_level = models.PositiveSmallIntegerField(default=1, null=True, verbose_name="Сложность от 1 до 10")
-    author = models.ForeignKey(
-        User,
-        on_delete=SET_NULL,
-        null=True,
-        related_name='posts'
-    )
     date_planned = models.DateTimeField()
+    to_tlg = models.BooleanField(default=False, verbose_name="Запостить в Телеграм")
 
     class Meta:
         ordering = ['-date_planned']
@@ -199,6 +204,26 @@ class Event(Post):
     def save(self):
         self.text_html = markdown(self.text)
         super(Event, self).save()
+
+        if self.to_tlg:
+            bot_token = config('TLG_BOT_TOKEN')
+            chat_id = config('TLG_CHAT_ID')
+            bot = telegram.Bot(token=bot_token)
+            if self.image:
+                try:
+                    img_url = request.build_absolute_uri(self.image.url)
+                    bot.send_photo(chat_id=chat_id, photo=img_url, caption=self.text, parse_mode="Markdown")
+                except Exception as e:
+                    print(f'{e}: {self.image.url}')
+            else:
+                try:
+                    bot.send_message(chat_id=chat_id, text=self.text, parse_mode="Markdown")
+                except Exception as e:
+                    print(f'{e}')
+
+        self.to_tlg = False
+        super(Event, self).save()
+
 
     def event_reports(self):
         reports = self.reports.all()

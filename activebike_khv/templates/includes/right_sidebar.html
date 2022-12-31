@@ -14,7 +14,7 @@
             <h3 class="single-article__title">{{ article.title }}</h3>
             <p class="single-article__text">{{ article.text|truncatechars:100 }}</p>
           </a>
-          <div class="article-info">
+          <div class="article-info article-info_widget">
             <div class="article-info__views"><i class="fa fa-eye" aria-hidden="true"> </i>{{ article.total_views }}
               {% if article.last_views %}
                 <span class="article-info__lastviews">
