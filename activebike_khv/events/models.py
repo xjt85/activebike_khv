@@ -13,7 +13,7 @@ from django.template.defaultfilters import slugify
 from datetime import date, timedelta
 from decouple import config
 import telegram
-from telegram.ext import CommandHandler, Filters, MessageHandler, Updater
+# from telegram.ext import CommandHandler, Filters, MessageHandler, Updater
 
 
 User = get_user_model()
@@ -138,11 +138,14 @@ class Post(models.Model):
         return self.views.filter(date_add__gte=date.today()).count()
 
     def default_image(self):
-        gallery = self.album.images.all()
-        if gallery.exists():
-            if gallery.filter(default=True).exists():
-                return gallery.filter(default=True).first().image
-            return gallery.first().image
+        if self.album:
+            gallery = self.album.images.all()
+            if gallery.exists():
+                if gallery.filter(default=True).exists():
+                    return gallery.filter(default=True).first().image
+                return gallery.first().image
+        else:
+            return None
 
 
 class Comment(models.Model):

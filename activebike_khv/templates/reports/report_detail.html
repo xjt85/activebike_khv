@@ -27,7 +27,13 @@
       <div class="article-descr article-descr_page">
         <p class="article-descr__text article-descr__text_page">{{ report.text_html|safe }}</p>
       </div>
-      
+
+      <div class="report-backevent-wrapper">
+        {% if report.report_event %}
+            <a href="{% url 'events:event_detail' report.report_event.id %}" class="article__more">← Назад к событию</a>
+        {% endif %}
+      </div>
+
       <div class="report-gallery owl-carousel owl-theme">
         {% for images in gallery %}
         <div class="report-gallery__item">

@@ -610,6 +610,10 @@ strong {
   font-size: 12px;
 }
 
+.article__more_event-detail {
+  margin-bottom: 20px;
+}
+
 .article__more:hover {
   background-color: #d3446c;
   color: #fff;
@@ -1019,6 +1023,11 @@ strong {
 }
 
 /*----------------------- REPORT ------------------------------*/
+
+.report-backevent-wrapper {
+  width: 100%;
+  margin-bottom: 20px;
+}
 
 .report-gallery__item {
   height: 300px;
